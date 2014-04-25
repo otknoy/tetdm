@@ -1,0 +1,132 @@
+##キーワード：活用なし
+名詞
+##キーワード：活用あり
+##文の区切りとする句点の種類 
+．
+。
+##キーワードにしない単語
+こと
+とき
+もの
+ため
+ない
+よい
+やすい
+ある
+いう
+いく
+いる
+おる
+くる
+する
+せる
+できる
+てる
+なる
+みる
+もつ
+やる
+よる
+られる
+れる
+##ChaSen例外フォーマット（２個並びの品詞）の除去用
+未知語
+##セグメント（段落や文章）を区切る単語
+スナリバラフト
+#主語
+が 助詞-格助詞
+は 助詞-係助詞
+#END OF SPEECH
+名詞
+接続詞
+副詞
+連体詞
+感動詞
+助詞
+動詞
+形容詞
+助動詞
+#テキストデータ処理設定
+Windows= false
+English= false
+MorphemeAnalysisExecution= Igo
+MorphemeAnalysisPath= 
+MorphemeAnalysisDictionaryPath= 
+ChaSenCode= EUC-JP
+ExcludeHiragana= true
+ExcludeKatakana= false
+ExcludeOne= true
+JapaneseMenu= true
+LeftTags= false
+#マイニング処理モジュール設定リスト
+9 AnnotationMining 1 2 false ]
+7777 DataTest 1 4 false ]
+21 Dictionary 15 false ]
+9998 DictionaryCreation 5 false ]
+1 EditModule 1 true ]
+18 FocusCheck 3 false ]
+25 HalfText 21 false ]
+13 LabelData 12 false ]
+16 LongSentenceCheck 3 false ]
+12 MakeLight 2 4 1102 false ]
+22 MakeScore 6 false ]
+0 MiningStyle 0 1005 1009 1013 1015 1016 1017 1018 false ]
+11 Panoramic 1 8 true ]
+2 PaperCheck 3 5 false ]
+6 RClustering 9 1016 false ]
+17 RelationCheck 3 false ]
+10 RelevancesKM 1 7 false ]
+10000 Sample1 1 false ]
+10001 Sample2 1 false ]
+99999 SourceRead 1 false ]
+5 SubjectExtraction 2 false ]
+19 TextInfo 3 true ]
+24 TopDownOrder 18 false ]
+23 TopicDistribution 16 false ]
+14 ToTagData 14 false ]
+20 TweetExtraction 2 false ]
+20001 TypingControl 20001 false ]
+3 WordExtraction 2 5 false ]
+4 WordReplace 1 5 false ]
+15 YKPExtraction 14 false ]
+#可視化インタフェースモジュール一覧
+20 CircleGraph false ]
+1017 DrawNodes false ]
+1013 DrawOriginal false ]
+1015 DrawTree false ]
+15 DualTextDisplay false ]
+5 FileDisplay false ]
+12 FlowPanel false ]
+1016 FocusDisplay false ]
+17 Graph false ]
+21 KeywordCompare false ]
+1102 KeywordSelect false ]
+9 OKmap false ]
+18 ParagraphChange false ]
+1005 ParagraphPanel false ]
+16 RadarChart false ]
+19 RankLine false ]
+10000 SampleDisplay false ]
+10001 SampleDisplay2 false ]
+4 ScoreDistribution false ]
+6 ScoreNetwork false ]
+1100 SegmentSelect false ]
+1101 SentenceSelect false ]
+7 SimpleKeywordMap false ]
+1009 TableDisplay false ]
+14 TagCloudView false ]
+1 TextDisplay true ]
+2 TextDisplayColor false ]
+3 TextDisplayHtml true ]
+11 TextDisplaySize false ]
+20001 Typing false ]
+0 VisualizationStyle false ]
+8 XDrawDisplay true ]
+#起動時パネル組み合わせ
+panelNumber=3
+19 3
+1 1
+11 8
+#Panel Balance
+846 846 846 
+#Panel Balance

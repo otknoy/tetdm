@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: TETDM1024.jar .
+Main-Class: source.tetdm1024
