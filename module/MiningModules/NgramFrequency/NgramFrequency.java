@@ -12,7 +12,7 @@ public class NgramFrequency extends MiningModule {
   
 
   public NgramFrequency() {
-    setModuleID(10002);
+    setModuleID(2);
     pairingVisualizationID = new int[]{1};
     setToolType(2); // semi primitive
 
@@ -41,6 +41,7 @@ public class NgramFrequency extends MiningModule {
       
       ngramTokens[i] = StringUtils.join(nTokens, '-');
     }
+
 
     System.out.println("################################");
     for (String s : ngramTokens) {
