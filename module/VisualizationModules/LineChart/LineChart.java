@@ -1,7 +1,8 @@
-package module.VisualizationModules.Histogram;
+package module.VisualizationModules.LineChart;
 
 import source.*;
 
+import javax.swing.JPanel;
 import java.awt.Graphics;
 
 import processing.core.*;
@@ -24,7 +25,9 @@ public class LineChart extends VisualizationModule {
   @Override
   public void initializePanel() {
     PApplet app = new Sketch(labels, data);
+    app.size(640, 480);
     add(app);
+    app.init();
   }
   
   @Override
