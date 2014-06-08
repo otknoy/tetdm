@@ -19,7 +19,7 @@ public class NgramFrequency extends MiningModule {
 
   public NgramFrequency() {
     setModuleID(2);
-    pairingVisualizationID = new int[]{1};
+    pairingVisualizationID = new int[]{1, 2};
     setToolType(2); // semi primitive
 
     n = 2;
@@ -45,9 +45,6 @@ public class NgramFrequency extends MiningModule {
     int[] primitiveFreqs = new int[freqs.length];
     for (int i = 0; i < primitiveFreqs.length; i++) {
       primitiveFreqs[i] = freqs[i];
-      if (freqs[i] != 1) {
-	System.out.println(freqs[i]);
-      }
     }
 
     setDataStringArray(terms);

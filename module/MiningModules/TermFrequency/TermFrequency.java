@@ -13,7 +13,7 @@ public class TermFrequency extends MiningModule {
 
   public TermFrequency() {
     setModuleID(1);
-    pairingVisualizationID = new int[]{1};
+    pairingVisualizationID = new int[]{1, 2};
     setToolType(2); // semi primitive
   }
 
