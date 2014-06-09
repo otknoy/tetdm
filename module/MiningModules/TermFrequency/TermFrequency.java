@@ -9,6 +9,8 @@ import java.util.Arrays;
 public class TermFrequency extends MiningModule {
 
   private Term[] terms;
+  private String[] surfaces;
+  private int[] frequencies;
   
 
   public TermFrequency() {
@@ -42,11 +44,19 @@ public class TermFrequency extends MiningModule {
       surfaces[i] = terms[i].getSurface();
       frequencies[i] = terms[i].getFrequency();
     }
-    setDataStringArray(surfaces);
-    setDataIntegerArray(frequencies);
+    this.surfaces = surfaces;
+    this.frequencies = frequencies;
   }
 
   @Override
   public void miningOperations(int optionNumber) {
+    switch(optionNumber) {
+    case 0:
+      setDataStringArray(surfaces);
+      setDataIntegerArray(frequencies);
+      break;
+    default:
+      break;
+    }
   }
 }

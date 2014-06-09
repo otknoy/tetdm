@@ -2,13 +2,15 @@ package module.VisualizationModules.LineChart;
 
 import source.*;
 
+import processing.core.*;
+
 import javax.swing.JPanel;
 import java.awt.Graphics;
 
-import processing.core.*;
-
 
 public class LineChart extends VisualizationModule {
+
+  private Sketch sketch;
 
   private String[] labels;
   private double[] data;
@@ -24,18 +26,24 @@ public class LineChart extends VisualizationModule {
 
   @Override
   public void initializePanel() {
-    PApplet app = new Sketch(labels, data);
-    add(app);
-    app.init();
   }
   
   @Override
   public void initializeData() {
-
   }
 
   @Override
   public void displayOperations(int optionNumber) {
+    switch(optionNumber) {
+    case 0:
+      if (sketch != null) remove(sketch);
+      sketch = new Sketch(getWidth(), getHeight(), labels, data);
+      add(sketch);
+      sketch.init();
+      break;
+    default:
+      break;
+    }
   }
 
 
@@ -51,8 +59,7 @@ public class LineChart extends VisualizationModule {
     for (int i = 0; i < temp.length; i++) {
       temp[i] = data[i];
     }
-    this.data = temp;
-    return true;    
+    return setData(dataID, temp);
   }
 
   @Override
@@ -64,7 +71,6 @@ public class LineChart extends VisualizationModule {
   @Override
   public void paintComponent(Graphics g) {
     getPanelSize();
-
     // System.out.println(sizeX);
   }
 }
