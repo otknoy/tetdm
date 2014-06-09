@@ -15,7 +15,7 @@ public class LineChart extends VisualizationModule {
 
   
   public LineChart() {
-    setModuleID(2);
+    setModuleID(90002);
     dataNumbers = new int[] {0, 0, 0, 0,
 			     0, 1, 1, 1,
 			     0, 0, 0};
@@ -25,7 +25,6 @@ public class LineChart extends VisualizationModule {
   @Override
   public void initializePanel() {
     PApplet app = new Sketch(labels, data);
-    app.size(640, 480);
     add(app);
     app.init();
   }

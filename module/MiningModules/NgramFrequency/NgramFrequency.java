@@ -18,8 +18,8 @@ public class NgramFrequency extends MiningModule {
   
 
   public NgramFrequency() {
-    setModuleID(2);
-    pairingVisualizationID = new int[]{1, 2};
+    setModuleID(90002);
+    pairingVisualizationID = new int[]{90001, 90002};
     setToolType(2); // semi primitive
 
     n = 2;

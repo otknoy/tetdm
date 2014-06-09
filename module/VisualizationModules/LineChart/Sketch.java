@@ -15,7 +15,7 @@ public class Sketch extends PApplet {
 
   @Override
   public void setup() {
-    // size(640, 480);
+    size(640, 480);
   }
 
   @Override

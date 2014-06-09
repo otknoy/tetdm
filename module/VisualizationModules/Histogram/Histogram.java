@@ -10,7 +10,7 @@ public class Histogram extends VisualizationModule {
   private int[] frequency;
 
   public Histogram() {
-    setModuleID(1);
+    setModuleID(90001);
     dataNumbers = new int[] {0, 0, 0, 0,
 			     0, 1, 0, 1,
 			     0, 0, 0};
