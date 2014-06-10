@@ -34,6 +34,8 @@ public class LineChart extends VisualizationModule {
 
   @Override
   public void displayOperations(int optionNumber) {
+    System.out.println("draw");
+
     switch(optionNumber) {
     case 0:
       if (sketch != null) remove(sketch);
