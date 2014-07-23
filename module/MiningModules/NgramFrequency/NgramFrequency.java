@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Arrays;
 
 
-
 public class NgramFrequency extends MiningModule {
 
   private int n;
@@ -33,9 +32,8 @@ public class NgramFrequency extends MiningModule {
   @Override
   public void initializeData() {
     resetData();
-    
 
-    String[] ngramTokens = ngram(n, getTerms());
+    List<String> ngramTokens = ngram(n, this.getTerms());
     
     Map freqMap = frequency(ngramTokens);
     String[] terms = (String[])freqMap.keySet().toArray(new String[0]);
@@ -85,24 +83,20 @@ public class NgramFrequency extends MiningModule {
     return terms;
   }
 
-  private String[] ngram(int n, List<String> terms) {
-    String[] ngramTokens = new String[terms.size()-(n-1)];
-    for (int i = 0; i < ngramTokens.length; i++) {
+  private List<String> ngram(int n, List<String> terms) {
+    List<String> ngramTokens = new ArrayList<String>();
 
-      // join n tokens
-      String[] nTokens = new String[n];
-      for (int j = 0; j < nTokens.length; j++) {
-	nTokens[j] = terms.get(i+j);
-      }
-      
-      ngramTokens[i] = StringUtils.join(nTokens, '-');
+    int ngramLength = terms.size() - (n - 1);
+
+    for (int i = 0; i < ngramLength; i++) {
+      List<String> nTokens = terms.subList(i, i+n);
+      ngramTokens.add(StringUtils.join(nTokens, '-'));
     }
-
+    
     return ngramTokens;
   }
 
-
-  private Map<String, Integer> frequency(String[] tokens) {
+  private Map<String, Integer> frequency(List<String> tokens) {
     Map<String, Integer> freqMap = new HashMap<String, Integer>();
 
     for (String t : tokens) {
