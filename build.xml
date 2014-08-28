@@ -16,7 +16,7 @@
   </path>
 
   <target name="compile" depends="clean,prepare">
-    <javac srcdir="module/:source/" destdir="build/classes" classpathref="libs.classpath">
+    <javac srcdir="module/:source/:src/" destdir="build/classes" classpathref="libs.classpath">
     </javac>
   </target>
 
