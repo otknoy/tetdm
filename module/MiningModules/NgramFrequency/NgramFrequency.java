@@ -14,11 +14,11 @@ import java.util.Arrays;
 public class NgramFrequency extends MiningModule {
 
   private int n;
-  
+
 
   public NgramFrequency() {
     setModuleID(90002);
-    pairingVisualizationID = new int[]{90001, 90002};
+    pairingVisualizationID = new int[] {90001, 90002};
     setToolType(2); // semi primitive
 
     n = 2;
@@ -34,7 +34,7 @@ public class NgramFrequency extends MiningModule {
     resetData();
 
     List<String> ngramTokens = ngram(n, this.getTerms());
-    
+
     Map freqMap = frequency(ngramTokens);
     String[] terms = (String[])freqMap.keySet().toArray(new String[0]);
     Integer[] freqs = (Integer[])freqMap.values().toArray(new Integer[0]);
@@ -67,16 +67,18 @@ public class NgramFrequency extends MiningModule {
       int[] wordIDList = s.wordIDList;
       int wordIDListLength = s.wordNumber;
       for (int i = 0; i < wordIDListLength; i++) {
-	// If word is not keyword, word id is -1.
-	// And then it is ignored.
-	if (wordIDList[i] < 0) continue;
+        // If word is not keyword, word id is -1.
+        // And then it is ignored.
+        if (wordIDList[i] < 0) {
+          continue;
+        }
 
-	KeywordData keyword = text.keyword[wordIDList[i]];
-	// Add only noun wor
-	// If keyword is noun, part of speech id is 1.
-	if (keyword.partOfSpeech == 1) {
-	  terms.add(keyword.word);
-	}
+        KeywordData keyword = text.keyword[wordIDList[i]];
+        // Add only noun wor
+        // If keyword is noun, part of speech id is 1.
+        if (keyword.partOfSpeech == 1) {
+          terms.add(keyword.word);
+        }
       }
     }
 
@@ -92,7 +94,7 @@ public class NgramFrequency extends MiningModule {
       List<String> nTokens = terms.subList(i, i+n);
       ngramTokens.add(StringUtils.join(nTokens, '-'));
     }
-    
+
     return ngramTokens;
   }
 
@@ -101,7 +103,7 @@ public class NgramFrequency extends MiningModule {
 
     for (String t : tokens) {
       if (!freqMap.containsKey(t)) {
-	freqMap.put(t, 0);
+        freqMap.put(t, 0);
       }
       freqMap.put(t, freqMap.get(t)+1);
     }

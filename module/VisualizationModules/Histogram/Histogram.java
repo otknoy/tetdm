@@ -12,15 +12,16 @@ public class Histogram extends VisualizationModule {
   public Histogram() {
     setModuleID(90001);
     dataNumbers = new int[] {0, 0, 0, 0,
-			     0, 1, 0, 1,
-			     0, 0, 0};
+                             0, 1, 0, 1,
+                             0, 0, 0
+                            };
     setToolType(2);
   }
 
   @Override
   public void initializePanel() {
   }
-  
+
   @Override
   public void initializeData() {
 
@@ -41,7 +42,7 @@ public class Histogram extends VisualizationModule {
   @Override
   public boolean setData(int dataID, int[] frequency) {
     this.frequency = frequency;
-    return true;    
+    return true;
   }
 
 
@@ -57,21 +58,21 @@ public class Histogram extends VisualizationModule {
     double[] normalizedFrequency = normalize(frequency);
 
     // for (int i = 0; i < normalizedFrequency.length; i++) {
-      // System.out.println(terms[i]);
-      // System.out.print(frequency[i]);
-      // System.out.print("\t");
-      // System.out.println(normalizedFrequency[i]);
+    // System.out.println(terms[i]);
+    // System.out.print(frequency[i]);
+    // System.out.print("\t");
+    // System.out.println(normalizedFrequency[i]);
     // }
-    
+
     int width = sizeX;
     int height = sizeY;
     double w = width/(double)terms.length;
 
     for (int i = 0; i < terms.length; i++) {
       double h = height*normalizedFrequency[i];
-      double x = i * w; 
+      double x = i * w;
       double y = height - h;
-      
+
       g.drawString(terms[i], (int)x, (int)y+12);
 
       g.drawRect((int)x, (int)y, (int)w, (int)h);
@@ -79,8 +80,8 @@ public class Histogram extends VisualizationModule {
   }
 
   private double[] normalize(double[] data) {
-    double max = Double.MIN_VALUE;    
-    for (int i = 0; i< frequency.length; i++){
+    double max = Double.MIN_VALUE;
+    for (int i = 0; i< frequency.length; i++) {
       max = Math.max(max, frequency[i]);
     }
 

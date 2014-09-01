@@ -10,8 +10,12 @@ public class Term implements Comparable {
     this.frequency = frequency;
   }
 
-  public String getSurface() { return surface; }
-  public int getFrequency() { return frequency; }
+  public String getSurface() {
+    return surface;
+  }
+  public int getFrequency() {
+    return frequency;
+  }
 
 
   @Override

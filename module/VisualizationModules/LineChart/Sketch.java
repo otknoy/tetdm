@@ -33,7 +33,7 @@ public class Sketch extends PApplet {
     noLoop();
   }
 
-  
+
   private void drawLineChart(int x, int y, int width, int height) {
     translate(x, y);
 

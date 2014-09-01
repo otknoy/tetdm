@@ -15,19 +15,20 @@ public class LineChart extends VisualizationModule {
   private String[] labels;
   private double[] data;
 
-  
+
   public LineChart() {
     setModuleID(90002);
     dataNumbers = new int[] {0, 0, 0, 0,
-			     0, 1, 1, 1,
-			     0, 0, 0};
+                             0, 1, 1, 1,
+                             0, 0, 0
+                            };
     setToolType(2);
   }
 
   @Override
   public void initializePanel() {
   }
-  
+
   @Override
   public void initializeData() {
   }
@@ -36,15 +37,17 @@ public class LineChart extends VisualizationModule {
   public void displayOperations(int optionNumber) {
     System.out.println("draw");
 
-    switch(optionNumber) {
-    case 0:
-      if (sketch != null) remove(sketch);
-      sketch = new Sketch(getWidth(), getHeight(), labels, data);
-      add(sketch);
-      sketch.init();
-      break;
-    default:
-      break;
+    switch (optionNumber) {
+      case 0:
+        if (sketch != null) {
+          remove(sketch);
+        }
+        sketch = new Sketch(getWidth(), getHeight(), labels, data);
+        add(sketch);
+        sketch.init();
+        break;
+      default:
+        break;
     }
   }
 
@@ -67,7 +70,7 @@ public class LineChart extends VisualizationModule {
   @Override
   public boolean setData(int dataID, double[] data) {
     this.data = data;
-    return true;    
+    return true;
   }
 
   @Override

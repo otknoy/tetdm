@@ -11,11 +11,11 @@ public class TermFrequency extends MiningModule {
   private Term[] terms;
   private String[] surfaces;
   private int[] frequencies;
-  
+
 
   public TermFrequency() {
     setModuleID(90001);
-    pairingVisualizationID = new int[]{90001, 90002};
+    pairingVisualizationID = new int[] {90001, 90002};
     setToolType(2); // semi primitive
   }
 
@@ -50,13 +50,13 @@ public class TermFrequency extends MiningModule {
 
   @Override
   public void miningOperations(int optionNumber) {
-    switch(optionNumber) {
-    case 0:
-      setDataStringArray(surfaces);
-      setDataIntegerArray(frequencies);
-      break;
-    default:
-      break;
+    switch (optionNumber) {
+      case 0:
+        setDataStringArray(surfaces);
+        setDataIntegerArray(frequencies);
+        break;
+      default:
+        break;
     }
   }
 }
