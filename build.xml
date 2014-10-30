@@ -1,29 +1,29 @@
 <project name="TETDM" default="jar">
 
-	<target name="clean">
-       <delete dir="build/classes"/>
-    </target>
+  <target name="clean">
+    <delete dir="build/classes"/>
+  </target>
 
-	<target name="prepare">
-      <!-- preparing directory for build classes-->
-      <mkdir dir="build/classes"/>
-    </target>
+  <target name="prepare">
+    <!-- preparing directory for build classes-->
+    <mkdir dir="build/classes"/>
+  </target>
 
-	<path id="libs.classpath">
-		<fileset dir="libs">
-			<include name="*.jar" />
-		</fileset>
-	</path>
+  <path id="libs.classpath">
+    <fileset dir="libs">
+      <include name="*.jar" />
+    </fileset>
+  </path>
 
-	<target name="compile" depends="clean,prepare">
-		<javac srcdir="module/:source/" destdir="build/classes" classpathref="libs.classpath">
-		</javac>
-	</target>
+  <target name="compile" depends="clean,prepare">
+    <javac srcdir="module/:source/" destdir="build/classes" classpathref="libs.classpath">
+    </javac>
+  </target>
 
-	<target name="jar" depends="compile">
-		<jar jarfile="TETDM.jar" basedir="build/classes" manifest="MANIFEST.MF">
-			<zipgroupfileset dir="libs" includes="*.jar" />
-		</jar>
-	</target>
+  <target name="jar" depends="compile">
+    <jar jarfile="TETDM.jar" basedir="build/classes" manifest="MANIFEST.MF">
+      <zipgroupfileset dir="libs" includes="*.jar" />
+    </jar>
+  </target>
   
 </project>
