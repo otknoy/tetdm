@@ -55,7 +55,6 @@ public class MainFrame extends JFrame {
 
     controlPanel = new Control(this, filename, absolutePath, windowSizeX, popSizeY);
     pane.add(controlPanel);
-    //		pane.add(new JPanel());
     setVisible(true);
 
 
@@ -72,33 +71,15 @@ public class MainFrame extends JFrame {
     // our proposed interface
     this.moduleSelectPanel = new ModuleSelectPanel(moduleManager);
     this.moduleSelectFrame = new JFrame("Module Select Panel");
-    // this.moduleSelectFrame.setSize(800, 800);
     this.moduleSelectFrame.add(moduleSelectPanel);
     this.moduleSelectFrame.pack();
     this.moduleSelectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.moduleSelectFrame.setVisible(true);
 
-    // history tree
-    this.historyTreePanel = new HistoryTreePanel<ModuleSelectPanel>(this, moduleSelectPanel);
-    this.historyTreeFrame = new JFrame("History Tree Panel");
-    this.historyTreeFrame.setSize(800, 400);
-    this.historyTreeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.historyTreeFrame.add(historyTreePanel);
-    this.historyTreeFrame.setVisible(true);
-
     // setPanel(0, 14, 14);
     // setPanel(1, 0, 23);
     // setPanel(2, 14, 14);
     // Control.addNewPanel(Text text);
-  }
-
-  /**
-   * save history
-   */
-  private void saveHistory() {
-    ModuleSelectPanel clone = this.moduleSelectPanel.clone();
-    this.historyTreePanel.saveHistory(clone);
-    // this.changeModuleSelectPanel(this.historyTreePanel.getCurrent()p);
   }
 
   /**
@@ -120,10 +101,6 @@ public class MainFrame extends JFrame {
    * @param: visualization module id
    */
   public void setPanel(int selectPanelIndex, int miningModuleID, int visualizationModuleID) {
-    // First, save current module select panel state
-    this.saveHistory();
-
-
     // System.out.println("**************** MainFrame.setPanel ****************");
     String[] miningNames = controlPanel.moduleData.module_names;
     String[] visualNames = controlPanel.moduleData.visu_module_names;
