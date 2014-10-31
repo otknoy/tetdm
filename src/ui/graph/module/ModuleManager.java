@@ -27,6 +27,9 @@ public class ModuleManager {
     
     int[][] pairIDsArray = new int[miningModules.length][];
     
+    ModuleInformation preprocess = new ModuleInformation("Preprocess", -1, ModuleInformation.TYPE_PREPROCESS);
+    this.preprocess = preprocess;
+    
     ModuleInformation[] minings = new ModuleInformation[miningModules.length];
     for (int i = 0; i < miningModules.length; i++) {
       String name = miningModuleNames[i];
@@ -49,9 +52,7 @@ public class ModuleManager {
       ModuleInformation mi = new ModuleInformation(name, id, type);
       visualizations[i] = mi;
     }
-
-    ModuleInformation preprocess = new ModuleInformation("Preprocess", -1, ModuleInformation.TYPE_PREPROCESS);
-
+    this.minings = Arrays.asList(minings);
 
     for (int i = 0; i < miningModules.length; i++) {
       ModuleInformation mmi = minings[i];
@@ -67,9 +68,6 @@ public class ModuleManager {
       mmi.addParent(preprocess);
       preprocess.addChild(mmi);
     }
-
-    this.preprocess = preprocess;
-    this.minings = Arrays.asList(minings);
     this.visualizations = Arrays.asList(visualizations);
   }
 
