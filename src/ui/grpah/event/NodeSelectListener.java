@@ -1,4 +1,4 @@
-package tetdm.ui.event;
+package ui.graph.event;
 
 import ui.graph.ModuleSelectPanel;
 import ui.graph.component.Node;
