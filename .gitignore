@@ -14,3 +14,5 @@ hs_err_pid*
 
 # ignore files
 TETDM*.jar
+ACTIONLOG
+text/*.txt2*
