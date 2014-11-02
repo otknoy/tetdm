@@ -13,7 +13,6 @@ import source.TextData.*;
 
 import ui.graph.ModuleSelectPanel;
 import ui.graph.component.Node;
-import ui.graph.module.ModuleInformation;
 import ui.graph.module.ModuleManager;
 import tetdm.history.HistoryTreePanel;
 
