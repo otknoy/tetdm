@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.EventListener;
 
 
-public class Node extends JComponent {
+public abstract class Node extends JComponent {
 
   private ModuleInfo moduleInfo;
 
@@ -31,19 +31,10 @@ public class Node extends JComponent {
   private MouseDragAndDropListener mddl;
   
 
-  public Node(ModuleInfo moduleInfo, Point location) {
+  public Node(ModuleInfo moduleInfo, Point location, Color gbColor) {
     this.moduleInfo = moduleInfo;
     this.setLocation(location);
-
-    Color c = null;
-    if (moduleInfo.getType() == ModuleInfo.TYPE_PREPROCESS) {
-      c = new Color(255, 255, 0, 128);
-    } else if (moduleInfo.getType() == ModuleInfo.TYPE_MINING) {
-      c = new Color(0, 255, 255, 128);
-    } else if (moduleInfo.getType() == ModuleInfo.TYPE_VISUALIZATION) {
-      c = new Color(255, 0, 255, 128);
-    }
-    this.bgColor = c;
+    this.bgColor = gbColor;
 
     this.setSize(new Dimension(64, 32));
 
@@ -59,8 +50,8 @@ public class Node extends JComponent {
     this.addMouseMotionListener(mddl);
   }
 
-  public Node(ModuleInfo moduleInfo) {
-    this(moduleInfo, new Point(0, 0));
+  public Node(ModuleInfo moduleInfo, Color gbColor) {
+    this(moduleInfo, new Point(0, 0), gbColor);
   }
   
   @Override

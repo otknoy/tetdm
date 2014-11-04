@@ -3,6 +3,9 @@ package ui.graph.component.event;
 import ui.graph.ModuleSelectPanel;
 import ui.graph.module.ModuleInfo;
 import ui.graph.component.Node;
+import ui.graph.component.PreprocessNode;
+import ui.graph.component.MiningNode;
+import ui.graph.component.VisualizationNode;
 
 import java.awt.Point;
 import java.awt.event.MouseListener;
@@ -50,7 +53,15 @@ public class NodeEventListener implements MouseListener {
     List<ModuleInfo> mil = node.getModuleInfo().getNextList();
     List<Node> nodes = new ArrayList<Node>();
     for (ModuleInfo mi : mil) {
-      nodes.add(new Node(mi));
+      Node node = null;
+      if (mi.getType() == ModuleInfo.TYPE_PREPROCESS) {
+	node = new PreprocessNode(mi);
+      } else if (mi.getType() == ModuleInfo.TYPE_MINING) {
+	node = new MiningNode(mi);
+      } else if (mi.getType() == ModuleInfo.TYPE_VISUALIZATION) {
+	node = new VisualizationNode(mi);
+      }
+      nodes.add(node);
     }
     this.connectableNodes = nodes;
     this.alignNodes(this.connectableNodes);
