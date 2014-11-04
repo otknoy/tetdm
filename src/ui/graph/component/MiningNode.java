@@ -1,20 +1,20 @@
 package ui.graph.component;
 
-import ui.graph.module.ModuleInformation;
+import ui.graph.module.ModuleInfo;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MiningNode extends Node {
 
-  public MiningNode(ModuleInformation mi, Point location) {
-    super(mi, location, new Color(0, 255, 255, 92));
+  private static Color BG_COLOR = Color.CYAN;
+
+  public MiningNode(ModuleInfo moduleInfo, Point location) {
+    super(moduleInfo, location, BG_COLOR);
   }
 
-  public MiningNode(ModuleInformation mi) {
-    this(mi, new Point(0, 0));
+  public MiningNode(ModuleInfo moduleInfo) {
+    super(moduleInfo, BG_COLOR);
   }
 }

@@ -1,4 +1,4 @@
-package ui.graph.event;
+package ui.graph.component.event;
 
 import java.awt.Container;
 import java.awt.Point;

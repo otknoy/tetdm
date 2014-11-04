@@ -15,9 +15,9 @@ import java.util.Arrays;
 public class ModuleManager {
 
   private MainFrame mainFrame;
-  private ModuleInformation preprocess;
-  private List<ModuleInformation> minings;
-  private List<ModuleInformation> visualizations;
+  private ModuleInfo preprocess;
+  private List<ModuleInfo> minings;
+  private List<ModuleInfo> visualizations;
 
 
   public ModuleManager(MainFrame mainFrame,
@@ -27,46 +27,46 @@ public class ModuleManager {
     
     int[][] pairIDsArray = new int[miningModules.length][];
     
-    ModuleInformation preprocess = new ModuleInformation("Preprocess", -1, ModuleInformation.TYPE_PREPROCESS);
+    ModuleInfo preprocess = new ModuleInfo("Preprocess", -1, ModuleInfo.TYPE_PREPROCESS);
     this.preprocess = preprocess;
     
-    ModuleInformation[] minings = new ModuleInformation[miningModules.length];
+    ModuleInfo[] minings = new ModuleInfo[miningModules.length];
     for (int i = 0; i < miningModules.length; i++) {
       String name = miningModuleNames[i];
       int id = miningModules[i].getModuleID();
-      int type = ModuleInformation.TYPE_MINING;
+      int type = ModuleInfo.TYPE_MINING;
 
-      ModuleInformation mi = new ModuleInformation(name, id, type);
+      ModuleInfo mi = new ModuleInfo(name, id, type);
       minings[i] = mi;
 
       int[] pairIDs = miningModules[i].pairingVisualizationID;
       pairIDsArray[i] = pairIDs;
     }
     
-    ModuleInformation[] visualizations = new ModuleInformation[visualizationModules.length];
+    ModuleInfo[] visualizations = new ModuleInfo[visualizationModules.length];
     for (int i = 0; i < visualizationModules.length; i++) {
       String name = visualizationModuleNames[i];
       int id = visualizationModules[i].getModuleID();
-      int type = ModuleInformation.TYPE_VISUALIZATION;
+      int type = ModuleInfo.TYPE_VISUALIZATION;
 
-      ModuleInformation mi = new ModuleInformation(name, id, type);
+      ModuleInfo mi = new ModuleInfo(name, id, type);
       visualizations[i] = mi;
     }
     this.minings = Arrays.asList(minings);
 
     for (int i = 0; i < miningModules.length; i++) {
-      ModuleInformation mmi = minings[i];
+      ModuleInfo mmi = minings[i];
       int[] pairIDs = pairIDsArray[i];
       for (Integer pid : pairIDs) {
-	for (ModuleInformation vmi : visualizations) {
+	for (ModuleInfo vmi : visualizations) {
 	  if (pid != vmi.getID()) continue;
 
-	  mmi.addChild(vmi);
-	  vmi.addParent(mmi);
+	  mmi.addToNext(vmi);
+	  vmi.addToPrev(mmi);
 	}
       }
-      mmi.addParent(preprocess);
-      preprocess.addChild(mmi);
+      mmi.addToPrev(preprocess);
+      preprocess.addToNext(mmi);
     }
     this.visualizations = Arrays.asList(visualizations);
   }
@@ -75,7 +75,15 @@ public class ModuleManager {
     this.mainFrame.setPanel(panelIndex, miningModuleID, visualizationModuleID);
   }
 
-  public ModuleInformation getPreprocess() { return this.preprocess; }
-  public List<ModuleInformation> getMinings() { return this.minings; }
-  public List<ModuleInformation> getVisualizations() { return this.visualizations; }
+  public ModuleInfo getPreprocess() { return this.preprocess; }
+  public List<ModuleInfo> getMinings() { return this.minings; }
+  public List<ModuleInfo> getVisualizations() { return this.visualizations; }
+
+  public List<ModuleInfo> getAllModuleInfo() {
+    List<ModuleInfo> all = new ArrayList<ModuleInfo>();
+    all.add(this.preprocess);
+    all.addAll(this.minings);
+    all.addAll(this.visualizations);
+    return all;
+  }
 }

@@ -1,7 +1,7 @@
 package ui.graph.component;
 
-import ui.graph.module.ModuleInformation;
-import ui.graph.event.MouseDragAndDropListener;
+import ui.graph.module.ModuleInfo;
+import ui.graph.component.event.MouseDragAndDropListener;
 
 import java.awt.Component;
 import java.awt.BasicStroke;
@@ -13,14 +13,12 @@ import java.awt.Color;
 import javax.swing.JComponent;
 import java.util.List;
 import java.util.ArrayList;
-import java.lang.Cloneable;
-import java.lang.CloneNotSupportedException;
 import java.util.EventListener;
 
 
-public class Node extends JComponent implements Cloneable {
+public abstract class Node extends JComponent {
 
-  private ModuleInformation moduleInformation;
+  private ModuleInfo moduleInfo;
 
   private Node previousNode;
   private List<Node> nextNodes;
@@ -32,8 +30,8 @@ public class Node extends JComponent implements Cloneable {
   private MouseDragAndDropListener mddl;
   
 
-  public Node(ModuleInformation moduleInformation, Point location, Color bgColor) {
-    this.moduleInformation = moduleInformation;
+  public Node(ModuleInfo moduleInfo, Point location, Color bgColor) {
+    this.moduleInfo = moduleInfo;
     this.setLocation(location);
     this.bgColor = bgColor;
 
@@ -46,39 +44,14 @@ public class Node extends JComponent implements Cloneable {
     this.addMouseListener(mddl);
     this.addMouseMotionListener(mddl);
   }
+
+  public Node(ModuleInfo moduleInfo, Color bgColor) {
+    this(moduleInfo, new Point(0, 0), bgColor);
+  }
   
   @Override
   public String toString() {
     return this.getName() + "[" + previousNode + "]" + "[" + this.nextNodes.size() + "]";
-  }
-
-  @Override
-  public Node clone() {
-    Node n;
-    try {
-      n = (Node)super.clone();
-    } catch(CloneNotSupportedException e) {
-      throw new RuntimeException();
-    }
-    n.setPreviousNode(null);
-    n.removeAllNextNodes();
-
-    for (MouseDragAndDropListener l : n.getListeners(MouseDragAndDropListener.class)) {
-      n.removeMouseListener(l);
-      n.addMouseMotionListener(l);
-    }
-    MouseDragAndDropListener mddl = new MouseDragAndDropListener(n);
-    n.addMouseListener(mddl);
-    n.addMouseMotionListener(mddl);
-
-    return n;      
-
-    // Node node = new Node(this.moduleInformation, this.getLocation(), this.bgColor);
-    // node.selected(this.isSelected());
-    // node.highlighted(this.isHighlighted());
-    // // node.setPreviousNode(this.previousNode);
-    // // node.addNextNodes(this.nextNodes);
-    // return node;
   }
 
   @Override
@@ -93,8 +66,8 @@ public class Node extends JComponent implements Cloneable {
     } else {
       g.setColor(this.bgColor);
     }
-    
     g.fillRect(0, 0, getWidth()-1, getHeight()-1);
+    
     // border
     g.setColor(Color.black);
     if (this.isSelected()) {
@@ -127,10 +100,10 @@ public class Node extends JComponent implements Cloneable {
   }
     
  
-  public ModuleInformation getModuleInformation() { return this.moduleInformation; }
-  public String getName() { return this.moduleInformation.getName(); }
-  public int getID() { return this.moduleInformation.getID(); }
-  public int getType() { return this.moduleInformation.getType(); }
+  public ModuleInfo getModuleInfo() { return this.moduleInfo; }
+  public String getName() { return this.moduleInfo.getName(); }
+  public int getID() { return this.moduleInfo.getID(); }
+  public int getType() { return this.moduleInfo.getType(); }
 
   public Node getPreviousNode() { return this.previousNode; }
   public void setPreviousNode(Node n) { this.previousNode = n; }
@@ -147,15 +120,15 @@ public class Node extends JComponent implements Cloneable {
   public void highlighted(boolean highlighted) { this.highlighted = highlighted; this.repaint(); }
 
   public boolean isConnectableTo(Node n) {
-    return this.getModuleInformation().isConnectableTo(n.getModuleInformation());
+    return this.getModuleInfo().isConnectableTo(n.getModuleInfo());
   }
 
   public boolean isConnectableToPrevious(Node n) {
-    return this.getModuleInformation().isConnectableToPrevious(n.getModuleInformation());
+    return this.getModuleInfo().isConnectableToPrevious(n.getModuleInfo());
   }
 
   public boolean isConnectableToNext(Node n) {
-    return this.getModuleInformation().isConnectableToNext(n.getModuleInformation());
+    return this.getModuleInfo().isConnectableToNext(n.getModuleInfo());
   }
 
   public boolean isConnectedTo(Node n1) {

@@ -2,7 +2,7 @@ package ui.graph.event;
 
 import ui.graph.ModuleSelectPanel;
 import ui.graph.component.Node;
-import ui.graph.component.VisualizationNode;
+// import ui.graph.component.VisualizationNode;
 import ui.graph.component.Edge;
 
 import java.awt.event.MouseMotionListener;
@@ -29,10 +29,10 @@ public class NodeSelectListener implements MouseListener, MouseMotionListener {
     if (!(e.getSource() instanceof Node)) return;
     Node node = (Node)e.getSource();
 
-    if ((node instanceof VisualizationNode) &&
-	((VisualizationNode)node).hasPathFromPreprocessNode()) {
-      this.parent.setModulesToPanel(0, node.getPreviousNode().getID(), node.getID());
-    }
+    // if ((node instanceof VisualizationNode) &&
+    // 	((VisualizationNode)node).hasPathFromPreprocessNode()) {
+    //   this.parent.setModulesToPanel(0, node.getPreviousNode().getID(), node.getID());
+    // }
 
     node.selected(!node.isSelected());
     node.repaint();
@@ -104,10 +104,10 @@ public class NodeSelectListener implements MouseListener, MouseMotionListener {
 	// System.out.println(n2);
 	// System.out.println(node instanceof VisualizationNode);
 
-	if ((node instanceof VisualizationNode) &&
-	    ((VisualizationNode)node).hasPathFromPreprocessNode()) {
-	  this.parent.setModulesToPanel(0, n1.getID(), n2.getID());
-	}
+	// if ((node instanceof VisualizationNode) &&
+	//     ((VisualizationNode)node).hasPathFromPreprocessNode()) {
+	//   this.parent.setModulesToPanel(0, n1.getID(), n2.getID());
+	// }
       }
     }
     this.parent.repaint();

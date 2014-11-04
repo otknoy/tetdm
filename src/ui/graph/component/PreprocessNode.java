@@ -1,15 +1,19 @@
 package ui.graph.component;
 
-import ui.graph.module.ModuleInformation;
-
+import ui.graph.module.ModuleInfo;
 import java.awt.Color;
 import java.awt.Point;
-import java.util.ArrayList;
 
 
 public class PreprocessNode extends Node {
 
-  public PreprocessNode(ModuleInformation mi) {
-    super(mi, new Point(32, 640), new Color(255, 255, 0, 92));
+  private static Color BG_COLOR = Color.YELLOW;
+
+  public PreprocessNode(ModuleInfo moduleInfo, Point location) {
+    super(moduleInfo, location, BG_COLOR);
+  }
+
+  public PreprocessNode(ModuleInfo moduleInfo) {
+    super(moduleInfo, BG_COLOR);
   }
 }

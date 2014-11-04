@@ -1,6 +1,6 @@
 package ui.graph;
 
-import ui.graph.module.ModuleInformation;
+import ui.graph.module.ModuleInfo;
 import ui.graph.module.ModuleManager;
 import ui.graph.component.Node;
 import ui.graph.component.PreprocessNode;
@@ -28,44 +28,42 @@ public class ModuleSelectPanel extends JPanel {
 
   private Node preprocessNode;
   private List<Node> miningNodes;
-  private List<Node> visualizationNodes;
+  private List<Node> visNodes;
 
 
-  public ModuleSelectPanel(ModuleManager moduleManager,
-			   Node preprocessNode,
-			   List<Node> miningNodes,
-			   List<Node> visualizationNodes,
-			   boolean align) {
+  public ModuleSelectPanel(ModuleManager moduleManager) {
     this.moduleManager = moduleManager;
-    this.preprocessNode     = preprocessNode;
-    this.miningNodes        = miningNodes;
-    this.visualizationNodes = visualizationNodes;
 
     this.nodeSelectListener = new NodeSelectListener(this);
     this.setPreferredSize(new Dimension(800, 800));
     this.setLayout(null);
 
-    List<Node> nodes = new ArrayList<Node>();
-    nodes.addAll(this.miningNodes);
-    nodes.addAll(this.visualizationNodes);
 
-    // align nodes
-    if (align) {
-      this.alignNodes(nodes);
+    this.preprocessNode = new PreprocessNode(this.moduleManager.getPreprocess(), new Point(32, 540));
+    this.miningNodes = new ArrayList<Node>();
+    for (ModuleInfo mi : this.moduleManager.getMinings()) {
+      MiningNode n = new MiningNode(mi);
+      miningNodes.add(n);
+    }
+    this.visNodes =  new ArrayList<Node>();
+    for (ModuleInfo mi : this.moduleManager.getVisualizations()) {
+      VisualizationNode n = new VisualizationNode(mi);
+      miningNodes.add(n);
     }
 
+    // align nodes
+    List<Node> alignNodes = new ArrayList<Node>();
+    alignNodes.addAll(this.miningNodes);
+    alignNodes.addAll(this.visNodes);
+    this.alignNodes(alignNodes);
+
     // add all nodes to this panel
-    nodes.add(this.preprocessNode);
-    for (Node n : nodes) this.add(n);    
-    for (Node n : nodes) this.addNodeSelectListenerTo(n);
-
-    this.preprocessNode.selected(true);
-  }
-
-  public ModuleSelectPanel(ModuleManager moduleManager) {
-    this(moduleManager, new PreprocessNode(moduleManager.getPreprocess()),
-	 ModuleSelectPanel.createNodesBasedOn(moduleManager.getMinings()),
-	 ModuleSelectPanel.createNodesBasedOn(moduleManager.getVisualizations()), true);
+    this.add(preprocessNode);
+    preprocessNode.selected(true);
+    for (Node n : this.miningNodes) this.add(n);
+    for (Node n : this.miningNodes) this.addNodeSelectListenerTo(n);
+    for (Node n : this.visNodes) this.add(n);
+    for (Node n : this.visNodes) this.addNodeSelectListenerTo(n);
   }
 
 
@@ -80,69 +78,11 @@ public class ModuleSelectPanel extends JPanel {
     }
   }
 
-  @Override
-  public ModuleSelectPanel clone() {
-    Node preprocessNode = (PreprocessNode)this.preprocessNode.clone();
-    List<Node> miningNodes = new ArrayList<Node>();
-    for (Node n : this.miningNodes) miningNodes.add((MiningNode)n.clone());
-    List<Node> visualizationNodes = new ArrayList<Node>();
-    for (Node n : this.visualizationNodes) visualizationNodes.add((VisualizationNode)n.clone());
-
-    List<Node> nodes = new ArrayList<Node>();
-    nodes.add(this.preprocessNode);
-    nodes.addAll(this.miningNodes);
-    nodes.addAll(this.visualizationNodes);
-    List<Node> clones = new ArrayList<Node>();
-    clones.add(preprocessNode);
-    clones.addAll(miningNodes);
-    clones.addAll(visualizationNodes);
-
-    for (int i = 0; i < nodes.size(); i++) {
-      Node node = nodes.get(i);
-      Node clone = clones.get(i);
-
-      Node previous = node.getPreviousNode();
-      if (previous != null) {
-    	int j = nodes.indexOf(previous);
-    	clone.setPreviousNode(clones.get(j));
-      }
-
-      for (Node n : node.getNextNodes()) {
-      	int j = nodes.indexOf(n);
-      	clone.addNextNode(clones.get(j));
-      }
-    }
-
-    return new ModuleSelectPanel(this.moduleManager, preprocessNode,
-				 miningNodes, visualizationNodes, false);
-  }
-    
-
   public void setModulesToPanel(int panelIndex, int miningModuleID, int visualizationModuleID) {
     this.moduleManager.setModulesToPanel(panelIndex, miningModuleID, visualizationModuleID);
   }
 
-  public ModuleManager getModuleManager() { return this.moduleManager; }
-
-  /**
-   * create nodes based on module information
-   * @param miList module information list
-   * @return created nodes as List
-   */
-  static List<Node> createNodesBasedOn(List<ModuleInformation> miList) {
-    List<Node> nodes = new ArrayList();
-    for (ModuleInformation mi : miList) {
-      Node node = null;
-      if (mi.getType() == ModuleInformation.TYPE_MINING) {
-	node = new MiningNode(mi);
-      } else if (mi.getType() == ModuleInformation.TYPE_VISUALIZATION) {
-	node = new VisualizationNode(mi);
-      }
-
-      nodes.add(node);
-    }
-    return nodes;
-  }
+  // public ModuleManager getModuleManager() { return this.moduleManager; }
 
   /**
    * add listener to Node in order to select.
@@ -173,14 +113,14 @@ public class ModuleSelectPanel extends JPanel {
   }
 
   /**
-   * get preprocess, mining and visualization nodes
+   * get all nodes
    * @return all nodes as List
    */
   public List<Node> getNodes() {
     List<Node> nodes = new ArrayList<Node>();
     nodes.add(this.preprocessNode);
     nodes.addAll(this.miningNodes);
-    nodes.addAll(this.visualizationNodes);
+    nodes.addAll(this.visNodes);
     return nodes;
   }
 
