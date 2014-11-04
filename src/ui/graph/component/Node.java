@@ -1,6 +1,7 @@
 package ui.graph.component;
 
 import ui.graph.module.ModuleInfo;
+import ui.graph.component.event.NodeEventListener;
 import ui.graph.component.event.MouseDragAndDropListener;
 
 import java.awt.Component;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.EventListener;
 
 
-public abstract class Node extends JComponent {
+public class Node extends JComponent {
 
   private ModuleInfo moduleInfo;
 
@@ -30,23 +31,36 @@ public abstract class Node extends JComponent {
   private MouseDragAndDropListener mddl;
   
 
-  public Node(ModuleInfo moduleInfo, Point location, Color bgColor) {
+  public Node(ModuleInfo moduleInfo, Point location) {
     this.moduleInfo = moduleInfo;
     this.setLocation(location);
-    this.bgColor = bgColor;
+
+    Color c = null;
+    if (moduleInfo.getType() == ModuleInfo.TYPE_PREPROCESS) {
+      c = new Color(255, 255, 0, 128);
+    } else if (moduleInfo.getType() == ModuleInfo.TYPE_MINING) {
+      c = new Color(0, 255, 255, 128);
+    } else if (moduleInfo.getType() == ModuleInfo.TYPE_VISUALIZATION) {
+      c = new Color(255, 0, 255, 128);
+    }
+    this.bgColor = c;
 
     this.setSize(new Dimension(64, 32));
 
     this.nextNodes = new ArrayList<Node>();
 
-    // for drag and drop
+    // select event
+    NodeEventListener nel = new NodeEventListener(this);
+    this.addMouseListener(nel);
+
+    // drag and drop event
     MouseDragAndDropListener mddl = new MouseDragAndDropListener(this);
     this.addMouseListener(mddl);
     this.addMouseMotionListener(mddl);
   }
 
-  public Node(ModuleInfo moduleInfo, Color bgColor) {
-    this(moduleInfo, new Point(0, 0), bgColor);
+  public Node(ModuleInfo moduleInfo) {
+    this(moduleInfo, new Point(0, 0));
   }
   
   @Override
@@ -98,8 +112,7 @@ public abstract class Node extends JComponent {
       g.drawLine(startX, startY, endX, endY);
     }
   }
-    
- 
+
   public ModuleInfo getModuleInfo() { return this.moduleInfo; }
   public String getName() { return this.moduleInfo.getName(); }
   public int getID() { return this.moduleInfo.getID(); }
