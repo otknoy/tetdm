@@ -11,10 +11,10 @@ public class VisualizationModuleNode extends ModuleNode {
   private static final Color BG_COLOR = new Color(255, 0, 255, 128);
 
   public VisualizationModuleNode(ModuleData moduleData, Point location) {
-    super(moduleData, location, BG_COLOR);
+    super(moduleData, BG_COLOR, location);
   }
 
-  public VisualizationModuleNode(ModuleData moduleInfo) {
-    super(moduleInfo, BG_COLOR);
+  public VisualizationModuleNode(ModuleData moduleData) {
+    super(moduleData, BG_COLOR);
   }
 }

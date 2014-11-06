@@ -22,6 +22,9 @@ public class ModuleSelectPanel extends JPanel {
 
   private List<Node> nodes;
 
+  public static final int WIDTH  = 800;
+  public static final int HEIGHT = 800;
+
 
   public ModuleSelectPanel(ModuleManager moduleManager) {
     this.moduleManager = moduleManager;
@@ -32,7 +35,7 @@ public class ModuleSelectPanel extends JPanel {
     this.nodes = new ArrayList<Node>();
 
     // init preprocess node
-    Node n = new PreprocessNode();
+    Node n = new PreprocessNode(new Point(this.WIDTH/10, this.HEIGHT/2));
     this.addNode(n);
   }
 

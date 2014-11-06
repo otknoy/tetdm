@@ -10,6 +10,7 @@ public class MiningModuleNode extends ModuleNode {
 
   private static final Color BG_COLOR = new Color(0, 255, 255, 128);
 
+
   public MiningModuleNode(ModuleData moduleData, Point location) {
     super(moduleData, BG_COLOR, location);
   }

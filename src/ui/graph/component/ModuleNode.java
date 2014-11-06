@@ -6,9 +6,10 @@ import java.awt.Color;
 import java.awt.Point;
 
 
-public class ModuleNode extends Node implements Connectable {
+public class ModuleNode extends Node {
 
   protected ModuleData moduleData;
+
 
   public ModuleNode(ModuleData moduleData, Color bgColor, Point location) {
     super(moduleData.getName(), moduleData.getId(), bgColor, location);
@@ -22,21 +23,21 @@ public class ModuleNode extends Node implements Connectable {
   
 
   @Override
-  public boolean isConnectableToPrev(ModuleNode n) {
+  public boolean isConnectableToPrev(Node n) {
     ModuleData d1 = this.moduleData;
-    ModuleData d2 = n.moduleData;
+    ModuleData d2 = ((ModuleNode)n).moduleData;
     return d1.isConnectableToPrev(d2);
   }
   
   @Override
-  public boolean isConnectableToNext(ModuleNode n) {
+  public boolean isConnectableToNext(Node n) {
     ModuleData d1 = this.moduleData;
-    ModuleData d2 = n.moduleData;
+    ModuleData d2 = ((ModuleNode)n).moduleData;
     return d1.isConnectableToNext(d2);
   }
 
   @Override
-  public boolean isConnectableTo(ModuleNode n) {
+  public boolean isConnectableTo(Node n) {
     return this.isConnectableToPrev(n) || this.isConnectableToNext(n);
   }
 }

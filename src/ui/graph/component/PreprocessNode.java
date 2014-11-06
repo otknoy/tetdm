@@ -3,7 +3,7 @@ package ui.graph.component;
 import java.awt.Color;
 import java.awt.Point;
 
-public class PreprocessNode extends Node implements Connectable {
+public class PreprocessNode extends Node {
 
   private static final String NAME = "Preprocess";
   private static final Color BG_COLOR = new Color(255, 255, 0, 128);

@@ -50,21 +50,21 @@ public class NodeEventListener implements MouseListener {
     node.repaint();
 
     // generate connectable nodes
-    List<ModuleInfo> mil = node.getModuleInfo().getNextList();
-    List<Node> nodes = new ArrayList<Node>();
-    for (ModuleInfo mi : mil) {
-      Node node = null;
-      if (mi.getType() == ModuleInfo.TYPE_PREPROCESS) {
-	node = new PreprocessNode(mi);
-      } else if (mi.getType() == ModuleInfo.TYPE_MINING) {
-	node = new MiningNode(mi);
-      } else if (mi.getType() == ModuleInfo.TYPE_VISUALIZATION) {
-	node = new VisualizationNode(mi);
-      }
-      nodes.add(node);
-    }
-    this.connectableNodes = nodes;
-    this.alignNodes(this.connectableNodes);
+    // List<ModuleData> mdl = node.getModuleInfo().getNextList();
+    // List<Node> nodes = new ArrayList<Node>();
+    // for (ModuleData md : mdl) {
+    //   Node node = null;
+    //   if (md.getType() == ModuleInfo.TYPE_PREPROCESS) {
+    // 	node = new PreprocessNode(mi);
+    //   } else if (mi.getType() == ModuleInfo.TYPE_MINING) {
+    // 	node = new MiningNode(mi);
+    //   } else if (mi.getType() == ModuleInfo.TYPE_VISUALIZATION) {
+    // 	node = new VisualizationNode(mi);
+    //   }
+    //   nodes.add(node);
+    // }
+    // this.connectableNodes = nodes;
+    // this.alignNodes(this.connectableNodes);
 
     ModuleSelectPanel parent = (ModuleSelectPanel)this.node.getParent();
     parent.addNodes(this.connectableNodes);

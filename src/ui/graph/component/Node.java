@@ -1,16 +1,18 @@
 package ui.graph.component;
 
+import ui.graph.component.event.NodeEventListener;
 import ui.graph.component.event.MouseDragAndDropListener;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import javax.swing.JComponent;
 
 
-public class Node extends JComponent {
+public abstract class Node extends JComponent {
 
   private String name;
   private int id;
@@ -21,17 +23,26 @@ public class Node extends JComponent {
   private List<Node> nextNodes;
 
   private boolean isSelected;
+  private boolean isHighlighted;
+
+  public static final int WIDTH  = 64;
+  public static final int HEIGHT = 32;
 
 
   public Node(String name, int id, Color bgColor, Point location) {
     this.name = name;
     this.id = id;
     this.bgColor = bgColor;
-    this.prevNodes = new ArrayList<Node>();
-    this.nextNodes = new ArrayList<Node>();
+
+    this.setSize(new Dimension(this.WIDTH, this.HEIGHT));
     this.setLocation(location);
 
+    this.prevNodes = new ArrayList<Node>();
+    this.nextNodes = new ArrayList<Node>();
+
     // select
+    NodeEventListener nel = new NodeEventListener(this);
+    this.addMouseListener(nel);
 
     // drag & drop 
     MouseDragAndDropListener mddl = new MouseDragAndDropListener(this);
@@ -86,6 +97,8 @@ public class Node extends JComponent {
 
   public boolean isSelected() { return this.isSelected; }
   public void selected(boolean selected) { this.isSelected = selected; }
+  public boolean isHighlighted() { return this.isHighlighted; }
+  public void highlighted(boolean highlighted) { this.isHighlighted = highlighted; }
 
   
   /**
@@ -106,4 +119,8 @@ public class Node extends JComponent {
   public double distance(Node n) {
     return this.getCenterPosition().distance(n.getCenterPosition());
   }
+
+  public abstract boolean isConnectableToPrev(Node n);
+  public abstract boolean isConnectableToNext(Node n);
+  public abstract boolean isConnectableTo(Node n);
 }
