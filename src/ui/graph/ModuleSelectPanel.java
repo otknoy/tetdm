@@ -1,12 +1,8 @@
 package ui.graph;
 
-import ui.graph.module.ModuleInfo;
-import ui.graph.module.ModuleManager;
-import ui.graph.component.Node;
-import ui.graph.component.PreprocessNode;
-import ui.graph.component.MiningNode;
-import ui.graph.component.VisualizationNode;
-import ui.graph.component.Edge;
+import ui.graph.module.*;
+import ui.graph.module.*;
+import ui.graph.component.*;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -36,7 +32,7 @@ public class ModuleSelectPanel extends JPanel {
     this.nodes = new ArrayList<Node>();
 
     // init preprocess node
-    Node n = new PreprocessNode(this.moduleManager.getPreprocess(), new Point(32, 400));
+    Node n = new PreprocessNode();
     this.addNode(n);
   }
 

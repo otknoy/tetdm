@@ -1,11 +1,11 @@
 package ui.graph.component.event;
 
 import ui.graph.ModuleSelectPanel;
-import ui.graph.module.ModuleInfo;
+import ui.graph.module.ModuleData;
 import ui.graph.component.Node;
 import ui.graph.component.PreprocessNode;
-import ui.graph.component.MiningNode;
-import ui.graph.component.VisualizationNode;
+import ui.graph.component.MiningModuleNode;
+import ui.graph.component.VisualizationModuleNode;
 
 import java.awt.Point;
 import java.awt.event.MouseListener;

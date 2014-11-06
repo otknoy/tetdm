@@ -1,156 +1,108 @@
 package ui.graph.component;
 
-import ui.graph.module.ModuleInfo;
-import ui.graph.component.event.NodeEventListener;
 import ui.graph.component.event.MouseDragAndDropListener;
 
-import java.awt.Component;
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Color;
-import javax.swing.JComponent;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.EventListener;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
+import javax.swing.JComponent;
 
 
-public abstract class Node extends JComponent {
+public class Node extends JComponent {
 
-  private ModuleInfo moduleInfo;
+  private String name;
+  private int id;
 
-  private Node previousNode;
-  private List<Node> nextNodes;
-  
   private Color bgColor;
-  private boolean selected;
-  private boolean highlighted;
 
-  private MouseDragAndDropListener mddl;
-  
+  private List<Node> prevNodes;
+  private List<Node> nextNodes;
 
-  public Node(ModuleInfo moduleInfo, Point location, Color gbColor) {
-    this.moduleInfo = moduleInfo;
-    this.setLocation(location);
-    this.bgColor = gbColor;
+  private boolean isSelected;
 
-    this.setSize(new Dimension(64, 32));
 
+  public Node(String name, int id, Color bgColor, Point location) {
+    this.name = name;
+    this.id = id;
+    this.bgColor = bgColor;
+    this.prevNodes = new ArrayList<Node>();
     this.nextNodes = new ArrayList<Node>();
+    this.setLocation(location);
 
-    // select event
-    NodeEventListener nel = new NodeEventListener(this);
-    this.addMouseListener(nel);
+    // select
 
-    // drag and drop event
+    // drag & drop 
     MouseDragAndDropListener mddl = new MouseDragAndDropListener(this);
     this.addMouseListener(mddl);
     this.addMouseMotionListener(mddl);
   }
 
-  public Node(ModuleInfo moduleInfo, Color gbColor) {
-    this(moduleInfo, new Point(0, 0), gbColor);
+  public Node(String name, int id, Color bgColor) {
+    this(name, id, bgColor, new Point(0, 0));
   }
-  
+
+
   @Override
   public String toString() {
-    return this.getName() + "[" + previousNode + "]" + "[" + this.nextNodes.size() + "]";
+    return this.getName() + "[" + this.prevNodes.size() + "]" + "[" + this.nextNodes.size() + "]";
   }
 
   @Override
   public void paintComponent(Graphics g) {
-    Graphics2D g2 = (Graphics2D)g;
-
     // background
-    if (this.isHighlighted()) {
-      Color c = this.bgColor;
-      Color cMaxAlpha = new Color(c.getRed(), c.getGreen(), c.getBlue(), 255);
-      g.setColor(cMaxAlpha);
-    } else {
-      g.setColor(this.bgColor);
-    }
+    g.setColor(this.bgColor);
     g.fillRect(0, 0, getWidth()-1, getHeight()-1);
-    
+
     // border
-    g.setColor(Color.black);
     if (this.isSelected()) {
-      BasicStroke wideStroke = new BasicStroke(3.0f);
-      g2.setStroke(wideStroke);
+      g.setColor(Color.black);
     } else {
-      BasicStroke wideStroke = new BasicStroke(1.0f);
-      g2.setStroke(wideStroke);
+      g.setColor(Color.gray);
     }
     g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 
     // label
     g.setColor(Color.black);
     g.drawString(this.getName(), 2, this.getHeight()/2);
-    // g.drawString(this.getID() + " " + this.getName(), 2, this.getHeight()/2);    
   }
 
-  public void drawEdgesToNextNode(Graphics g) {
-    Point p1 = this.getLocation();
-    int startX = (int)(p1.getX() + this.getWidth());
-    int startY = (int)(p1.getY() + this.getHeight()/2);
-    for (Node n : this.nextNodes) {
-      Point p2 = n.getLocation();
-      int endX = (int)p2.getX();
-      int endY = (int)(p2.getY() + this.getHeight()/2);
 
-      g.setColor(Color.black);
-      g.drawLine(startX, startY, endX, endY);
-    }
-  }
+  public String getName() { return this.name; }
+  public int getId() { return this.id; }
 
-  public ModuleInfo getModuleInfo() { return this.moduleInfo; }
-  public String getName() { return this.moduleInfo.getName(); }
-  public int getID() { return this.moduleInfo.getID(); }
-  public int getType() { return this.moduleInfo.getType(); }
-
-  public Node getPreviousNode() { return this.previousNode; }
-  public void setPreviousNode(Node n) { this.previousNode = n; }
-  public void removePreviousNode(Node n) { if (this.previousNode == n) this.previousNode = null; }  
+  
+  public List<Node> getPrevNodes() { return this.prevNodes; }
+  public void addPrevNodes(Node n) { this.prevNodes.add(n); }
+  public void removePrevNode(Node n) { this.prevNodes.remove(n); }
+  public void removeAllPrevNodes() { this.prevNodes = new ArrayList<Node>(); }
+  
   public List<Node> getNextNodes() { return this.nextNodes; }
-  public void addNextNode(Node n) { this.nextNodes.add(n); }
-  public void addNextNodes(List<Node> nodes) { for (Node n : nodes) this.addNextNode(n); }  
+  public void addNextNodes(Node n) { this.nextNodes.add(n); }
   public void removeNextNode(Node n) { this.nextNodes.remove(n); }
   public void removeAllNextNodes() { this.nextNodes = new ArrayList<Node>(); }
 
-  public boolean isSelected() { return this.selected; }
-  public void selected(boolean selected) { this.selected = selected; this.repaint(); }
-  public boolean isHighlighted() { return this.highlighted; }
-  public void highlighted(boolean highlighted) { this.highlighted = highlighted; this.repaint(); }
 
-  public boolean isConnectableTo(Node n) {
-    return this.getModuleInfo().isConnectableTo(n.getModuleInfo());
-  }
+  public boolean isSelected() { return this.isSelected; }
+  public void selected(boolean selected) { this.isSelected = selected; }
 
-  public boolean isConnectableToPrevious(Node n) {
-    return this.getModuleInfo().isConnectableToPrevious(n.getModuleInfo());
-  }
-
-  public boolean isConnectableToNext(Node n) {
-    return this.getModuleInfo().isConnectableToNext(n.getModuleInfo());
-  }
-
-  public boolean isConnectedTo(Node n1) {
-    List<Node> nodes = new ArrayList<Node>();
-    nodes.add(this.previousNode);
-    nodes.addAll(this.nextNodes);
-    for (Node n2 : nodes)
-      if (n1 == n2) return true;
-    return false;
-  }
-
-
+  
+  /**
+   * get center point of Node
+   * @return center point
+   */
   public Point getCenterPosition() {
     int x = (int)(getX() + (getWidth()/2));
     int y = (int)(getY() + (getHeight()/2));
     return new Point(x, y);
   }
 
+  /**
+   * calculate distance to Node n
+   * @param destination node
+   * @return distance
+   */
   public double distance(Node n) {
     return this.getCenterPosition().distance(n.getCenterPosition());
   }
