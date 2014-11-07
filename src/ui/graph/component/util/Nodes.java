@@ -3,6 +3,7 @@ package ui.graph.component.util;
 import ui.graph.component.Node;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.List;
 
 
@@ -10,9 +11,10 @@ public class Nodes {
   
   /**
    * Align nodes
+   * @param region where nodes aligned
    * @param aligned nodes
    */
-  public static void alignNodes(List<Node> nodes) {
+  public static void alignNodes(Rectangle rect, List<Node> nodes) {
     final int mergin = 8;
 
     final int wn = 5;
@@ -20,8 +22,8 @@ public class Nodes {
       int wi = i % wn;
       int hi = i / wn;
 
-      int x = mergin + wi * (nodes.get(i).getWidth() + mergin);
-      int y = mergin + hi * (nodes.get(i).getHeight() + mergin);      
+      int x = rect.x + mergin + wi * (nodes.get(i).getWidth() + mergin);
+      int y = rect.y + mergin + hi * (nodes.get(i).getHeight() + mergin);
       nodes.get(i).setLocation(x, y);
     }
   }

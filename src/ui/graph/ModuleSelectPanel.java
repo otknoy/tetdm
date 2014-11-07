@@ -3,16 +3,18 @@ package ui.graph;
 import ui.graph.module.*;
 import ui.graph.module.*;
 import ui.graph.component.*;
+import ui.graph.component.util.*;
 
-import javax.swing.JPanel;
 import java.awt.Color;
-import java.util.List;
-import java.util.ArrayList;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Component;
+import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.awt.Dimension;
+import java.util.List;
+import javax.swing.JPanel;
 
 
 public class ModuleSelectPanel extends JPanel {
@@ -55,6 +57,9 @@ public class ModuleSelectPanel extends JPanel {
       vmNodes.add(n);
     }
     this.addNodes(vmNodes);
+
+    Nodes.alignNodes(new Rectangle(      0, 0, WIDTH/2, HEIGHT/2), mmNodes);
+    Nodes.alignNodes(new Rectangle(WIDTH/2, 0, WIDTH/2, HEIGHT/2), vmNodes);
   }
 
 
