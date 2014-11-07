@@ -39,18 +39,22 @@ public class ModuleSelectPanel extends JPanel {
     this.addNode(n);
 
     // init mining module node
+    List<Node> mmNodes = new ArrayList<Node>();
     List<ModuleData> mdl = moduleManager.getMiningModuleDataList();
     for (ModuleData md : mdl) {
       n = new MiningModuleNode(md);
-      this.addNode(n);
+      mmNodes.add(n);
     }
+    this.addNodes(mmNodes);
 
     // init visualization module node
+    List<Node> vmNodes = new ArrayList<Node>();
     List<ModuleData> vdl = moduleManager.getVisualizationModuleDataList();
     for (ModuleData md : vdl) {
       n = new VisualizationModuleNode(md);
-      this.addNode(n);
+      vmNodes.add(n);
     }
+    this.addNodes(vmNodes);
   }
 
 
