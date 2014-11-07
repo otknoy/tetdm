@@ -71,8 +71,8 @@ public class ModuleManager {
     this.mainFrame.setPanel(panelIndex, miningModuleID, visualizationModuleID);
   }
 
-  public List<ModuleData> getMinings() { return this.minings; }
-  public List<ModuleData> getVisualizations() { return this.visualizations; }
+  public List<ModuleData> getMiningModuleDataList() { return this.minings; }
+  public List<ModuleData> getVisualizationModuleDataList() { return this.visualizations; }
 
   // public List<ModuleData> getAllModuleData() {
   //   List<ModuleData> all = new ArrayList<ModuleData>();
