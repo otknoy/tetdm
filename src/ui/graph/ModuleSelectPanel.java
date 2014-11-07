@@ -37,6 +37,20 @@ public class ModuleSelectPanel extends JPanel {
     // init preprocess node
     Node n = new PreprocessNode(new Point(this.WIDTH/10, this.HEIGHT/2));
     this.addNode(n);
+
+    // init mining module node
+    List<ModuleData> mdl = moduleManager.getMiningModuleDataList();
+    for (ModuleData md : mdl) {
+      n = new MiningModuleNode(md);
+      this.addNode(n);
+    }
+
+    // init visualization module node
+    List<ModuleData> vdl = moduleManager.getVisualizationModuleDataList();
+    for (ModuleData md : vdl) {
+      n = new VisualizationModuleNode(md);
+      this.addNode(n);
+    }
   }
 
 
