@@ -61,15 +61,7 @@ public class ModuleSelectPanel extends JPanel {
     this.moduleManager.setModulesToPanel(panelIndex, miningModuleID, visualizationModuleID);
   }
 
-  /**
-   * get all nodes
-   * @return all nodes as List
-   */
-  public List<Node> getNodes() {
-    return this.nodes;
-  }
 
-  
   public void addNode(Node node) {
     this.nodes.add(node);
     this.add(node);
