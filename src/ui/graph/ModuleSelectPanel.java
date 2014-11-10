@@ -3,6 +3,8 @@ package ui.graph;
 import ui.graph.module.*;
 import ui.graph.module.*;
 import ui.graph.component.*;
+import ui.graph.component.event.NodeEventListener;
+import ui.graph.component.event.MouseDragAndDropListener;
 import ui.graph.component.util.*;
 
 import java.awt.Color;
@@ -86,6 +88,16 @@ public class ModuleSelectPanel extends JPanel {
 
 
   public void addNode(Node node) {
+    // select event
+    NodeEventListener nel = new NodeEventListener(this, node);
+    node.addMouseListener(nel);
+    node.addMouseMotionListener(nel);
+
+    // drag & drop event
+    MouseDragAndDropListener mddl = new MouseDragAndDropListener(node);
+    node.addMouseListener(mddl);
+    node.addMouseMotionListener(mddl);
+
     this.nodes.add(node);
     this.add(node);
   }
