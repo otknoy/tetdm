@@ -16,13 +16,16 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-public class NodeEventListener implements MouseListener {
+public class NodeEventListener implements MouseListener, MouseMotionListener {
+
+  private ModuleSelectPanel parent;
 
   private Node node;
   private List<Node> connectableNodes;
 
   
-  public NodeEventListener(Node node) {
+  public NodeEventListener(ModuleSelectPanel parent, Node node) {
+    this.parent = parent;
     this.node = node;
     this.connectableNodes = new ArrayList<Node>();
   }
@@ -35,12 +38,10 @@ public class NodeEventListener implements MouseListener {
   }
 
   @Override  
-  public void mousePressed(MouseEvent e) {
-  }
+  public void mousePressed(MouseEvent e) {}
 
   @Override  
-  public void mouseReleased(MouseEvent e) {
-  }
+  public void mouseReleased(MouseEvent e) {}
 
   @Override
   public void mouseEntered(MouseEvent e) {
@@ -49,26 +50,13 @@ public class NodeEventListener implements MouseListener {
     node.highlighted(true);
     node.repaint();
 
-    // generate connectable nodes
-    // List<ModuleData> mdl = node.getModuleInfo().getNextList();
-    // List<Node> nodes = new ArrayList<Node>();
-    // for (ModuleData md : mdl) {
-    //   Node node = null;
-    //   if (md.getType() == ModuleInfo.TYPE_PREPROCESS) {
-    // 	node = new PreprocessNode(mi);
-    //   } else if (mi.getType() == ModuleInfo.TYPE_MINING) {
-    // 	node = new MiningNode(mi);
-    //   } else if (mi.getType() == ModuleInfo.TYPE_VISUALIZATION) {
-    // 	node = new VisualizationNode(mi);
-    //   }
-    //   nodes.add(node);
-    // }
-    // this.connectableNodes = nodes;
-    // this.alignNodes(this.connectableNodes);
+    // highlight connectable nodes
+    this.connectableNodes = parent.findConnectableNodes(this.node);
+    for (Node n : this.connectableNodes) {
+      n.highlighted(true);
+    }
 
-    ModuleSelectPanel parent = (ModuleSelectPanel)this.node.getParent();
-    parent.addNodes(this.connectableNodes);
-    parent.repaint();
+    this.parent.repaint();
   }
 
   @Override
@@ -78,36 +66,23 @@ public class NodeEventListener implements MouseListener {
     node.highlighted(false);    
     node.repaint();
 
-    // remove connectable nodes
-    ModuleSelectPanel parent = (ModuleSelectPanel)this.node.getParent();
-    parent.removeNodes(this.connectableNodes);
+    // unhighlight connectable nodes
+    for (Node n : this.connectableNodes) {
+      n.highlighted(false);
+    }
     this.connectableNodes = new ArrayList<Node>();
-    parent.repaint();
+
+    this.parent.repaint();
   }
 
-  // Align nodes to arch-shaped
-  private void alignNodes(List<Node> nodes) {
-    final double maxRad = Math.toRadians(150);
-    
-    double diffRad = Math.toRadians(10);
-    double rad = diffRad * nodes.size();
-    if (rad > maxRad) {
-      rad = maxRad;
-      diffRad = rad / nodes.size();
-    }
-    
-    final double startRad = -rad / 2;
-    final double endRad   =  rad / 2;
+  @Override
+  public void mouseDragged(MouseEvent e) {
+    System.out.println(e);
 
-    final Point np = node.getCenterPosition();
-    final int r = 192;
-    for (int i = 0; i < nodes.size(); i++) {
-      double theta = startRad + diffRad * (i+1);
-      double x = np.getX() + r * Math.cos(theta);
-      double y = np.getY() + r * Math.sin(theta);
-
-      nodes.get(i).setLocation((int)x - node.getWidth()/2,
-			       (int)y - node.getHeight()/2);
-    }
+    // If the distance between connectable nodes becomes closer than threshold,
+    // these nodes are connected.
   }
+
+  @Override
+  public void mouseMoved(MouseEvent e) {}
 }
