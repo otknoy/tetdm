@@ -118,4 +118,20 @@ public class ModuleSelectPanel extends JPanel {
       this.removeNode(n);
     }
   }
+
+
+  /**
+   * Find connectable nodes from all nodes.
+   * @param base node
+   * @return nodes which are connectable to Node n1
+   */
+  public List<Node> findConnectableNodes(Node n1) {
+    List<Node> connectableNodes = new ArrayList<Node>();
+    for (Node n2 : this.nodes) {
+      if (n1.isConnectableTo(n2)) {
+	connectableNodes.add(n2);
+      }
+    }
+    return connectableNodes;
+  }
 }
