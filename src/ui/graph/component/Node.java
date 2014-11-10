@@ -1,14 +1,13 @@
 package ui.graph.component;
 
-import ui.graph.component.event.NodeEventListener;
-import ui.graph.component.event.MouseDragAndDropListener;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.BasicStroke;
 import javax.swing.JComponent;
 
 
@@ -40,14 +39,6 @@ public abstract class Node extends JComponent {
     this.prevNodes = new ArrayList<Node>();
     this.nextNodes = new ArrayList<Node>();
 
-    // select
-    NodeEventListener nel = new NodeEventListener(this);
-    this.addMouseListener(nel);
-
-    // drag & drop 
-    MouseDragAndDropListener mddl = new MouseDragAndDropListener(this);
-    this.addMouseListener(mddl);
-    this.addMouseMotionListener(mddl);
   }
 
   public Node(String name, int id, Color bgColor) {
@@ -62,21 +53,32 @@ public abstract class Node extends JComponent {
 
   @Override
   public void paintComponent(Graphics g) {
+    Graphics2D g2 = (Graphics2D)g;
+
     // background
-    g.setColor(this.bgColor);
-    g.fillRect(0, 0, getWidth()-1, getHeight()-1);
+    if (this.isHighlighted()) {
+      Color c = this.bgColor;
+      Color cMaxAlpha = new Color(c.getRed(), c.getGreen(), c.getBlue(), 255);
+      g2.setColor(cMaxAlpha);
+    } else {
+      g2.setColor(this.bgColor);
+    }
+    g2.fillRect(0, 0, getWidth()-1, getHeight()-1);
 
     // border
+    g2.setColor(Color.black);
     if (this.isSelected()) {
-      g.setColor(Color.black);
+      BasicStroke wideStroke = new BasicStroke(3.0f);
+      g2.setStroke(wideStroke);
     } else {
-      g.setColor(Color.gray);
+      BasicStroke wideStroke = new BasicStroke(1.0f);
+      g2.setStroke(wideStroke);
     }
-    g.drawRect(0, 0, getWidth()-1, getHeight()-1);
+    g2.drawRect(0, 0, getWidth()-1, getHeight()-1);
 
     // label
-    g.setColor(Color.black);
-    g.drawString(this.getName(), 2, this.getHeight()/2);
+    g2.setColor(Color.black);
+    g2.drawString(this.getName(), 2, this.getHeight()/2);
   }
 
 
