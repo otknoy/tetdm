@@ -25,6 +25,7 @@ public class ModuleSelectPanel extends JPanel {
   private final ModuleManager moduleManager;
 
   private List<Node> nodes;
+  private Node preprocessNode;
 
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 800;
@@ -40,6 +41,7 @@ public class ModuleSelectPanel extends JPanel {
 
     // init preprocess node
     Node n = new PreprocessNode(new Point(this.WIDTH/10, this.HEIGHT/2));
+    this.preprocessNode = n;
     this.addNode(n);
 
     // init mining module node
@@ -133,5 +135,21 @@ public class ModuleSelectPanel extends JPanel {
       }
     }
     return connectableNodes;
+  }
+
+  /**
+   * get combinations of preprocess node, mining module node, and visualization module node
+   * @return combination list
+   */
+  public List<Node[]> getNodeCombinations() {
+    List<Node[]> combinations = new ArrayList<Node[]>();
+    Node n1 = this.preprocessNode;
+    for (Node n2 : n1.getNextNodes()) {
+      for (Node n3 : n2.getNextNodes()) {
+	Node[] c = {n1, n2, n3};
+	combinations.add(c);
+      }
+    }
+    return combinations;
   }
 }
