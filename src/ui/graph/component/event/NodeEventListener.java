@@ -78,6 +78,7 @@ public class NodeEventListener implements MouseListener, MouseMotionListener {
   @Override
   public void mouseDragged(MouseEvent e) {
     if (!this.node.isHighlighted()) {
+      parent.repaint();
       return;
     }
 
