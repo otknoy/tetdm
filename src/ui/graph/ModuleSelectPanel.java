@@ -152,4 +152,32 @@ public class ModuleSelectPanel extends JPanel {
     }
     return combinations;
   }
+
+  /**
+   * extract combinations which have connected all nodes
+   * @param node combinations
+   * @return filtered node combinations
+   */
+  private List<Node[]> extractConnectedCombinations(List<Node[]> combinations) {
+    List<Node[]> filtered = new ArrayList<Node[]>();
+    for (Node[] c : combinations) {
+      Node n1 = c[0], n2 = c[1], n3 = c[2];
+      if (!checkNodeTypes(n1, n2, n3)) {
+	continue;
+      }
+
+      boolean n1n2 = n1.getNextNodes().contains(n2);
+      boolean n2n3 = n2.getNextNodes().contains(n3);
+      if (n1n2 && n2n3) {
+	filtered.add(c);
+      }
+    }
+    return filtered;
+  }
+
+  private boolean checkNodeTypes(Node n1, Node n2, Node n3) {
+    return ((n1 instanceof PreprocessNode) &&
+	    (n2 instanceof MiningModuleNode) &&
+	    (n3 instanceof VisualizationModuleNode));
+  }
 }
