@@ -80,26 +80,31 @@ public class NodeEventListener implements MouseListener, MouseMotionListener {
     if (!this.node.isHighlighted()) {
       return;
     }
-    System.out.println(e);
 
-    // If the distance between connectable nodes becomes closer than threshold,
-    // these nodes are connected.
-    final int threshold = 128;
+    // If the distance between connectable nodes becomes closer/more distant than threshold,
+    // these nodes are connected/disconnected.
+    final int threshold = 192;
     for (Node n : this.connectableNodes) {
-      if (this.node.isConnectedTo(n)) {
-	continue;
-      }
+      if (this.node.distance(n) <= threshold) {	// connect
+	if (this.node.isConnectedTo(n)) {
+	  continue;
+	}
 
-      if (threshold < this.node.distance(n)) {
-	continue;
-      }
-
-      if (this.node.isConnectableToPrev(n)) {
-	this.node.addPrevNodes(n);
-	n.addNextNodes(n);
-      } else if (this.node.isConnectableToNext(n) ){
-	this.node.addNextNodes(n);
-	n.addPrevNodes(n);
+        if (this.node.isConnectableToPrev(n)) {
+	  this.node.addPrevNodes(n);
+	  n.addNextNodes(this.node);
+	} else if (this.node.isConnectableToNext(n)){
+	  this.node.addNextNodes(n);
+	  n.addPrevNodes(this.node);
+	}
+      } else { // disconnect
+        if (this.node.isConnectableToPrev(n)) {
+          this.node.removePrevNode(n);
+	  n.removeNextNode(this.node);
+	} else if (this.node.isConnectableToNext(n)){
+	  this.node.removeNextNode(n);
+	  n.removePrevNode(this.node);
+	}
       }
     }
 
@@ -107,5 +112,7 @@ public class NodeEventListener implements MouseListener, MouseMotionListener {
   }
 
   @Override
-  public void mouseMoved(MouseEvent e) {}
+  public void mouseMoved(MouseEvent e) {
+    parent.repaint();
+  }
 }
