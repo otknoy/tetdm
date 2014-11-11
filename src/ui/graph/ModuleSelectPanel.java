@@ -88,6 +88,16 @@ public class ModuleSelectPanel extends JPanel {
     this.moduleManager.setModulesToPanel(panelIndex, miningModuleID, visualizationModuleID);
   }
 
+  /**
+   * Set mining module and visualization module to a panel
+   * @param index of panel
+   * @param mining module node
+   * @param visualization module node
+   */
+  public void setModulesToPanel(int panelIndex, MiningModuleNode mmn, VisualizationModuleNode vmn) {
+    this.setModulesToPanel(panelIndex, mmn.getId(), vmn.getId());
+  }
+
 
   public void addNode(Node node) {
     // select event
