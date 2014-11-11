@@ -81,6 +81,23 @@ public abstract class Node extends JComponent {
     g2.drawString(this.getName(), 2, this.getHeight()/2);
   }
 
+  /**
+   * draw edges to next nodes
+   * @param targed Graphics
+   */
+  public void drawEdgesToNextNodes(Graphics g) {
+    Point p1 = this.getLocation();
+    int startX = (int)(p1.getX() + this.getWidth());
+    int startY = (int)(p1.getY() + this.getHeight()/2);
+    for (Node n : this.nextNodes) {
+      Point p2 = n.getLocation();
+      int endX = (int)p2.getX();
+      int endY = (int)(p2.getY() + this.getHeight()/2);
+
+      g.setColor(Color.black);
+      g.drawLine(startX, startY, endX, endY);
+    }
+  }
 
   public String getName() { return this.name; }
   public int getId() { return this.id; }
@@ -90,12 +107,17 @@ public abstract class Node extends JComponent {
   public void addPrevNodes(Node n) { this.prevNodes.add(n); }
   public void removePrevNode(Node n) { this.prevNodes.remove(n); }
   public void removeAllPrevNodes() { this.prevNodes = new ArrayList<Node>(); }
+  public boolean isConnectedToPrev(Node n) { return this.prevNodes.contains(n); }
   
   public List<Node> getNextNodes() { return this.nextNodes; }
   public void addNextNodes(Node n) { this.nextNodes.add(n); }
   public void removeNextNode(Node n) { this.nextNodes.remove(n); }
   public void removeAllNextNodes() { this.nextNodes = new ArrayList<Node>(); }
+  public boolean isConnectedToNext(Node n) { return this.nextNodes.contains(n); }
 
+  public boolean isConnectedTo(Node n) {
+    return this.isConnectedToPrev(n) || this.isConnectedToNext(n);
+  }
 
   public boolean isSelected() { return this.isSelected; }
   public void selected(boolean selected) { this.isSelected = selected; }

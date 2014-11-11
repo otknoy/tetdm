@@ -77,10 +77,33 @@ public class NodeEventListener implements MouseListener, MouseMotionListener {
 
   @Override
   public void mouseDragged(MouseEvent e) {
+    if (!this.node.isHighlighted()) {
+      return;
+    }
     System.out.println(e);
 
     // If the distance between connectable nodes becomes closer than threshold,
     // these nodes are connected.
+    final int threshold = 128;
+    for (Node n : this.connectableNodes) {
+      if (this.node.isConnectedTo(n)) {
+	continue;
+      }
+
+      if (threshold < this.node.distance(n)) {
+	continue;
+      }
+
+      if (this.node.isConnectableToPrev(n)) {
+	this.node.addPrevNodes(n);
+	n.addNextNodes(n);
+      } else if (this.node.isConnectableToNext(n) ){
+	this.node.addNextNodes(n);
+	n.addPrevNodes(n);
+      }
+    }
+
+    parent.repaint();
   }
 
   @Override

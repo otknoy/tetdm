@@ -70,10 +70,10 @@ public class ModuleSelectPanel extends JPanel {
     g.setColor(Color.white);
     g.fillRect(0, 0, getWidth(), getHeight());
 
-    // drag edges
-    // for (Node n : this.nodes) {
-    //   n.drawEdgesToNextNode(g);
-    // }
+    // draw edges
+    for (Node n : this.nodes) {
+      n.drawEdgesToNextNodes(g);
+    }
   }
 
   /**
