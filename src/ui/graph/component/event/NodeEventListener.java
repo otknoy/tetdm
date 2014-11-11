@@ -97,6 +97,8 @@ public class NodeEventListener implements MouseListener, MouseMotionListener {
 	  this.node.addNextNodes(n);
 	  n.addPrevNodes(this.node);
 	}
+
+	changeModules();
       } else { // disconnect
         if (this.node.isConnectableToPrev(n)) {
           this.node.removePrevNode(n);
@@ -114,5 +116,32 @@ public class NodeEventListener implements MouseListener, MouseMotionListener {
   @Override
   public void mouseMoved(MouseEvent e) {
     parent.repaint();
+  }
+
+
+  private void changeModules() {
+    List<Node[]> combinations = parent.getNodeCombinations();
+    combinations = parent.extractConnectedCombinations(combinations);
+
+    Node[] selectedCombination = null;
+    for (Node[] c : combinations) {
+      Node n1 = c[0], n2 = c[1], n3 = c[2];
+      if (checkSelected(n1, n2, n3)) {
+	selectedCombination = c;
+      }
+    }
+    if (selectedCombination == null) {
+      return;
+    }
+
+    MiningModuleNode mmn = (MiningModuleNode)selectedCombination[1];
+    VisualizationModuleNode vmn = (VisualizationModuleNode)selectedCombination[2];
+    parent.setModulesToPanel(0, mmn, vmn);
+  }
+
+  private boolean checkSelected(Node n1, Node n2, Node n3) {
+    return (n1.isSelected() &&
+	    n2.isSelected() &&
+	    n3.isSelected());
   }
 }
