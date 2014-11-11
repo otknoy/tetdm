@@ -158,7 +158,7 @@ public class ModuleSelectPanel extends JPanel {
    * @param node combinations
    * @return filtered node combinations
    */
-  private List<Node[]> extractConnectedCombinations(List<Node[]> combinations) {
+  public List<Node[]> extractConnectedCombinations(List<Node[]> combinations) {
     List<Node[]> filtered = new ArrayList<Node[]>();
     for (Node[] c : combinations) {
       Node n1 = c[0], n2 = c[1], n3 = c[2];
