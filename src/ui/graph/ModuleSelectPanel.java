@@ -64,6 +64,10 @@ public class ModuleSelectPanel extends JPanel {
 
     Nodes.alignNodes(new Rectangle(      0, 0, WIDTH/2, HEIGHT/2), mmNodes);
     Nodes.alignNodes(new Rectangle(WIDTH/2, 0, WIDTH/2, HEIGHT/2), vmNodes);
+
+    // experimental
+    Sticky sticky = new Sticky("hogehoge");
+    this.add(sticky);
   }
 
 
