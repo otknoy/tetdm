@@ -35,6 +35,7 @@ public abstract class Node extends JComponent {
 
     this.setSize(new Dimension(this.WIDTH, this.HEIGHT));
     this.setLocation(location);
+    this.setToolTipText(this.name);
 
     this.prevNodes = new ArrayList<Node>();
     this.nextNodes = new ArrayList<Node>();
