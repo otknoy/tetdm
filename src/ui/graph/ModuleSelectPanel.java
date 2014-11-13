@@ -66,7 +66,7 @@ public class ModuleSelectPanel extends JPanel {
     Nodes.alignNodes(new Rectangle(WIDTH/2, 0, WIDTH/2, HEIGHT/2), vmNodes);
 
     // experimental
-    Sticky sticky = new Sticky("hogehoge");
+    Sticky sticky = new Sticky("hogehogehoge おおつかなおや 大塚直也testtesttest naoya otsuka naoya otsuka naoya otsuka");
     this.add(sticky);
   }
 
