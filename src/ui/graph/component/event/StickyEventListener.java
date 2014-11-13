@@ -20,10 +20,13 @@ public class StickyEventListener implements MouseListener{
 
   @Override
   public void mouseClicked(MouseEvent e) {
+    StickyEditor se = new StickyEditor(this.sticky);
+
     Point mp = e.getLocationOnScreen();
-    int x = (int)mp.getX() - StickyEditor.WIDHT/2;
-    int y = (int)mp.getY() - StickyEditor.HEIGHT/2;
-    StickyEditor se = new StickyEditor(this.sticky, x, y);
+    int x = (int)mp.getX() - se.getWidth() /2;
+    int y = (int)mp.getY() - se.getHeight()/2;
+    se.setLocation(x, y);
+
     se.setVisible(true);
   }
 
