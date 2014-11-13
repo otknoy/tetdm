@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.FontMetrics;
+import java.awt.Rectangle;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -66,11 +67,19 @@ public class Sticky extends JPanel {
     g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 
     // text
-    drawText(g);
+    int padding = 12;
+    this.drawText(g, padding);
   }
 
-  private void drawText(Graphics g) {
-    g.setColor(Color.black);
+
+  /**
+   * Draw auto-formatted text with padding into this panel
+   * @param Graphics
+   * @param padding
+   */
+  private void drawText(Graphics g, int padding) {
+    Rectangle r = new Rectangle(padding, padding, getWidth()-2*padding, getHeight()-2*padding);
+    System.out.println(getHeight()-2*padding);
 
     FontMetrics fm = g.getFontMetrics();
     int fmAscent = fm.getAscent();
@@ -80,17 +89,17 @@ public class Sticky extends JPanel {
     String line = "";
     for (int i = 0; i < this.text.length(); i++) {
       char c = this.text.charAt(i);
-      if (!(fm.stringWidth(line) <= getWidth())) {
+      if (!(fm.stringWidth(line) <= r.width)) {
 	lines.add(line);
 	line = "";
       }
       line += c;
     }
 
+    g.setColor(Color.black);
     for (int i = 0; i < lines.size(); i++) {
-      int y = fmAscent + i*fmHeight;
-      g.drawString(lines.get(i), 0, y);
+      int y = r.y + fmAscent + i*fmHeight;
+      g.drawString(lines.get(i), r.x, y);
     }
-
   }
 }
