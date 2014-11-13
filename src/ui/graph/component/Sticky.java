@@ -69,7 +69,6 @@ public class Sticky extends JPanel {
    */
   private void drawText(Graphics g, int padding) {
     Rectangle r = new Rectangle(padding, padding, getWidth()-2*padding, getHeight()-2*padding);
-    System.out.println(getHeight()-2*padding);
 
     FontMetrics fm = g.getFontMetrics();
     int fmAscent = fm.getAscent();
