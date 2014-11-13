@@ -34,7 +34,7 @@ public class ModuleSelectPanel extends JPanel {
   public ModuleSelectPanel(ModuleManager moduleManager) {
     this.moduleManager = moduleManager;
 
-    this.setPreferredSize(new Dimension(800, 800));
+    this.setPreferredSize(new Dimension(ModuleSelectPanel.WIDTH, ModuleSelectPanel.HEIGHT));
     this.setLayout(null);
 
     this.nodes = new ArrayList<Node>();
@@ -64,6 +64,10 @@ public class ModuleSelectPanel extends JPanel {
 
     Nodes.alignNodes(new Rectangle(      0, 0, WIDTH/2, HEIGHT/2), mmNodes);
     Nodes.alignNodes(new Rectangle(WIDTH/2, 0, WIDTH/2, HEIGHT/2), vmNodes);
+
+    // experimental
+    Sticky sticky = new Sticky("hogehogehoge おおつかなおや 大塚直也testtesttest naoya otsuka naoya otsuka naoya otsuka");
+    this.add(sticky);
   }
 
 
