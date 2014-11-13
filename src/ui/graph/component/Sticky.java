@@ -1,6 +1,7 @@
 package ui.graph.component;
 
 import ui.graph.component.event.MouseDragAndDropListener;
+import ui.graph.component.event.StickyEventListener;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,6 +32,10 @@ public class Sticky extends JPanel {
     MouseDragAndDropListener mddl = new MouseDragAndDropListener(this);
     this.addMouseListener(mddl);
     this.addMouseMotionListener(mddl);
+
+    // mouse event
+    StickyEventListener sel = new StickyEventListener(this);
+    this.addMouseListener(sel);
   }
 
   public Sticky(String text) {
