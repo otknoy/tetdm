@@ -78,7 +78,8 @@ public class Sticky extends JPanel {
     String line = "";
     for (int i = 0; i < this.text.length(); i++) {
       char c = this.text.charAt(i);
-      if (!(fm.stringWidth(line) <= r.width)) {
+      String nl = line + c;
+      if (!(fm.stringWidth(nl) <= r.width)) {
 	lines.add(line);
 	line = "";
       }
