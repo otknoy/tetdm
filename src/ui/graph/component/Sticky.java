@@ -9,9 +9,6 @@ import java.awt.Graphics;
 import java.awt.FontMetrics;
 import java.awt.Rectangle;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -29,13 +26,6 @@ public class Sticky extends JPanel {
     this.bgColor = bgColor;
 
     this.setSize(new Dimension(this.WIDTH, this.HEIGHT));    
-
-    // JTextArea textArea = new JTextArea(memo);
-    // JScrollPane scrollPane = new JScrollPane(textArea);
-    // scrollPane.setBorder(new EmptyBorder(10, 10, 10, 10));
-
-    // this.setLayout(new BorderLayout(8, 8));
-    // this.add("Center", scrollPane);
 
     // drag & drop event
     MouseDragAndDropListener mddl = new MouseDragAndDropListener(this);
