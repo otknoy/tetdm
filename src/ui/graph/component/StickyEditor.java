@@ -10,12 +10,15 @@ import javax.swing.JScrollPane;
 public class StickyEditor extends JFrame {
 
   private Sticky sticky;
-  
 
-  public StickyEditor(Sticky sticky) {
+  public static final int WIDHT  = 480;
+  public static final int HEIGHT = 480;
+
+
+  public StickyEditor(Sticky sticky, int x, int y) {
     this.sticky = sticky;
 
-    this.setPreferredSize(new Dimension(480, 480));
+    this.setBounds(x, y,StickyEditor.WIDHT, StickyEditor.HEIGHT);
 
     JPanel p = new JPanel();
     
