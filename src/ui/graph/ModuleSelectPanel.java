@@ -34,7 +34,7 @@ public class ModuleSelectPanel extends JPanel {
   public ModuleSelectPanel(ModuleManager moduleManager) {
     this.moduleManager = moduleManager;
 
-    this.setPreferredSize(new Dimension(800, 800));
+    this.setPreferredSize(new Dimension(ModuleSelectPanel.WIDTH, ModuleSelectPanel.HEIGHT));
     this.setLayout(null);
 
     this.nodes = new ArrayList<Node>();

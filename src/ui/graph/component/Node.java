@@ -33,7 +33,7 @@ public abstract class Node extends JComponent {
     this.id = id;
     this.bgColor = bgColor;
 
-    this.setSize(new Dimension(this.WIDTH, this.HEIGHT));
+    this.setSize(new Dimension(Node.WIDTH, Node.HEIGHT));
     this.setLocation(location);
 
     this.prevNodes = new ArrayList<Node>();
