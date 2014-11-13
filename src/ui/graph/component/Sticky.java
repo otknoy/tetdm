@@ -97,4 +97,8 @@ public class Sticky extends JPanel {
       g.drawString(lines.get(i), r.x, y);
     }
   }
+
+
+  public String getText() { return this.text; }
+  public void setText(String text) { this.text = text; }
 }
