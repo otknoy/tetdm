@@ -16,12 +16,13 @@ import javax.swing.JPanel;
 
 public class Sticky extends JPanel {
 
-  public static final int WIDTH  = 128;
-  public static final int HEIGHT = 128;
-
   private String text;
   private Color bgColor;
   
+  public static final int WIDTH  = 128;
+  public static final int HEIGHT = 128;
+
+
   public Sticky(String text, Color bgColor) {
     this.text = text;
     this.bgColor = bgColor;
