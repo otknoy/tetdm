@@ -6,10 +6,13 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.FontMetrics;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class Sticky extends JPanel {
@@ -61,5 +64,33 @@ public class Sticky extends JPanel {
     // border
     g.setColor(Color.black);
     g.drawRect(0, 0, getWidth()-1, getHeight()-1);
+
+    // text
+    drawText(g);
+  }
+
+  private void drawText(Graphics g) {
+    g.setColor(Color.black);
+
+    FontMetrics fm = g.getFontMetrics();
+    int fmAscent = fm.getAscent();
+    int fmHeight = fm.getHeight();
+
+    List<String> lines = new ArrayList<String>();
+    String line = "";
+    for (int i = 0; i < this.text.length(); i++) {
+      char c = this.text.charAt(i);
+      if (!(fm.stringWidth(line) <= getWidth())) {
+	lines.add(line);
+	line = "";
+      }
+      line += c;
+    }
+
+    for (int i = 0; i < lines.size(); i++) {
+      int y = fmAscent + i*fmHeight;
+      g.drawString(lines.get(i), 0, y);
+    }
+
   }
 }
