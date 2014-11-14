@@ -106,6 +106,7 @@ public class Sticky extends JPanel {
       }
       line += c;
     }
+    lines.add(line);
     return lines;
   }
 
