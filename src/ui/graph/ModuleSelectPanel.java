@@ -108,6 +108,8 @@ public class ModuleSelectPanel extends JPanel {
   }
 
 
+  public List<Node> getNodes() { return this.nodes; }
+
   public void addNode(Node node) {
     // select event
     NodeEventListener nel = new NodeEventListener(this, node);

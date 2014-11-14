@@ -33,7 +33,22 @@ public class NodeEventListener implements MouseListener, MouseMotionListener {
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    node.selected(!node.isSelected());
+    List<Node> nodes = this.parent.getNodes();
+
+    // Only one node at each node type is selected
+    if (!this.node.isSelected()) {
+      // All same type nodes become "selected = false."
+      for (Node n : nodes) {
+	if (n.getClass() == this.node.getClass()) {
+	  n.selected(false);
+	}
+      }
+      // Only this node becomes "selected = true."
+      this.node.selected(true);
+    } else {
+      this.node.selected(false);
+    }
+
     node.repaint();
   }
 
