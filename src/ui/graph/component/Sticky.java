@@ -80,17 +80,7 @@ public class Sticky extends JPanel {
     int fmAscent = fm.getAscent();
     int fmHeight = fm.getHeight();
 
-    List<String> lines = new ArrayList<String>();
-    String line = "";
-    for (int i = 0; i < this.text.length(); i++) {
-      char c = this.text.charAt(i);
-      String nl = line + c;
-      if (!(fm.stringWidth(nl) <= r.width)) {
-	lines.add(line);
-	line = "";
-      }
-      line += c;
-    }
+    List<String> lines = this.splitTextByLineLength(this.text, r.width, fm);
 
     g.setColor(Color.black);
     for (int i = 0; i < lines.size(); i++) {
@@ -99,7 +89,31 @@ public class Sticky extends JPanel {
     }
   }
 
+  /**
+   * Split text by line length
+   * @param text
+   * @param line length
+   */
+  private List<String> splitTextByLineLength(String s, int lineLength,  FontMetrics fm) {
+    List<String> lines = new ArrayList<String>();
+    String line = "";
+    for (int i = 0; i < this.text.length(); i++) {
+      char c = this.text.charAt(i);
+      String nline = line + c;
+      if (!(fm.stringWidth(nline) <= lineLength)) {
+	lines.add(line);
+	line = "";
+      }
+      line += c;
+    }
+    lines.add(line);
+    return lines;
+  }
+
 
   public String getText() { return this.text; }
-  public void setText(String text) { this.text = text; }
+  public void setText(String text) {
+    this.text = text;
+    this.repaint();
+  }
 }
