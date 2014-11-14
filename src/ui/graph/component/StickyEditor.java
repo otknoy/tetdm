@@ -37,7 +37,6 @@ public class StickyEditor extends JFrame implements MouseListener {
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    System.out.println(textArea.getText());
     sticky.setText(textArea.getText());
   }
 
