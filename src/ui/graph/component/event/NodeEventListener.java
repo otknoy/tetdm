@@ -49,6 +49,8 @@ public class NodeEventListener implements MouseListener, MouseMotionListener {
       this.node.selected(false);
     }
 
+    this.changeModules();
+
     node.repaint();
   }
 
