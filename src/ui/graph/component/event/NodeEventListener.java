@@ -114,7 +114,7 @@ public class NodeEventListener implements MouseListener, MouseMotionListener {
 	  n.addPrevNodes(this.node);
 	}
 
-	changeModules();
+	this.changeModules();
       } else { // disconnect
         if (this.node.isConnectableToPrev(n)) {
           this.node.removePrevNode(n);
