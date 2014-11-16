@@ -142,6 +142,9 @@ public class GraphPanel extends JPanel {
     }
   }
 
+  public void addSticky(Sticky s) { this.add(s); }
+  public void removeSticky(Sticky s) { this.remove(s); }
+
 
   /**
    * Find connectable nodes from all nodes.
@@ -200,10 +203,5 @@ public class GraphPanel extends JPanel {
     return ((n1 instanceof PreprocessNode) &&
 	    (n2 instanceof MiningModuleNode) &&
 	    (n3 instanceof VisualizationModuleNode));
-  }
-
-
-  public void addSticky(Sticky s) {
-    this.add(s);
   }
 }
