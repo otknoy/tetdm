@@ -31,7 +31,7 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
     this.uiPanel.add(new JButton("test2"));
 
     // add sticky button
-    JButton addStickyButton = new JButton("Add Stichky");
+    JButton addStickyButton = new JButton("Add Sticky");
     addStickyButton.addMouseListener(this);
     this.uiPanel.add(addStickyButton);
     this.add(this.uiPanel, BorderLayout.SOUTH);
