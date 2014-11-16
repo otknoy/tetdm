@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseListener;
@@ -28,10 +29,21 @@ public class StickyEditor extends JFrame implements MouseListener {
     JScrollPane scrollPane = new JScrollPane(this.textArea);
     this.add(scrollPane, BorderLayout.CENTER);
 
+
+    // ui panel
+    JPanel uiPanel = new JPanel();
+
     // save button
     JButton saveButton = new JButton("save");
     saveButton.addMouseListener(this);
-    this.add(saveButton, BorderLayout.SOUTH);
+    uiPanel.add(saveButton);
+
+    // remove button
+    JButton removeButton = new JButton("remove");
+    removeButton.addMouseListener(this);
+    uiPanel.add(removeButton);
+
+    this.add(uiPanel, BorderLayout.SOUTH);
   }
 
 
