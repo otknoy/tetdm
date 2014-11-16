@@ -1,5 +1,8 @@
 package ui.graph.component;
 
+import ui.graph.GraphPanel;
+
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
@@ -15,6 +18,8 @@ public class StickyEditor extends JFrame implements MouseListener {
 
   private final Sticky sticky;
   private final JTextArea textArea;
+  private final JButton saveButton;
+  private final JButton removeButton;
 
 
   public StickyEditor(Sticky sticky) {
@@ -34,22 +39,31 @@ public class StickyEditor extends JFrame implements MouseListener {
     JPanel uiPanel = new JPanel();
 
     // save button
-    JButton saveButton = new JButton("save");
-    saveButton.addMouseListener(this);
-    uiPanel.add(saveButton);
+    this.saveButton = new JButton("save");
+    this.saveButton.addMouseListener(this);
+    uiPanel.add(this.saveButton);
 
     // remove button
-    JButton removeButton = new JButton("remove");
-    removeButton.addMouseListener(this);
-    uiPanel.add(removeButton);
+    this.removeButton = new JButton("remove");
+    this.removeButton.addMouseListener(this);
+    uiPanel.add(this.removeButton);
 
     this.add(uiPanel, BorderLayout.SOUTH);
   }
 
-
   @Override
   public void mouseClicked(MouseEvent e) {
-    sticky.setText(textArea.getText());
+    Component c = (Component)e.getSource();
+    if (c == this.saveButton) {
+      this.sticky.setText(this.textArea.getText());
+    } else if (c == this.removeButton) {
+      GraphPanel p = (GraphPanel)this.sticky.getParent();
+      p.removeSticky(this.sticky);
+      p.repaint();
+    }
+
+    // Close sticky editor
+    this.dispose();
   }
 
   @Override public void mousePressed(MouseEvent e) {}
