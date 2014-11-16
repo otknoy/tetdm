@@ -34,8 +34,7 @@ public class GraphPanel extends JPanel {
   public GraphPanel(ModuleManager moduleManager) {
     this.moduleManager = moduleManager;
 
-
-    this.setPreferredSize(new Dimension(ModuleSelectPanel.WIDTH, ModuleSelectPanel.HEIGHT));
+    this.setPreferredSize(new Dimension(GraphPanel.WIDTH, GraphPanel.HEIGHT));
     this.setLayout(null);
 
     this.nodes = new ArrayList<Node>();
@@ -201,5 +200,10 @@ public class GraphPanel extends JPanel {
     return ((n1 instanceof PreprocessNode) &&
 	    (n2 instanceof MiningModuleNode) &&
 	    (n3 instanceof VisualizationModuleNode));
+  }
+
+
+  public void addSticky(Sticky s) {
+    this.add(s);
   }
 }

@@ -1,23 +1,23 @@
 package ui.graph;
 
+import ui.graph.component.Sticky;
 import ui.graph.module.ModuleManager;
 
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
 
-public class ModuleSelectPanel extends JPanel {
+public class ModuleSelectPanel extends JPanel implements MouseListener {
 
   static final String NAME = "Module Select Panel";
 
   private final ModuleManager moduleManager;
 
-  private final JPanel upperPanel;
+  private final JPanel uiPanel;
   private final GraphPanel graphPanel;
-
-  public static final int WIDTH  = 800;
-  public static final int HEIGHT = 800;
 
 
   public ModuleSelectPanel(ModuleManager moduleManager) {
@@ -25,14 +25,32 @@ public class ModuleSelectPanel extends JPanel {
 
     this.setLayout(new BorderLayout());
 
-    this.upperPanel = new JPanel();
-    this.upperPanel.add(new JButton("test1"));
-    this.upperPanel.add(new JButton("test2"));
-    this.upperPanel.add(new JButton("test3"));
-    this.add(this.upperPanel, BorderLayout.NORTH);
+    // ui panel
+    this.uiPanel = new JPanel();
+    this.uiPanel.add(new JButton("test1"));
+    this.uiPanel.add(new JButton("test2"));
+
+    // add sticky button
+    JButton addStickyButton = new JButton("Add Stichky");
+    addStickyButton.addMouseListener(this);
+    this.uiPanel.add(addStickyButton);
+    this.add(this.uiPanel, BorderLayout.SOUTH);
 
 
+    // graph panel
     this.graphPanel = new GraphPanel(moduleManager);
-    this.add(this.graphPanel);
+    this.add(this.graphPanel, BorderLayout.CENTER);
   }
+
+
+  @Override
+  public void mouseClicked(MouseEvent e) {
+    this.graphPanel.addSticky(new Sticky());
+    this.graphPanel.repaint();
+  }
+
+  @Override public void mousePressed(MouseEvent e) {}
+  @Override public void mouseReleased(MouseEvent e) {}
+  @Override public void mouseEntered(MouseEvent e) {}
+  @Override public void mouseExited(MouseEvent e) {}
 }
