@@ -1,6 +1,6 @@
 package ui.graph.component.event;
 
-import ui.graph.ModuleSelectPanel;
+import ui.graph.GraphPanel;
 import ui.graph.module.ModuleData;
 import ui.graph.component.Node;
 import ui.graph.component.PreprocessNode;
@@ -18,13 +18,13 @@ import java.util.ArrayList;
 
 public class NodeEventListener implements MouseListener, MouseMotionListener {
 
-  private ModuleSelectPanel parent;
+  private final GraphPanel parent;
 
   private Node node;
   private List<Node> connectableNodes;
 
   
-  public NodeEventListener(ModuleSelectPanel parent, Node node) {
+  public NodeEventListener(GraphPanel parent, Node node) {
     this.parent = parent;
     this.node = node;
     this.connectableNodes = new ArrayList<Node>();
