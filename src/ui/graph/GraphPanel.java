@@ -26,8 +26,9 @@ public class GraphPanel extends JPanel implements Cloneable {
   static final String NAME = "Module Selector";
   private final ModuleManager moduleManager;
 
-  private List<Node> nodes;
-  private Node preprocessNode;
+  private List<PreprocessNode> preprocessNodes;
+  private List<MiningModuleNode> miningModuleNodes;
+  private List<VisualizationModuleNode> visualizationModuleNodes;
 
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 800;
@@ -39,33 +40,17 @@ public class GraphPanel extends JPanel implements Cloneable {
     this.setPreferredSize(new Dimension(GraphPanel.WIDTH, GraphPanel.HEIGHT));
     this.setLayout(null);
 
-    this.nodes = new ArrayList<Node>();
+    List<PreprocessNode> pNodes = this.createPreprocessNodes();
+    List<MiningModuleNode> mmNodes = this.createMiningModuleNodes(this.moduleManager);
+    List<VisualizationModuleNode> vmNodes = this.createVisualizationModuleNodes(this.moduleManager);
 
-    // init preprocess node
-    Node n = new PreprocessNode(new Point(this.WIDTH/10, this.HEIGHT/2));
-    this.preprocessNode = n;
-    this.addNode(n);
-
-    // init mining module node
-    List<Node> mmNodes = new ArrayList<Node>();
-    List<ModuleData> mdl = moduleManager.getMiningModuleDataList();
-    for (ModuleData md : mdl) {
-      n = new MiningModuleNode(md);
-      mmNodes.add(n);
-    }
+    this.addNodes(pNodes);
     this.addNodes(mmNodes);
-
-    // init visualization module node
-    List<Node> vmNodes = new ArrayList<Node>();
-    List<ModuleData> vdl = moduleManager.getVisualizationModuleDataList();
-    for (ModuleData md : vdl) {
-      n = new VisualizationModuleNode(md);
-      vmNodes.add(n);
-    }
     this.addNodes(vmNodes);
 
     Nodes.alignNodes(new Rectangle(      0, 0, WIDTH/2, HEIGHT/2), mmNodes);
     Nodes.alignNodes(new Rectangle(WIDTH/2, 0, WIDTH/2, HEIGHT/2), vmNodes);
+
 
     // sticky experiment
     Sticky sticky = new Sticky("hogehogehoge おおつ");
@@ -77,14 +62,13 @@ public class GraphPanel extends JPanel implements Cloneable {
     this.add(sticky);
   }
 
-
   @Override
   public void paintComponent(Graphics g) {
     g.setColor(Color.white);
     g.fillRect(0, 0, getWidth(), getHeight());
 
     // draw edges
-    for (Node n : this.nodes) {
+    for (Node n : this.getNodes()) {
       n.drawEdgesToNextNodes(g);
     }
   }
@@ -99,6 +83,34 @@ public class GraphPanel extends JPanel implements Cloneable {
     }
 
     return gp;
+  }
+
+
+  private List<PreprocessNode> createPreprocessNodes() {
+    List<PreprocessNode> preprocessNodes = new ArrayList<PreprocessNode>();
+    PreprocessNode n = new PreprocessNode(new Point(this.WIDTH/10, this.HEIGHT/2));
+    preprocessNodes.add(n);
+    return preprocessNodes;
+  }
+
+  private List<MiningModuleNode> createMiningModuleNodes(ModuleManager moduleManager) {
+    List<MiningModuleNode> mmNodes = new ArrayList<MiningModuleNode>();
+    List<ModuleData> mmdl = moduleManager.getMiningModuleDataList();
+    for (ModuleData md : mmdl) {
+      MiningModuleNode n = new MiningModuleNode(md);
+      mmNodes.add(n);
+    }
+    return mmNodes;
+  }
+
+  private List<VisualizationModuleNode> createVisualizationModuleNodes(ModuleManager moduleManager) {
+    List<VisualizationModuleNode> vmNodes = new ArrayList<VisualizationModuleNode>();
+    List<ModuleData> vmdl = moduleManager.getVisualizationModuleDataList();
+    for (ModuleData md : vmdl) {
+      VisualizationModuleNode n = new VisualizationModuleNode(md);
+      vmNodes.add(n);
+    }
+    return vmNodes;
   }
 
 
@@ -123,7 +135,13 @@ public class GraphPanel extends JPanel implements Cloneable {
   }
 
 
-  public List<Node> getNodes() { return this.nodes; }
+  public List<Node> getNodes() {
+    List<Node> nodes = new ArrayList<Node>();
+    nodes.addAll(this.preprocessNodes);
+    nodes.addAll(this.miningModuleNodes);
+    nodes.addAll(this.visualizationModuleNodes);
+    return nodes;
+  }
 
   public void addNode(Node node) {
     // select event
@@ -136,18 +154,32 @@ public class GraphPanel extends JPanel implements Cloneable {
     node.addMouseListener(mddl);
     node.addMouseMotionListener(mddl);
 
-    this.nodes.add(node);
+    if (node instanceof PreprocessNode) {
+      this.preprocessNodes.add((PreprocessNode)node);
+    } else if (node instanceof MiningModuleNode) {
+      this.miningModuleNodes.add((MiningModuleNode)node);
+    } else if (node instanceof VisualizationModuleNode) {
+      this.visualizationModuleNodes.add((VisualizationModuleNode)node);
+    }
+
     this.add(node);
   }
 
-  public void addNodes(List<Node> nodes) {
+  public void addNodes(List<? extends Node> nodes) {
     for (Node n : nodes) {
       this.addNode(n);
     }
   }
   
   public void removeNode(Node node) {
-    this.nodes.remove(node);
+    if (node instanceof PreprocessNode) {
+      this.preprocessNodes.remove((PreprocessNode)node);
+    } else if (node instanceof MiningModuleNode) {
+      this.miningModuleNodes.remove((MiningModuleNode)node);
+    } else if (node instanceof VisualizationModuleNode) {
+      this.visualizationModuleNodes.remove((VisualizationModuleNode)node);
+    }
+
     this.remove(node);
   }
 
@@ -168,7 +200,7 @@ public class GraphPanel extends JPanel implements Cloneable {
    */
   public List<Node> findConnectableNodes(Node n1) {
     List<Node> connectableNodes = new ArrayList<Node>();
-    for (Node n2 : this.nodes) {
+    for (Node n2 : this.getNodes()) {
       if (n1.isConnectableTo(n2)) {
 	connectableNodes.add(n2);
       }
@@ -182,11 +214,12 @@ public class GraphPanel extends JPanel implements Cloneable {
    */
   public List<Node[]> getNodeCombinations() {
     List<Node[]> combinations = new ArrayList<Node[]>();
-    Node n1 = this.preprocessNode;
-    for (Node n2 : n1.getNextNodes()) {
-      for (Node n3 : n2.getNextNodes()) {
-	Node[] c = {n1, n2, n3};
-	combinations.add(c);
+    for (Node n1 : this.preprocessNodes) {
+      for (Node n2 : n1.getNextNodes()) {
+	for (Node n3 : n2.getNextNodes()) {
+	  Node[] c = {n1, n2, n3};
+	  combinations.add(c);
+	}
       }
     }
     return combinations;
