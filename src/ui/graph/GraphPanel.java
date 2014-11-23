@@ -17,9 +17,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JPanel;
+import java.lang.Cloneable;
+import java.lang.CloneNotSupportedException;
 
 
-public class GraphPanel extends JPanel {
+public class GraphPanel extends JPanel implements Cloneable {
 
   static final String NAME = "Module Selector";
   private final ModuleManager moduleManager;
@@ -86,6 +88,19 @@ public class GraphPanel extends JPanel {
       n.drawEdgesToNextNodes(g);
     }
   }
+
+  @Override
+  public GraphPanel clone() {
+    GraphPanel gp;
+    try {
+      gp = (GraphPanel) super.clone();
+    } catch (CloneNotSupportedException ce) {
+      throw new RuntimeException();/* 適切なエラー処理 */
+    }
+
+    return gp;
+  }
+
 
   /**
    * Set mining module and visualization module to a panel
@@ -204,5 +219,4 @@ public class GraphPanel extends JPanel {
 	    (n2 instanceof MiningModuleNode) &&
 	    (n3 instanceof VisualizationModuleNode));
   }
-
 }
