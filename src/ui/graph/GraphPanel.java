@@ -162,7 +162,7 @@ public class GraphPanel extends JPanel {
   }
 
   /**
-   * get combinations of preprocess node, mining module node, and visualization module node
+   * Get combinations of preprocess node, mining module node, and visualization module node
    * @return combination list
    */
   public List<Node[]> getNodeCombinations() {
@@ -178,7 +178,7 @@ public class GraphPanel extends JPanel {
   }
 
   /**
-   * extract combinations which have connected all nodes
+   * Extract combinations which have connected all nodes
    * @param node combinations
    * @return filtered node combinations
    */
@@ -204,4 +204,5 @@ public class GraphPanel extends JPanel {
 	    (n2 instanceof MiningModuleNode) &&
 	    (n3 instanceof VisualizationModuleNode));
   }
+
 }
