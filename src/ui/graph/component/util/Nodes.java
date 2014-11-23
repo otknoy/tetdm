@@ -14,7 +14,7 @@ public class Nodes {
    * @param region where nodes aligned
    * @param aligned nodes
    */
-  public static void alignNodes(Rectangle rect, List<Node> nodes) {
+  public static void alignNodes(Rectangle rect, List<? extends Node> nodes) {
     final int mergin = 8;
 
     final int wn = 5;
