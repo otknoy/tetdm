@@ -40,6 +40,10 @@ public class GraphPanel extends JPanel implements Cloneable {
     this.setPreferredSize(new Dimension(GraphPanel.WIDTH, GraphPanel.HEIGHT));
     this.setLayout(null);
 
+    this.preprocessNodes = new ArrayList<PreprocessNode>();
+    this.miningModuleNodes = new ArrayList<MiningModuleNode>();
+    this.visualizationModuleNodes = new ArrayList<VisualizationModuleNode>();
+
     List<PreprocessNode> pNodes = this.createPreprocessNodes();
     List<MiningModuleNode> mmNodes = this.createMiningModuleNodes(this.moduleManager);
     List<VisualizationModuleNode> vmNodes = this.createVisualizationModuleNodes(this.moduleManager);
