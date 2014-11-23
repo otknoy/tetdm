@@ -27,8 +27,12 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
 
     // ui panel
     this.uiPanel = new JPanel();
-    this.uiPanel.add(new JButton("test1"));
-    this.uiPanel.add(new JButton("test2"));
+    JButton b1 = new JButton("test1");
+    b1.addMouseListener(this);
+    JButton b2 = new JButton("test2");
+    b2.addMouseListener(this);
+    this.uiPanel.add(b1);
+    this.uiPanel.add(b2);
 
     // add sticky button
     JButton addStickyButton = new JButton("Add Sticky");
@@ -45,8 +49,22 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    this.graphPanel.addSticky(new Sticky());
-    this.graphPanel.repaint();
+    Object src = e.getSource();
+    if (src instanceof JButton) {
+      JButton b = (JButton)src;
+      String text = b.getText();
+      System.out.println(text);
+      if (text == "test1") {
+	GraphPanel gp = this.graphPanel.clone();
+
+      } else if (text == "test2") {
+	GraphPanel gp = this.graphPanel.clone();
+
+      } else if (text == "Add Sticky") {
+	this.graphPanel.addSticky(new Sticky());
+	this.graphPanel.repaint();
+      }
+    }
   }
 
   @Override public void mousePressed(MouseEvent e) {}
