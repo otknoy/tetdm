@@ -3,6 +3,7 @@ package ui.graph.component;
 import ui.graph.GraphPanel;
 
 import java.awt.Component;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
@@ -10,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JColorChooser;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
@@ -19,6 +21,7 @@ public class StickyEditor extends JFrame implements MouseListener {
   private final Sticky sticky;
   private final JTextArea textArea;
   private final JButton saveButton;
+  private final JButton selectColorButton;
   private final JButton removeButton;
 
 
@@ -43,6 +46,11 @@ public class StickyEditor extends JFrame implements MouseListener {
     this.saveButton.addMouseListener(this);
     uiPanel.add(this.saveButton);
 
+    // change color button
+    this.selectColorButton = new JButton("change color");
+    this.selectColorButton.addMouseListener(this);
+    uiPanel.add(this.selectColorButton);
+
     // remove button
     this.removeButton = new JButton("remove");
     this.removeButton.addMouseListener(this);
@@ -53,13 +61,17 @@ public class StickyEditor extends JFrame implements MouseListener {
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    Component c = (Component)e.getSource();
-    if (c == this.saveButton) {
+    Component src = (Component)e.getSource();
+    if (src == this.saveButton) {
       this.sticky.setText(this.textArea.getText());
-    } else if (c == this.removeButton) {
+    } else if (src == this.removeButton) {
       GraphPanel p = (GraphPanel)this.sticky.getParent();
       p.removeSticky(this.sticky);
       p.repaint();
+    } else if (src == this.selectColorButton) {
+      Color c = JColorChooser.showDialog(this, "Select color", sticky.getBgColor());
+      if (c == null) return;
+      sticky.setBgColor(c);
     }
 
     // Close sticky editor
