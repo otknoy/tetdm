@@ -40,7 +40,6 @@ public abstract class Node extends JComponent implements Cloneable {
 
     this.prevNodes = new ArrayList<Node>();
     this.nextNodes = new ArrayList<Node>();
-
   }
 
   public Node(String name, int id, Color bgColor) {
@@ -83,17 +82,6 @@ public abstract class Node extends JComponent implements Cloneable {
     g2.drawString(this.getName(), 2, this.getHeight()/2);
   }
 
-  @Override public Node clone() {
-    Node n;
-    try {
-      n = (Node)super.clone();
-    } catch (CloneNotSupportedException ce) {
-      ce.printStackTrace();
-      throw new RuntimeException();
-    }
-
-    return n;
-  }
 
   /**
    * draw edges to next nodes
@@ -158,6 +146,7 @@ public abstract class Node extends JComponent implements Cloneable {
     return this.getCenterPosition().distance(n.getCenterPosition());
   }
 
+  @Override public abstract Node clone();
   public abstract boolean isConnectableToPrev(Node n);
   public abstract boolean isConnectableToNext(Node n);
   public abstract boolean isConnectableTo(Node n);

@@ -21,6 +21,15 @@ public class VisualizationModuleNode extends ModuleNode {
 
 
   @Override
+  public VisualizationModuleNode clone() {
+    VisualizationModuleNode n = new VisualizationModuleNode(this.moduleData);
+    n.setLocation(this.getLocation());
+    n.selected(this.isSelected());
+    n.highlighted(this.isHighlighted());
+    return n;
+  }
+
+  @Override
   public boolean isConnectableToPrev(Node n) {
     if (!(n instanceof MiningModuleNode)) {
       return false;

@@ -21,6 +21,15 @@ public class MiningModuleNode extends ModuleNode {
 
 
   @Override
+  public MiningModuleNode clone() {
+    MiningModuleNode n = new MiningModuleNode(this.moduleData);
+    n.setLocation(this.getLocation());
+    n.selected(this.isSelected());
+    n.highlighted(this.isHighlighted());
+    return n;
+  }
+
+  @Override
   public boolean isConnectableToPrev(Node n) {
     if (n instanceof PreprocessNode) {
       return true;

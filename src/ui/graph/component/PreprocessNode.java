@@ -17,6 +17,16 @@ public class PreprocessNode extends Node {
     super(NAME, -1, BG_COLOR);
   }
 
+
+  @Override
+  public PreprocessNode clone() {
+    PreprocessNode n = new PreprocessNode();
+    n.setLocation(this.getLocation());
+    n.selected(this.isSelected());
+    n.highlighted(this.isHighlighted());
+    return n;
+  }
+
   @Override
   public boolean isConnectableToPrev(Node n) { 
     return false;
