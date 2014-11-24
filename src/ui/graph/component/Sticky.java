@@ -116,4 +116,10 @@ public class Sticky extends JPanel {
     this.text = text;
     this.repaint();
   }
+
+  public Color getBgColor() { return this.bgColor; }
+  public void setBgColor(Color c) {
+    this.bgColor = c;
+    this.repaint();
+  }
 }
