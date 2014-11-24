@@ -9,9 +9,10 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.BasicStroke;
 import javax.swing.JComponent;
+import java.lang.Cloneable;
 
 
-public abstract class Node extends JComponent {
+public abstract class Node extends JComponent implements Cloneable {
 
   private String name;
   private int id;
@@ -80,6 +81,18 @@ public abstract class Node extends JComponent {
     // label
     g2.setColor(Color.black);
     g2.drawString(this.getName(), 2, this.getHeight()/2);
+  }
+
+  @Override public Node clone() {
+    Node n;
+    try {
+      n = (Node)super.clone();
+    } catch (CloneNotSupportedException ce) {
+      ce.printStackTrace();
+      throw new RuntimeException();
+    }
+
+    return n;
   }
 
   /**
