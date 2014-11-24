@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.JPanel;
 import java.lang.Cloneable;
-import java.lang.CloneNotSupportedException;
 
 
 public class GraphPanel extends JPanel implements Cloneable {
@@ -79,12 +78,36 @@ public class GraphPanel extends JPanel implements Cloneable {
 
   @Override
   public GraphPanel clone() {
-    GraphPanel gp;
-    try {
-      gp = (GraphPanel) super.clone();
-    } catch (CloneNotSupportedException ce) {
-      throw new RuntimeException();/* 適切なエラー処理 */
+    GraphPanel gp = new GraphPanel(this.moduleManager);
+    gp.removeAllNodes();
+
+    // clone nodes
+    List<Node> cloneNodes = new ArrayList<Node>();
+    for (Node n : this.getNodes()) {
+      cloneNodes.add(n.clone());
     }
+    gp.addNodes(cloneNodes);
+
+    // connect
+    int threshold = 192;
+    for (Node n1 : cloneNodes) {
+      for (Node n2 : gp.findConnectableNodes(n1)) {
+	if (n1.distance(n2) <= threshold) {
+	  if (n1.isConnectedTo(n2)) {
+	    continue;
+	  }
+	  if (n1.isConnectableToPrev(n2)) {
+	    n1.addPrevNodes(n2);
+	    n2.addNextNodes(n1);
+	  } else if (n1.isConnectableToNext(n2)) {
+	    n2.addPrevNodes(n1);
+	    n1.addNextNodes(n2);
+	  }
+	}
+      }
+    }
+
+    // clone stickies
 
     return gp;
   }
@@ -192,6 +215,8 @@ public class GraphPanel extends JPanel implements Cloneable {
       this.removeNode(n);
     }
   }
+
+  public void removeAllNodes() { this.removeNodes(this.getNodes()); }
 
   public void addSticky(Sticky s) { this.add(s); }
   public void removeSticky(Sticky s) { this.remove(s); }
