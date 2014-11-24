@@ -16,7 +16,6 @@ public class PreprocessNode extends Node {
   public PreprocessNode() {
     super(NAME, -1, BG_COLOR);
   }
-  
 
   @Override
   public boolean isConnectableToPrev(Node n) { 

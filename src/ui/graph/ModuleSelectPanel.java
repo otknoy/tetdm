@@ -53,13 +53,13 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
     if (src instanceof JButton) {
       JButton b = (JButton)src;
       String text = b.getText();
-      System.out.println(text);
       if (text == "test1") {
 	GraphPanel gp = this.graphPanel.clone();
-
-      } else if (text == "test2") {
-	GraphPanel gp = this.graphPanel.clone();
-
+	System.out.println(gp);
+	javax.swing.JFrame f = new javax.swing.JFrame();
+	f.add(gp);
+	f.pack();
+	f.setVisible(true);
       } else if (text == "Add Sticky") {
 	this.graphPanel.addSticky(new Sticky());
 	this.graphPanel.repaint();
