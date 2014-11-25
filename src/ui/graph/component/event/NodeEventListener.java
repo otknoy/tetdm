@@ -6,6 +6,7 @@ import ui.graph.component.Node;
 import ui.graph.component.PreprocessNode;
 import ui.graph.component.MiningModuleNode;
 import ui.graph.component.VisualizationModuleNode;
+import ui.graph.component.ToolPanelNode;
 
 import java.awt.Point;
 import java.awt.event.MouseListener;
@@ -143,8 +144,8 @@ public class NodeEventListener implements MouseListener, MouseMotionListener {
 
     Node[] selectedCombination = null;
     for (Node[] c : combinations) {
-      Node n1 = c[0], n2 = c[1], n3 = c[2];
-      if (checkSelected(n1, n2, n3)) {
+      Node n1 = c[0], n2 = c[1], n3 = c[2], n4 = c[3];
+      if (checkSelected(n1, n2, n3, n4)) {
 	selectedCombination = c;
       }
     }
@@ -154,12 +155,14 @@ public class NodeEventListener implements MouseListener, MouseMotionListener {
 
     MiningModuleNode mmn = (MiningModuleNode)selectedCombination[1];
     VisualizationModuleNode vmn = (VisualizationModuleNode)selectedCombination[2];
-    parent.setModulesToPanel(0, mmn, vmn);
+    int panelNumber = ((ToolPanelNode)selectedCombination[3]).getPanelNumber();
+    parent.setModulesToPanel(panelNumber, mmn, vmn);
   }
 
-  private boolean checkSelected(Node n1, Node n2, Node n3) {
+  private boolean checkSelected(Node n1, Node n2, Node n3, Node n4) {
     return (n1.isSelected() &&
 	    n2.isSelected() &&
-	    n3.isSelected());
+	    n3.isSelected() &&
+	    n4.isSelected());
   }
 }

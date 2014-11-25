@@ -33,6 +33,8 @@ public class MiningModuleNode extends ModuleNode {
   public boolean isConnectableToPrev(Node n) {
     if (n instanceof PreprocessNode) {
       return true;
+    } else if (!(n instanceof VisualizationModuleNode)) {
+      return false;
     }
 
     ModuleData d1 = this.moduleData;

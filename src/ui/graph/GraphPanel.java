@@ -28,6 +28,7 @@ public class GraphPanel extends JPanel implements Cloneable {
   private List<PreprocessNode> preprocessNodes;
   private List<MiningModuleNode> miningModuleNodes;
   private List<VisualizationModuleNode> visualizationModuleNodes;
+  private List<ToolPanelNode> toolPanelNodes;
 
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 800;
@@ -42,6 +43,7 @@ public class GraphPanel extends JPanel implements Cloneable {
     this.preprocessNodes = new ArrayList<PreprocessNode>();
     this.miningModuleNodes = new ArrayList<MiningModuleNode>();
     this.visualizationModuleNodes = new ArrayList<VisualizationModuleNode>();
+    this.toolPanelNodes = new ArrayList<ToolPanelNode>();
 
     List<PreprocessNode> pNodes = this.createPreprocessNodes();
     List<MiningModuleNode> mmNodes = this.createMiningModuleNodes(this.moduleManager);
@@ -53,6 +55,13 @@ public class GraphPanel extends JPanel implements Cloneable {
 
     Nodes.alignNodes(new Rectangle(      0, 0, WIDTH/2, HEIGHT/2), mmNodes);
     Nodes.alignNodes(new Rectangle(WIDTH/2, 0, WIDTH/2, HEIGHT/2), vmNodes);
+
+    // testing tool panel node
+    List<ToolPanelNode> tnNodes = new ArrayList<ToolPanelNode>();
+    tnNodes.add(new ToolPanelNode(0, new Point(700, 600)));
+    tnNodes.add(new ToolPanelNode(1, new Point(700, 650)));
+    tnNodes.add(new ToolPanelNode(2, new Point(700, 700)));
+    this.addNodes(tnNodes);
   }
 
   @Override
@@ -105,7 +114,7 @@ public class GraphPanel extends JPanel implements Cloneable {
 
   private List<PreprocessNode> createPreprocessNodes() {
     List<PreprocessNode> preprocessNodes = new ArrayList<PreprocessNode>();
-    PreprocessNode n = new PreprocessNode(new Point(this.WIDTH/10, this.HEIGHT/2));
+    PreprocessNode n = new PreprocessNode(new Point(100, 650));
     preprocessNodes.add(n);
     return preprocessNodes;
   }
@@ -157,6 +166,7 @@ public class GraphPanel extends JPanel implements Cloneable {
     nodes.addAll(this.preprocessNodes);
     nodes.addAll(this.miningModuleNodes);
     nodes.addAll(this.visualizationModuleNodes);
+    nodes.addAll(this.toolPanelNodes);
     return nodes;
   }
 
@@ -177,6 +187,8 @@ public class GraphPanel extends JPanel implements Cloneable {
       this.miningModuleNodes.add((MiningModuleNode)node);
     } else if (node instanceof VisualizationModuleNode) {
       this.visualizationModuleNodes.add((VisualizationModuleNode)node);
+    } else if (node instanceof ToolPanelNode) {
+      this.toolPanelNodes.add((ToolPanelNode)node);
     }
 
     this.add(node);
@@ -236,8 +248,10 @@ public class GraphPanel extends JPanel implements Cloneable {
     for (Node n1 : this.preprocessNodes) {
       for (Node n2 : n1.getNextNodes()) {
 	for (Node n3 : n2.getNextNodes()) {
-	  Node[] c = {n1, n2, n3};
-	  combinations.add(c);
+	  for (Node n4 : n3.getNextNodes()) {
+	    Node[] c = {n1, n2, n3, n4};
+	    combinations.add(c);
+	  }
 	}
       }
     }
@@ -252,23 +266,25 @@ public class GraphPanel extends JPanel implements Cloneable {
   public List<Node[]> extractConnectedCombinations(List<Node[]> combinations) {
     List<Node[]> filtered = new ArrayList<Node[]>();
     for (Node[] c : combinations) {
-      Node n1 = c[0], n2 = c[1], n3 = c[2];
-      if (!checkNodeTypes(n1, n2, n3)) {
+      Node n1 = c[0], n2 = c[1], n3 = c[2], n4 = c[3];
+      if (!checkNodeTypes(n1, n2, n3, n4)) {
 	continue;
       }
 
       boolean n1n2 = n1.getNextNodes().contains(n2);
       boolean n2n3 = n2.getNextNodes().contains(n3);
-      if (n1n2 && n2n3) {
+      boolean n3n4 = n3.getNextNodes().contains(n4);
+      if (n1n2 && n2n3 && n3n4) {
 	filtered.add(c);
       }
     }
     return filtered;
   }
 
-  private boolean checkNodeTypes(Node n1, Node n2, Node n3) {
+  private boolean checkNodeTypes(Node n1, Node n2, Node n3, Node n4) {
     return ((n1 instanceof PreprocessNode) &&
 	    (n2 instanceof MiningModuleNode) &&
-	    (n3 instanceof VisualizationModuleNode));
+	    (n3 instanceof VisualizationModuleNode) &&
+	    (n4 instanceof ToolPanelNode));
   }
 }

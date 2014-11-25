@@ -42,7 +42,7 @@ public class VisualizationModuleNode extends ModuleNode {
 
   @Override
   public boolean isConnectableToNext(Node n) {
-    return false;
+    return n instanceof ToolPanelNode;
   }
 
   @Override
