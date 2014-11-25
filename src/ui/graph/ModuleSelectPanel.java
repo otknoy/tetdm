@@ -60,7 +60,10 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
 	f.pack();
 	f.setVisible(true);
       } else if (text == "Add Sticky") {
-	this.graphPanel.addSticky(new Sticky());
+	Sticky sticky = new Sticky();
+	sticky.setLocation((this.graphPanel.getWidth()  - Sticky.WIDTH)  / 2,
+			   (this.graphPanel.getHeight() - Sticky.HEIGHT) / 2);
+	this.graphPanel.addSticky(sticky);
 	this.graphPanel.repaint();
       }
     }
