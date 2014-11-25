@@ -9,7 +9,7 @@ public class ToolPanelNode extends Node {
   private static final String NAME_PREFIX = "Panel";
   private static final Color BG_COLOR = new Color(255, 255, 255, 128);
 
-  private int panelNumber;
+  private final int panelNumber;
   
 
   public ToolPanelNode(int panelNumber, Point location) {
@@ -20,6 +20,9 @@ public class ToolPanelNode extends Node {
   public ToolPanelNode(int panelNumber) {
     this(panelNumber, new Point(0, 0));
   }
+
+  public int getPanelNumber() { return this.panelNumber; }
+
 
   @Override
   public ToolPanelNode clone() {

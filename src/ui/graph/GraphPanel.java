@@ -256,8 +256,10 @@ public class GraphPanel extends JPanel implements Cloneable {
     for (Node n1 : this.preprocessNodes) {
       for (Node n2 : n1.getNextNodes()) {
 	for (Node n3 : n2.getNextNodes()) {
-	  Node[] c = {n1, n2, n3};
-	  combinations.add(c);
+	  for (Node n4 : n3.getNextNodes()) {
+	    Node[] c = {n1, n2, n3, n4};
+	    combinations.add(c);
+	  }
 	}
       }
     }
@@ -272,23 +274,25 @@ public class GraphPanel extends JPanel implements Cloneable {
   public List<Node[]> extractConnectedCombinations(List<Node[]> combinations) {
     List<Node[]> filtered = new ArrayList<Node[]>();
     for (Node[] c : combinations) {
-      Node n1 = c[0], n2 = c[1], n3 = c[2];
-      if (!checkNodeTypes(n1, n2, n3)) {
+      Node n1 = c[0], n2 = c[1], n3 = c[2], n4 = c[3];
+      if (!checkNodeTypes(n1, n2, n3, n4)) {
 	continue;
       }
 
       boolean n1n2 = n1.getNextNodes().contains(n2);
       boolean n2n3 = n2.getNextNodes().contains(n3);
-      if (n1n2 && n2n3) {
+      boolean n3n4 = n3.getNextNodes().contains(n4);
+      if (n1n2 && n2n3 && n3n4) {
 	filtered.add(c);
       }
     }
     return filtered;
   }
 
-  private boolean checkNodeTypes(Node n1, Node n2, Node n3) {
+  private boolean checkNodeTypes(Node n1, Node n2, Node n3, Node n4) {
     return ((n1 instanceof PreprocessNode) &&
 	    (n2 instanceof MiningModuleNode) &&
-	    (n3 instanceof VisualizationModuleNode));
+	    (n3 instanceof VisualizationModuleNode) &&
+	    (n4 instanceof ToolPanelNode));
   }
 }
