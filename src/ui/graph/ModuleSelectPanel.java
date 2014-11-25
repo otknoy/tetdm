@@ -27,7 +27,7 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
 
     // ui panel
     this.uiPanel = new JPanel();
-    JButton b1 = new JButton("test1");
+    JButton b1 = new JButton("clone test");
     b1.addMouseListener(this);
     JButton b2 = new JButton("test2");
     b2.addMouseListener(this);
@@ -53,7 +53,7 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
     if (src instanceof JButton) {
       JButton b = (JButton)src;
       String text = b.getText();
-      if (text == "test1") {
+      if (text == "clone test") {
 	GraphPanel gp = this.graphPanel.clone();
 	javax.swing.JFrame f = new javax.swing.JFrame();
 	f.add(gp);
