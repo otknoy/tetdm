@@ -55,7 +55,6 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
       String text = b.getText();
       if (text == "test1") {
 	GraphPanel gp = this.graphPanel.clone();
-	System.out.println(gp);
 	javax.swing.JFrame f = new javax.swing.JFrame();
 	f.add(gp);
 	f.pack();
