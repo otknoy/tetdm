@@ -58,9 +58,9 @@ public class GraphPanel extends JPanel implements Cloneable {
 
     // testing tool panel node
     List<ToolPanelNode> tnNodes = new ArrayList<ToolPanelNode>();
-    tnNodes.add(new ToolPanelNode(1, new Point(100, 100)));
-    tnNodes.add(new ToolPanelNode(2, new Point(200, 100)));
-    tnNodes.add(new ToolPanelNode(3, new Point(300, 100)));
+    tnNodes.add(new ToolPanelNode(0, new Point(700, 600)));
+    tnNodes.add(new ToolPanelNode(1, new Point(700, 650)));
+    tnNodes.add(new ToolPanelNode(2, new Point(700, 700)));
     this.addNodes(tnNodes);
 
     // sticky experiment
@@ -123,7 +123,7 @@ public class GraphPanel extends JPanel implements Cloneable {
 
   private List<PreprocessNode> createPreprocessNodes() {
     List<PreprocessNode> preprocessNodes = new ArrayList<PreprocessNode>();
-    PreprocessNode n = new PreprocessNode(new Point(this.WIDTH/10, this.HEIGHT/2));
+    PreprocessNode n = new PreprocessNode(new Point(100, 650));
     preprocessNodes.add(n);
     return preprocessNodes;
   }
