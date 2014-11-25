@@ -53,16 +53,6 @@ public class GraphPanel extends JPanel implements Cloneable {
 
     Nodes.alignNodes(new Rectangle(      0, 0, WIDTH/2, HEIGHT/2), mmNodes);
     Nodes.alignNodes(new Rectangle(WIDTH/2, 0, WIDTH/2, HEIGHT/2), vmNodes);
-
-
-    // sticky experiment
-    Sticky sticky = new Sticky("hogehogehoge おおつ");
-    sticky.setLocation(200, 200);
-    this.add(sticky);
-
-    sticky = new Sticky("hogehogehoge おおつかなおや");
-    sticky.setLocation(500, 500);
-    this.add(sticky);
   }
 
   @Override
