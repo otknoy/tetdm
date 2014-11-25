@@ -28,6 +28,7 @@ public class GraphPanel extends JPanel implements Cloneable {
   private List<PreprocessNode> preprocessNodes;
   private List<MiningModuleNode> miningModuleNodes;
   private List<VisualizationModuleNode> visualizationModuleNodes;
+  private List<ToolPanelNode> toolPanelNodes;
 
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 800;
@@ -42,6 +43,7 @@ public class GraphPanel extends JPanel implements Cloneable {
     this.preprocessNodes = new ArrayList<PreprocessNode>();
     this.miningModuleNodes = new ArrayList<MiningModuleNode>();
     this.visualizationModuleNodes = new ArrayList<VisualizationModuleNode>();
+    this.toolPanelNodes = new ArrayList<ToolPanelNode>();
 
     List<PreprocessNode> pNodes = this.createPreprocessNodes();
     List<MiningModuleNode> mmNodes = this.createMiningModuleNodes(this.moduleManager);
@@ -54,6 +56,12 @@ public class GraphPanel extends JPanel implements Cloneable {
     Nodes.alignNodes(new Rectangle(      0, 0, WIDTH/2, HEIGHT/2), mmNodes);
     Nodes.alignNodes(new Rectangle(WIDTH/2, 0, WIDTH/2, HEIGHT/2), vmNodes);
 
+    // testing tool panel node
+    List<ToolPanelNode> tnNodes = new ArrayList<ToolPanelNode>();
+    tnNodes.add(new ToolPanelNode(1, new Point(100, 100)));
+    tnNodes.add(new ToolPanelNode(2, new Point(200, 100)));
+    tnNodes.add(new ToolPanelNode(3, new Point(300, 100)));
+    this.addNodes(tnNodes);
 
     // sticky experiment
     Sticky sticky = new Sticky("hogehogehoge おおつ");
@@ -187,6 +195,8 @@ public class GraphPanel extends JPanel implements Cloneable {
       this.miningModuleNodes.add((MiningModuleNode)node);
     } else if (node instanceof VisualizationModuleNode) {
       this.visualizationModuleNodes.add((VisualizationModuleNode)node);
+    } else if (node instanceof ToolPanelNode) {
+      this.toolPanelNodes.add((ToolPanelNode)node);
     }
 
     this.add(node);
