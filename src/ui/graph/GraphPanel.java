@@ -175,6 +175,7 @@ public class GraphPanel extends JPanel implements Cloneable {
     nodes.addAll(this.preprocessNodes);
     nodes.addAll(this.miningModuleNodes);
     nodes.addAll(this.visualizationModuleNodes);
+    nodes.addAll(this.toolPanelNodes);
     return nodes;
   }
 
