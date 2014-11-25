@@ -45,6 +45,6 @@ public class ToolPanelNode extends Node {
 
   @Override
   public boolean isConnectableTo(Node n) {
-    return this.isConnectableToPrev(n) || this.isConnectableToNext(n);
+    return this.isConnectableToPrev(n);
   }
 }
