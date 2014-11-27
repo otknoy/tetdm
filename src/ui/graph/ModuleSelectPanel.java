@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.BoxLayout;
 
 
 public class ModuleSelectPanel extends JPanel implements MouseListener {
@@ -25,26 +26,25 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
 
     this.setLayout(new BorderLayout());
 
-    // ui panel
-    this.uiPanel = new JPanel();
-    JButton b1 = new JButton("clone test");
-    b1.addMouseListener(this);
-    JButton b2 = new JButton("test2");
-    b2.addMouseListener(this);
-    this.uiPanel.add(b1);
-    this.uiPanel.add(b2);
-
-    // add sticky button
-    JButton addStickyButton = new JButton("Add Sticky");
-    addStickyButton.addMouseListener(this);
-    this.uiPanel.add(addStickyButton);
-    this.add(this.uiPanel, BorderLayout.SOUTH);
-
-
     // graph panel
     this.graphPanel = new GraphPanel(moduleManager);
     this.add(this.graphPanel, BorderLayout.CENTER);
-  }
+
+    // ui panel
+    this.uiPanel = new JPanel();
+    this.uiPanel.setLayout(new BoxLayout(this.uiPanel, BoxLayout.X_AXIS));
+
+    // sticky button
+    JButton addStickyButton = new JButton("Add Sticky");
+    addStickyButton.addMouseListener(this);
+    this.uiPanel.add(addStickyButton);
+
+    // rating buttons
+    RatingButtonPanel ratingButtonPanel = new RatingButtonPanel(this.graphPanel);
+    this.uiPanel.add(ratingButtonPanel);
+
+    this.add(this.uiPanel, BorderLayout.SOUTH);
+ }
 
 
   @Override
@@ -53,13 +53,7 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
     if (src instanceof JButton) {
       JButton b = (JButton)src;
       String text = b.getText();
-      if (text == "clone test") {
-	GraphPanel gp = this.graphPanel.clone();
-	javax.swing.JFrame f = new javax.swing.JFrame();
-	f.add(gp);
-	f.pack();
-	f.setVisible(true);
-      } else if (text == "Add Sticky") {
+      if (text == "Add Sticky") {
 	Sticky sticky = new Sticky();
 	sticky.setLocation((this.graphPanel.getWidth()  - Sticky.WIDTH)  / 2,
 			   (this.graphPanel.getHeight() - Sticky.HEIGHT) / 2);
