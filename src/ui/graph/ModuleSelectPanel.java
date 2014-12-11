@@ -2,11 +2,13 @@ package ui.graph;
 
 import ui.graph.component.Sticky;
 import ui.graph.module.ModuleManager;
+import ui.history.HistoryTreePanel;
 
 import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
+import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 
@@ -44,6 +46,14 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
     this.uiPanel.add(ratingButtonPanel);
 
     this.add(this.uiPanel, BorderLayout.SOUTH);
+
+
+    // history panel
+    JFrame hf = new JFrame();
+    HistoryTreePanel historyTreePanel = new HistoryTreePanel(this, this.graphPanel);
+    hf.add(historyTreePanel);
+    hf.setSize(800, 450);
+    hf.setVisible(true);
  }
 
 

@@ -1,6 +1,6 @@
 package ui.history;
 
-import source.MainFrame;
+import ui.graph.ModuleSelectPanel;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -14,14 +14,14 @@ public class HistoryTreePanel<T> extends JPanel implements MouseListener {
 
   static final String NAME = "History Tree";
 
-  private MainFrame mainFrame;
+  private ModuleSelectPanel moduleSelectPanel;
 
   private History<T> root;
   private History<T> current;
 
 
-  public HistoryTreePanel(MainFrame mainFrame, T o) {
-    this.mainFrame = mainFrame;
+  public HistoryTreePanel(ModuleSelectPanel moduleSelectPanel, T o) {
+    this.moduleSelectPanel = moduleSelectPanel;
     
     this.setLayout(null);
 
@@ -44,7 +44,8 @@ public class HistoryTreePanel<T> extends JPanel implements MouseListener {
     this.current.selected(true);
     this.repaint();
 
-    // this.mainFrame.changeModuleSelectPanel(this.current.getData());
+    // change graph panel
+    // this.moduleSelectPanel.changeGraphPanel(this.current.getData());
   }
   
   @Override public void mousePressed(MouseEvent e) {}
@@ -83,8 +84,6 @@ public class HistoryTreePanel<T> extends JPanel implements MouseListener {
     this.current = h;
 
     this.alignHistoryTree(this.root);
-
-    // this.mainFrame.changeModuleSelectPanel(this.current.getData());
   }
 
   public T getCurrent() { return this.current.getData(); }
