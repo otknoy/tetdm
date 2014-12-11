@@ -14,7 +14,7 @@ import source.TextData.*;
 import ui.graph.ModuleSelectPanel;
 import ui.graph.component.Node;
 import ui.graph.module.ModuleManager;
-import tetdm.history.HistoryTreePanel;
+import ui.history.HistoryTreePanel;
 
 import java.awt.*;
 import java.awt.BorderLayout;

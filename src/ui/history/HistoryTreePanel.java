@@ -1,4 +1,4 @@
-package tetdm.history;
+package ui.history;
 
 import source.MainFrame;
 
