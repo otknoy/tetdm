@@ -30,6 +30,8 @@ public class GraphPanel extends JPanel implements Cloneable {
   private List<VisualizationModuleNode> visualizationModuleNodes;
   private List<ToolPanelNode> toolPanelNodes;
 
+  private List<Sticky> stickies;
+
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 800;
 
@@ -44,6 +46,8 @@ public class GraphPanel extends JPanel implements Cloneable {
     this.miningModuleNodes = new ArrayList<MiningModuleNode>();
     this.visualizationModuleNodes = new ArrayList<VisualizationModuleNode>();
     this.toolPanelNodes = new ArrayList<ToolPanelNode>();
+
+    this.stickies = new ArrayList<Sticky>();
 
     List<PreprocessNode> pNodes = this.createPreprocessNodes();
     List<MiningModuleNode> mmNodes = this.createMiningModuleNodes(this.moduleManager);
@@ -107,6 +111,9 @@ public class GraphPanel extends JPanel implements Cloneable {
     }
 
     // clone stickies
+    for (Sticky s : this.stickies) {
+      gp.addSticky(s.clone());
+    }
 
     return gp;
   }
@@ -220,8 +227,15 @@ public class GraphPanel extends JPanel implements Cloneable {
 
   public void removeAllNodes() { this.removeNodes(this.getNodes()); }
 
-  public void addSticky(Sticky s) { this.add(s); }
-  public void removeSticky(Sticky s) { this.remove(s); }
+  public void addSticky(Sticky s) {
+    this.stickies.add(s);
+    this.add(s);
+  }
+
+  public void removeSticky(Sticky s) {
+    this.stickies.remove(s);
+    this.remove(s);
+  }
 
 
   /**

@@ -12,9 +12,10 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
+import java.lang.Cloneable;
 
 
-public class Sticky extends JPanel {
+public class Sticky extends JPanel implements Cloneable {
 
   private String text;
   private Color bgColor;
@@ -65,6 +66,13 @@ public class Sticky extends JPanel {
     // text
     int padding = 12;
     this.drawText(g, padding);
+  }
+
+  @Override
+  public Sticky clone() {
+    Sticky s = new Sticky(this.text, this.bgColor);
+    s.setLocation(this.getLocation());
+    return s;
   }
 
 
