@@ -14,7 +14,6 @@ import source.TextData.*;
 import ui.graph.ModuleSelectPanel;
 import ui.graph.component.Node;
 import ui.graph.module.ModuleManager;
-import ui.history.HistoryTreePanel;
 
 import java.awt.*;
 import java.awt.BorderLayout;
@@ -35,8 +34,6 @@ public class MainFrame extends JFrame {
 
   private JFrame moduleSelectFrame;
   private ModuleSelectPanel moduleSelectPanel;
-  private JFrame historyTreeFrame;
-  private HistoryTreePanel<ModuleSelectPanel> historyTreePanel;
 
 
   MainFrame(String title, String filename, String absolutePath) {
