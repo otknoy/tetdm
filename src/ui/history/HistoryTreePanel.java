@@ -1,6 +1,7 @@
 package ui.history;
 
 import ui.graph.ModuleSelectPanel;
+import ui.graph.GraphPanel;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -45,7 +46,7 @@ public class HistoryTreePanel<T> extends JPanel implements MouseListener {
     this.repaint();
 
     // change graph panel
-    // this.moduleSelectPanel.changeGraphPanel(this.current.getData());
+    this.moduleSelectPanel.changeGraphPanel((GraphPanel)this.current.getData());
   }
   
   @Override public void mousePressed(MouseEvent e) {}

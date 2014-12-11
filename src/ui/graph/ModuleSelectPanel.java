@@ -20,7 +20,8 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
   private final ModuleManager moduleManager;
 
   private final JPanel uiPanel;
-  private final GraphPanel graphPanel;
+  private GraphPanel graphPanel;
+  private final HistoryTreePanel<GraphPanel> historyTreePanel;
 
 
   public ModuleSelectPanel(ModuleManager moduleManager) {
@@ -41,19 +42,20 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
     addStickyButton.addMouseListener(this);
     this.uiPanel.add(addStickyButton);
 
-    // rating buttons
-    RatingButtonPanel ratingButtonPanel = new RatingButtonPanel(this.graphPanel);
-    this.uiPanel.add(ratingButtonPanel);
-
-    this.add(this.uiPanel, BorderLayout.SOUTH);
-
-
+    
     // history panel
     JFrame hf = new JFrame();
-    HistoryTreePanel historyTreePanel = new HistoryTreePanel(this, this.graphPanel);
+    this.historyTreePanel = new HistoryTreePanel<GraphPanel>(this, this.graphPanel);
     hf.add(historyTreePanel);
     hf.setSize(800, 450);
     hf.setVisible(true);
+
+
+    // rating buttons
+    RatingButtonPanel ratingButtonPanel = new RatingButtonPanel(this.graphPanel, this.historyTreePanel);
+    this.uiPanel.add(ratingButtonPanel);
+
+    this.add(this.uiPanel, BorderLayout.SOUTH);
  }
 
 
@@ -77,4 +79,13 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
   @Override public void mouseReleased(MouseEvent e) {}
   @Override public void mouseEntered(MouseEvent e) {}
   @Override public void mouseExited(MouseEvent e) {}
+
+  public void changeGraphPanel(GraphPanel gp) {
+    System.out.println(gp);
+    this.remove(this.graphPanel);
+    this.graphPanel = gp;
+    this.add(gp, BorderLayout.CENTER);
+    this.invalidate();
+    this.validate();
+  }
 }

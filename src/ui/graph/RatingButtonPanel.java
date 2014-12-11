@@ -1,5 +1,7 @@
 package ui.graph;
 
+import ui.history.HistoryTreePanel;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.BoxLayout;
@@ -11,14 +13,16 @@ import javax.swing.JFrame;
 public class RatingButtonPanel extends JPanel implements MouseListener {
 
   private static GraphPanel graphPanel;
+  private static HistoryTreePanel historyTreePanel ;
 
   private static JButton goodButton;
   private static JButton normalButton;
   private static JButton badButton;
   
 
-  public RatingButtonPanel(GraphPanel graphPanel) {
+  public RatingButtonPanel(GraphPanel graphPanel, HistoryTreePanel historyTreePanel) {
     this.graphPanel = graphPanel;
+    this.historyTreePanel = historyTreePanel;
     
     this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
@@ -40,10 +44,11 @@ public class RatingButtonPanel extends JPanel implements MouseListener {
     Object src = e.getSource();
     if (src == this.goodButton) {
       GraphPanel gp = this.graphPanel.clone();
-      JFrame f = new JFrame();
-      f.add(gp);
-      f.pack();
-      f.setVisible(true);
+      this.historyTreePanel.saveHistory(gp);
+      // JFrame f = new JFrame();
+      // f.add(gp);
+      // f.pack();
+      // f.setVisible(true);
     } else if (src == this.normalButton) {
       return;
     } else if (src == this.badButton) {
