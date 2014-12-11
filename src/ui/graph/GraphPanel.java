@@ -91,7 +91,7 @@ public class GraphPanel extends JPanel implements Cloneable {
     }
     gp.addNodes(cloneNodes);
 
-    // connect
+    // connect cloned nodes
     int threshold = 192;
     for (Node n1 : cloneNodes) {
       for (Node n2 : gp.findConnectableNodes(n1)) {
