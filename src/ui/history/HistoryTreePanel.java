@@ -46,7 +46,8 @@ public class HistoryTreePanel<T> extends JPanel implements MouseListener {
     this.repaint();
 
     // change graph panel
-    this.moduleSelectPanel.changeGraphPanel((GraphPanel)this.current.getData());
+    GraphPanel gp = ((GraphPanel)this.current.getData());
+    this.moduleSelectPanel.changeGraphPanel(gp);
   }
   
   @Override public void mousePressed(MouseEvent e) {}
