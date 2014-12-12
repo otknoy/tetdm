@@ -81,11 +81,10 @@ public class ModuleSelectPanel extends JPanel implements MouseListener {
   @Override public void mouseExited(MouseEvent e) {}
 
   public void changeGraphPanel(GraphPanel gp) {
-    System.out.println(gp);
     this.remove(this.graphPanel);
-    this.graphPanel = gp;
-    this.add(gp, BorderLayout.CENTER);
-    this.invalidate();
-    this.validate();
+    this.graphPanel = gp.clone();
+    this.add(this.graphPanel, BorderLayout.CENTER);
+    this.graphPanel.repaint();
+    this.revalidate();
   }
 }
