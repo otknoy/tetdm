@@ -11,6 +11,7 @@ package source;
 import source.*;
 import source.TextData.*;
 
+import ui.Interface;
 import ui.graph.ModuleSelectPanel;
 import ui.graph.component.Node;
 import ui.graph.module.ModuleManager;
@@ -64,13 +65,15 @@ public class MainFrame extends JFrame {
 						    miningModules, miningNames,
 						    visualizationModules, visualNames);
 
-    // our proposed interface
-    this.moduleSelectPanel = new ModuleSelectPanel(moduleManager);
-    this.moduleSelectFrame = new JFrame("Module Select Panel");
-    this.moduleSelectFrame.add(moduleSelectPanel);
-    this.moduleSelectFrame.pack();
-    this.moduleSelectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.moduleSelectFrame.setVisible(true);
+    // // our proposed interface
+    // this.moduleSelectPanel = new ModuleSelectPanel(moduleManager);
+    // this.moduleSelectFrame = new JFrame("Module Select Panel");
+    // this.moduleSelectFrame.add(moduleSelectPanel);
+    // this.moduleSelectFrame.pack();
+    // this.moduleSelectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    // this.moduleSelectFrame.setVisible(true);
+    Interface inf = new Interface();
+    inf.setVisible(true);
 
     // setPanel(0, 14, 14);
     // setPanel(1, 0, 23);
