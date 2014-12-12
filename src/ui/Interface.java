@@ -21,13 +21,13 @@ public class Interface extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
     this.toolbox = new Toolbox();
-    this.toolbox.setMaximumSize(new Dimension(Short.MAX_VALUE, (int)(1/4.0 * this.getHeight())));
+    this.toolbox.setMaximumSize(new Dimension(Short.MAX_VALUE, (int)(0.15 * this.getHeight())));
     
     this.graphInterface = new GraphInterface();
-    this.graphInterface.setMaximumSize(new Dimension(Short.MAX_VALUE, (int)(2/4.0 * this.getHeight())));
+    this.graphInterface.setMaximumSize(new Dimension(Short.MAX_VALUE, (int)(0.6 * this.getHeight())));
     
     this.historyTree = new HistoryTree();
-    this.historyTree.setMaximumSize(new Dimension(Short.MAX_VALUE, (int)(1/4.0 * this.getHeight())));
+    this.historyTree.setMaximumSize(new Dimension(Short.MAX_VALUE, (int)(0.25 * this.getHeight())));
 
 
     JPanel p = new JPanel();
