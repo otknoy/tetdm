@@ -19,5 +19,7 @@ public abstract class ModuleNode extends Node {
   public ModuleNode(ModuleData moduleData, Color bgColor) {
     this(moduleData, bgColor, new Point(0, 0));
   }
+
+  abstract public ModuleNode clone();
 }
 
