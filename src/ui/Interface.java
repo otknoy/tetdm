@@ -11,6 +11,8 @@ import javax.swing.*;
 
 public class Interface extends JFrame {
 
+  public static final String NAME = "Tool Selector";
+
   public final ModuleManager moduleManager;
 
   public final Toolbox toolbox;
@@ -20,12 +22,11 @@ public class Interface extends JFrame {
   public Interface(ModuleManager moduleManager) {
     this.moduleManager = moduleManager;
 
-    this.setTitle("Tool Selector");
+    this.setTitle(Interface.NAME);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    
-    this.toolbox = new Toolbox(this);
-    this.graphInterface = new GraphInterface();
 
+    this.graphInterface = new GraphInterface(this);
+    this.toolbox = new Toolbox(this);
 
     
     JPanel p = new JPanel();

@@ -1,6 +1,14 @@
 package ui.graph;
 
-import java.awt.*;
+import ui.Interface;
+import ui.graph.component.*;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Graphics;
 import javax.swing.*;
 
 
@@ -9,14 +17,57 @@ public class GraphInterface extends JPanel {
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 650;
 
+  private final Interface parent;
+  private List<Node> nodes;
 
-  public GraphInterface() {
+
+  public GraphInterface(Interface parent) {
+    this.parent = parent;
+    this.nodes = new ArrayList<Node>();
+
     this.setPreferredSize(new Dimension(GraphInterface.WIDTH, GraphInterface.HEIGHT));
+    this.setLayout(null);
+
+    
+
+    // Init preprocess node
+    PreprocessNode pNode = new PreprocessNode(new Point(100, GraphInterface.HEIGHT/2));
+    this.addNode(pNode);
+
+    // Init tool panel nodes
+    this.addNode(new ToolPanelNode(0, new Point(700, GraphInterface.HEIGHT/2 - 100)));
+    this.addNode(new ToolPanelNode(1, new Point(700, GraphInterface.HEIGHT/2)));
+    this.addNode(new ToolPanelNode(2, new Point(700, GraphInterface.HEIGHT/2 + 100)));
+
+    System.out.println(this.nodes.size());
   }
 
   @Override
   public void paintComponent(Graphics g) {
     g.setColor(Color.white);
     g.fillRect(0, 0, getWidth(), getHeight());
+  }
+
+
+  private List<PreprocessNode> createPreprocessNodes() {
+    List<PreprocessNode> preprocessNodes = new ArrayList<PreprocessNode>();
+    PreprocessNode n = new PreprocessNode(new Point(100, 650));
+    preprocessNodes.add(n);
+    return preprocessNodes;
+  }
+
+
+
+  public void addNode(Node n) {
+    // Add the node to arraylist
+    this.nodes.add(n);
+
+    // Add the node to this panel
+    this.add(n);
+
+    // Add mouse listener to the node
+    // drag and drop
+    
+    this.repaint();
   }
 }
