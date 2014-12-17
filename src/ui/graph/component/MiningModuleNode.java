@@ -8,7 +8,7 @@ import java.awt.Point;
 
 public class MiningModuleNode extends ModuleNode {
 
-  private static final Color BG_COLOR = new Color(0, 255, 255, 128);
+  private static final Color BG_COLOR = new Color(0, 255, 255, 64);
 
 
   public MiningModuleNode(ModuleData moduleData, Point location) {

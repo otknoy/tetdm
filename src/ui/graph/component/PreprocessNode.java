@@ -6,7 +6,7 @@ import java.awt.Point;
 public class PreprocessNode extends Node {
 
   private static final String NAME = "Preprocess";
-  private static final Color BG_COLOR = new Color(255, 255, 0, 128);
+  private static final Color BG_COLOR = new Color(255, 255, 0, 64);
 
 
   public PreprocessNode(Point location) {

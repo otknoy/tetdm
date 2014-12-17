@@ -8,7 +8,7 @@ import java.awt.Point;
 
 public class VisualizationModuleNode extends ModuleNode {
 
-  private static final Color BG_COLOR = new Color(255, 0, 255, 128);
+  private static final Color BG_COLOR = new Color(255, 0, 255, 64);
 
 
   public VisualizationModuleNode(ModuleData moduleData, Point location) {
