@@ -72,7 +72,7 @@ public class MainFrame extends JFrame {
     // this.moduleSelectFrame.pack();
     // this.moduleSelectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     // this.moduleSelectFrame.setVisible(true);
-    Interface inf = new Interface();
+    Interface inf = new Interface(moduleManager);
     inf.setVisible(true);
 
     // setPanel(0, 14, 14);
