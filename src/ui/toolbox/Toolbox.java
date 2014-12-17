@@ -37,7 +37,7 @@ public class Toolbox extends JPanel {
     this.visualizationModuleNodes = this.createVisualizationModuleNodes(parent.moduleManager);
 
 
-    NodeMouseListener tml = new NodeMouseListener(parent.graphInterface);
+    NodeMouseListener tml = new NodeMouseListener(this.parent);
 
     for (ModuleNode n : this.miningModuleNodes) {
       n.addMouseListener(tml);
