@@ -25,17 +25,28 @@ public class Interface extends JFrame {
     this.setTitle(Interface.NAME);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    this.graphInterface = new GraphInterface(this);
-    this.toolbox = new Toolbox(this);
+    this.setLayout(new BorderLayout());
 
-    
+
+    // menu bar
+    // this.add(hoge, BorderLayout.NORTH);
+
+
+    // toolbox and graph interface
     JPanel p = new JPanel();
     p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
 
+    this.graphInterface = new GraphInterface(this);
+    this.toolbox = new Toolbox(this);
     p.add(this.toolbox);
     p.add(this.graphInterface);
+    this.add(p, BorderLayout.CENTER);
 
-    this.add(p);
+
+    // manipulation bar
+    // this.add(hoge, BorderLayout.SOUTH);
+
+
     this.pack();
   }
 }
