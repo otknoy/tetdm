@@ -4,6 +4,7 @@ import ui.Interface;
 import ui.graph.component.*;
 import ui.graph.component.event.MouseDragAndDropListener;
 import ui.graph.component.event.NodeSelectMouseListener;
+import ui.graph.event.NodeConnectMouseListener;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -75,6 +76,10 @@ public class GraphInterface extends JPanel {
     // select and highlight
     NodeSelectMouseListener nsml = new NodeSelectMouseListener(n);
     n.addMouseListener(nsml);
+    // connect
+    NodeConnectMouseListener ncml = new NodeConnectMouseListener(parent, n);
+    n.addMouseListener(ncml);
+    n.addMouseMotionListener(ncml);
 
     this.repaint();
   }
