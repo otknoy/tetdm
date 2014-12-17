@@ -15,6 +15,7 @@ public class Interface extends JFrame {
 
   
   public Interface() {
+    this.setTitle("Tool Selector");
     this.setSize(800, 800);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
