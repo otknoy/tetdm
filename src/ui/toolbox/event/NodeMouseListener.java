@@ -23,7 +23,9 @@ public class NodeMouseListener implements MouseListener {
   @Override
   public void mouseClicked(MouseEvent e) {
     ModuleNode n = (ModuleNode)e.getSource();
-    
+    ModuleNode c = n.clone();
+    this.graphInterface.addNode(c);
+
     System.out.println(n);
   }
   
