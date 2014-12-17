@@ -13,8 +13,8 @@ public class Interface extends JFrame {
 
   public final ModuleManager moduleManager;
 
-  private final Toolbox toolbox;
-  private final GraphInterface graphInterface;
+  public final Toolbox toolbox;
+  public final GraphInterface graphInterface;
 
   
   public Interface(ModuleManager moduleManager) {
@@ -25,6 +25,7 @@ public class Interface extends JFrame {
     
     this.toolbox = new Toolbox(this);
     this.graphInterface = new GraphInterface();
+
 
     
     JPanel p = new JPanel();

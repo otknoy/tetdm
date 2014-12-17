@@ -4,6 +4,7 @@ import ui.Interface;
 import ui.graph.component.*;
 import ui.graph.component.util.*;
 import ui.graph.module.*;
+import ui.toolbox.event.NodeMouseListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +36,17 @@ public class Toolbox extends JPanel {
     this.miningModuleNodes = this.createMiningModuleNodes(parent.moduleManager);
     this.visualizationModuleNodes = this.createVisualizationModuleNodes(parent.moduleManager);
 
-    for (Node n : this.miningModuleNodes) {
+
+    NodeMouseListener tml = new NodeMouseListener(parent.graphInterface);
+
+    for (ModuleNode n : this.miningModuleNodes) {
+      n.addMouseListener(tml);
+  
       this.add(n);
     }
-    for (Node n : this.visualizationModuleNodes) {
+    for (ModuleNode n : this.visualizationModuleNodes) {
+      n.addMouseListener(tml);
+
       this.add(n);
     }
 
