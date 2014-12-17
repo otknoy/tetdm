@@ -1,5 +1,8 @@
 package ui.graph.component.event;
 
+import ui.Interface;
+import ui.toolbox.Toolbox;
+import ui.graph.GraphInterface;
 import ui.graph.component.Node;
 
 import java.awt.Point;
@@ -12,17 +15,20 @@ import java.util.ArrayList;
 
 public class NodeSelectMouseListener implements MouseListener {
 
-  private Node node;
+  private final Interface parent;
+  private final Node node;
+  
+  private List<Node> connectableNodes;
 
   
-  public NodeSelectMouseListener(Node node) {
+  public NodeSelectMouseListener(Interface parent, Node node) {
+    this.parent = parent;
     this.node = node;
-  }
-  
+  }  
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    this.node.selected(!this.node.isSelected());
+    node.selected(!node.isSelected());
 
     node.repaint();
   }
@@ -30,17 +36,41 @@ public class NodeSelectMouseListener implements MouseListener {
   @Override public void mousePressed(MouseEvent e) {}
   @Override public void mouseReleased(MouseEvent e) {}
 
-  @Override
-  public void mouseEntered(MouseEvent e) {
+  @Override public void mouseEntered(MouseEvent e) {
+    Toolbox toolbox = this.parent.getToolbox();
+    GraphInterface graphInterface = this.parent.getGraphInterface();
+
     node.highlighted(true);
 
-    node.repaint();
+
+    List<Node> nodes = new ArrayList<Node>();
+    nodes.addAll(toolbox.getNodes());
+    nodes.addAll(graphInterface.getNodes());
+
+    this.connectableNodes = new ArrayList<Node>();
+    for (Node n : nodes) {
+      if (node.isConnectableTo(n)) {
+    	n.highlighted(true);
+    	this.connectableNodes.add(n);
+      }
+    }
+
+    toolbox.repaint();
+    graphInterface.repaint();
   }
 
-  @Override
-  public void mouseExited(MouseEvent e) {
-    node.highlighted(false);    
+  @Override public void mouseExited(MouseEvent e) {
+    Toolbox toolbox = this.parent.getToolbox();
+    GraphInterface graphInterface = this.parent.getGraphInterface();
 
-    node.repaint();
+    node.highlighted(false);
+
+    for (Node n : this.connectableNodes) {
+      n.highlighted(false);
+    }
+    this.connectableNodes = null;
+
+    toolbox.repaint();
+    graphInterface.repaint();
   }
 }

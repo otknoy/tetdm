@@ -75,7 +75,7 @@ public class GraphInterface extends JPanel {
     n.addMouseListener(mddl);
     n.addMouseMotionListener(mddl);
     // select and highlight
-    NodeSelectMouseListener nsml = new NodeSelectMouseListener(n);
+    NodeSelectMouseListener nsml = new NodeSelectMouseListener(parent, n);
     n.addMouseListener(nsml);
     // connect
     NodeConnectMouseListener ncml = new NodeConnectMouseListener(parent, n);

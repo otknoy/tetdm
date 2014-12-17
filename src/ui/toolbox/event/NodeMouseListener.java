@@ -37,7 +37,7 @@ public class NodeMouseListener implements MouseListener {
 
 
   @Override public void mouseEntered(MouseEvent e) {
-    ModuleNode node = (ModuleNode)e.getSource();
+    Node node = (Node)e.getSource();
     node.highlighted(true);
 
     List<Node> nodes = new ArrayList<Node>();
@@ -57,7 +57,7 @@ public class NodeMouseListener implements MouseListener {
   }
 
   @Override public void mouseExited(MouseEvent e) {
-    ModuleNode node = (ModuleNode)e.getSource();
+    Node node = (Node)e.getSource();
     node.highlighted(false);
 
     for (Node n : this.connectableNodes) {

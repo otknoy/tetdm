@@ -1,7 +1,9 @@
 package ui;
 
 import ui.toolbox.Toolbox;
+import ui.toolbox.event.NodeMouseListener;
 import ui.graph.GraphInterface;
+import ui.graph.component.Node;
 import ui.history.HistoryTree;
 import ui.graph.module.ModuleManager;
 
@@ -13,10 +15,10 @@ public class Interface extends JFrame {
 
   public static final String NAME = "Tool Selector";
 
-  public final ModuleManager moduleManager;
+  private final ModuleManager moduleManager;
 
-  public final Toolbox toolbox;
-  public final GraphInterface graphInterface;
+  private final Toolbox toolbox;
+  private final GraphInterface graphInterface;
 
   
   public Interface(ModuleManager moduleManager) {
@@ -37,7 +39,13 @@ public class Interface extends JFrame {
     p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
 
     this.graphInterface = new GraphInterface(this);
-    this.toolbox = new Toolbox(this);
+
+    this.toolbox = new Toolbox(this.moduleManager);
+    NodeMouseListener tml = new NodeMouseListener(this.toolbox, this.graphInterface);
+    for (Node n : this.toolbox.getNodes()) {
+      n.addMouseListener(tml);
+    }
+
     p.add(this.toolbox);
     p.add(this.graphInterface);
     this.add(p, BorderLayout.CENTER);
@@ -49,4 +57,8 @@ public class Interface extends JFrame {
 
     this.pack();
   }
+
+  
+  public Toolbox getToolbox() { return this.toolbox; }
+  public GraphInterface getGraphInterface() { return this.graphInterface; }
 }
