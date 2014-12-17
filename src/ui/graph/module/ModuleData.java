@@ -35,6 +35,8 @@ public class ModuleData {
   
   public String getName() { return this.name; }
   public int getId() { return this.id; }
+  public boolean isMiningModule() { return this.type == TYPE_MINING; }
+  public boolean isVisualizationModule() { return this.type == TYPE_VISUALIZATION; }
 
   List<ModuleData> getPrevList() { return this.prevList; }
   void addToPrevList(ModuleData d) { this.prevList.add(d); }

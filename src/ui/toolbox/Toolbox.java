@@ -20,10 +20,8 @@ public class Toolbox extends JPanel {
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 250;
 
-  private Interface parent;
-
-  private List<MiningModuleNode> miningModuleNodes;
-  private List<VisualizationModuleNode> visualizationModuleNodes;
+  private final Interface parent;
+  private final List<ModuleNode> nodes;
 
 
   public Toolbox(Interface parent) {
@@ -33,25 +31,21 @@ public class Toolbox extends JPanel {
     this.setLayout(null);
 
 
-    this.miningModuleNodes = this.createMiningModuleNodes(parent.moduleManager);
-    this.visualizationModuleNodes = this.createVisualizationModuleNodes(parent.moduleManager);
+    List<ModuleNode> mNodes = this.createNodes(this.parent.moduleManager.getMiningModuleDataList());
+    List<ModuleNode> vNodes = this.createNodes(this.parent.moduleManager.getVisualizationModuleDataList());
+    this.nodes = new ArrayList<ModuleNode>();
+    this.nodes.addAll(mNodes);
+    this.nodes.addAll(vNodes);
 
-
-    NodeMouseListener tml = new NodeMouseListener(this.parent);
-
-    for (ModuleNode n : this.miningModuleNodes) {
-      n.addMouseListener(tml);
-  
-      this.add(n);
-    }
-    for (ModuleNode n : this.visualizationModuleNodes) {
+    NodeMouseListener tml = new NodeMouseListener(this, this.parent.graphInterface);
+    for (ModuleNode n : this.nodes) {
       n.addMouseListener(tml);
 
       this.add(n);
     }
 
-    Nodes.alignNodes(new Rectangle(      0, 0, WIDTH/2, HEIGHT/2), this.miningModuleNodes);
-    Nodes.alignNodes(new Rectangle(WIDTH/2, 0, WIDTH/2, HEIGHT/2), this.visualizationModuleNodes);
+    Nodes.alignNodes(new Rectangle(      0, 0, WIDTH/2, HEIGHT/2), mNodes);
+    Nodes.alignNodes(new Rectangle(WIDTH/2, 0, WIDTH/2, HEIGHT/2), vNodes);
   }
 
 
@@ -61,25 +55,17 @@ public class Toolbox extends JPanel {
     g.fillRect(0, 0, getWidth(), getHeight());
   }
 
-  
+  private List<ModuleNode> createNodes(List<ModuleData> mdl) {
+    List<ModuleNode> nodes = new ArrayList<ModuleNode>();
 
-  private List<MiningModuleNode> createMiningModuleNodes(ModuleManager moduleManager) {
-    List<MiningModuleNode> mmNodes = new ArrayList<MiningModuleNode>();
-    List<ModuleData> mmdl = moduleManager.getMiningModuleDataList();
-    for (ModuleData md : mmdl) {
-      MiningModuleNode n = new MiningModuleNode(md);
-      mmNodes.add(n);
+    for (ModuleData md : mdl) {
+      if (md.isMiningModule()) {
+	nodes.add(new MiningModuleNode(md));
+      } else if (md.isVisualizationModule()) {
+	nodes.add(new VisualizationModuleNode(md));
+      }
     }
-    return mmNodes;
-  }
 
-  private List<VisualizationModuleNode> createVisualizationModuleNodes(ModuleManager moduleManager) {
-    List<VisualizationModuleNode> vmNodes = new ArrayList<VisualizationModuleNode>();
-    List<ModuleData> vmdl = moduleManager.getVisualizationModuleDataList();
-    for (ModuleData md : vmdl) {
-      VisualizationModuleNode n = new VisualizationModuleNode(md);
-      vmNodes.add(n);
-    }
-    return vmNodes;
+    return nodes;
   }
 }
