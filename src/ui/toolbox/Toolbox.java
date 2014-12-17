@@ -68,4 +68,6 @@ public class Toolbox extends JPanel {
 
     return nodes;
   }
+
+  public List<ModuleNode> getNodes() { return this.nodes; }
 }

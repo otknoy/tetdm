@@ -60,6 +60,7 @@ public class GraphInterface extends JPanel {
   }
 
 
+  public List<Node> getNodes() { return this.nodes; }
 
   public void addNode(Node n) {
     // Add the node to arraylist
