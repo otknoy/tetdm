@@ -6,8 +6,12 @@ import javax.swing.*;
 
 public class GraphInterface extends JPanel {
 
-  public GraphInterface() {
+  public static final int WIDTH  = 800;
+  public static final int HEIGHT = 650;
 
+
+  public GraphInterface() {
+    this.setPreferredSize(new Dimension(GraphInterface.WIDTH, GraphInterface.HEIGHT));
   }
 
   @Override
