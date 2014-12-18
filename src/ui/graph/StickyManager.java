@@ -28,6 +28,7 @@ public class StickyManager {
     this.stickyEventListener = new StickyEventListener(this);
   }
 
+  public List<Sticky> getStickies() { return this.stickies; }
 
   public void add(Sticky s) {
     // drag & drop event
