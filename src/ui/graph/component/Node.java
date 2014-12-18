@@ -126,7 +126,33 @@ public abstract class Node extends JComponent implements Cloneable {
   public boolean isHighlighted() { return this.isHighlighted; }
   public void highlighted(boolean highlighted) { this.isHighlighted = highlighted; }
 
-  
+  public boolean connectsTo(Node n) {
+    if (this.isConnectableToPrev(n)) {
+      this.addPrevNodes(n);
+      n.addNextNodes(this);
+      return true;
+    } else if (this.isConnectableToNext(n)) {
+      this.addNextNodes(n);
+      n.addPrevNodes(this);
+      return true;
+    }
+    return false;
+  }
+
+  public boolean disconnectsTo(Node n) {
+    if (this.isConnectableToPrev(n)) {
+      this.removePrevNode(n);
+      n.removeNextNode(this);
+      return true;
+    } else if (this.isConnectableToNext(n)) {
+      this.removeNextNode(n);
+      n.removePrevNode(this);
+      return true;
+    }
+    return false;
+  }
+
+
   /**
    * get center point of Node
    * @return center point
