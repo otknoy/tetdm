@@ -13,9 +13,10 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.Graphics;
 import javax.swing.*;
+import java.lang.Cloneable;
 
 
-public class GraphInterface extends JPanel {
+public class GraphInterface extends JPanel implements Cloneable {
 
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 650;
@@ -38,11 +39,11 @@ public class GraphInterface extends JPanel {
     this.addNode(pNode);
 
     // Init tool panel nodes
-
     this.addNode(new ToolPanelNode(0, new Point(700, GraphInterface.HEIGHT/2 - 100)));
     this.addNode(new ToolPanelNode(1, new Point(700, GraphInterface.HEIGHT/2)));
     this.addNode(new ToolPanelNode(2, new Point(700, GraphInterface.HEIGHT/2 + 100)));
   }
+
 
   @Override
   public void paintComponent(Graphics g) {
@@ -53,6 +54,24 @@ public class GraphInterface extends JPanel {
     for (Node n : this.nodes) {
       n.drawEdgesToNextNodes(g);
     }
+  }
+
+  @Override public GraphInterface clone() {
+    // clone this
+    GraphInterface gi = new GraphInterface(this.parent);
+
+    // remove existing nodes,
+    // and then clone the nodes and add them to the cloned GraphInterface
+    for (Node n : this.nodes) {
+      gi.remove(n);
+
+      gi.add(n.clone());
+    }
+
+    // clone stickies
+
+
+    return gi;
   }
 
 
