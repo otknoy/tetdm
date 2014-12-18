@@ -47,6 +47,11 @@ public class GraphInterface extends JPanel {
   public void paintComponent(Graphics g) {
     g.setColor(Color.white);
     g.fillRect(0, 0, getWidth(), getHeight());
+
+    // draw edges
+    for (Node n : this.nodes) {
+      n.drawEdgesToNextNodes(g);
+    }
   }
 
 
