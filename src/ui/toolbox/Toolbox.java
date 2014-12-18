@@ -46,7 +46,7 @@ public class Toolbox extends JPanel {
 
   @Override
   public void paintComponent(Graphics g) {
-    g.setColor(Color.white);
+    g.setColor(new Color(223, 223, 223));
     g.fillRect(0, 0, getWidth(), getHeight());
   }
 
