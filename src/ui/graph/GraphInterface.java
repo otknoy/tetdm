@@ -38,6 +38,7 @@ public class GraphInterface extends JPanel {
     this.addNode(pNode);
 
     // Init tool panel nodes
+
     this.addNode(new ToolPanelNode(0, new Point(700, GraphInterface.HEIGHT/2 - 100)));
     this.addNode(new ToolPanelNode(1, new Point(700, GraphInterface.HEIGHT/2)));
     this.addNode(new ToolPanelNode(2, new Point(700, GraphInterface.HEIGHT/2 + 100)));
@@ -52,14 +53,6 @@ public class GraphInterface extends JPanel {
     for (Node n : this.nodes) {
       n.drawEdgesToNextNodes(g);
     }
-  }
-
-
-  private List<PreprocessNode> createPreprocessNodes() {
-    List<PreprocessNode> preprocessNodes = new ArrayList<PreprocessNode>();
-    PreprocessNode n = new PreprocessNode(new Point(100, 650));
-    preprocessNodes.add(n);
-    return preprocessNodes;
   }
 
 
