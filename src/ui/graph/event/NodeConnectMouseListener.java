@@ -54,9 +54,9 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
 
 	this.node.disconnectsTo(n);
       }
-
-      this.parent.getGraphInterface().repaint();
     }
+
+    this.parent.getGraphInterface().repaint();
   }
 
   @Override public void mouseMoved(MouseEvent e) { }
