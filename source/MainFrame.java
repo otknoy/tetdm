@@ -12,7 +12,6 @@ import source.*;
 import source.TextData.*;
 
 import ui.Interface;
-import ui.graph.ModuleSelectPanel;
 import ui.graph.component.Node;
 import ui.graph.module.ModuleManager;
 
@@ -32,9 +31,6 @@ public class MainFrame extends JFrame {
 
   Control controlPanel;
   Container pane = getContentPane();
-
-  private JFrame moduleSelectFrame;
-  private ModuleSelectPanel moduleSelectPanel;
 
 
   MainFrame(String title, String filename, String absolutePath) {
@@ -65,13 +61,7 @@ public class MainFrame extends JFrame {
 						    miningModules, miningNames,
 						    visualizationModules, visualNames);
 
-    // // our proposed interface
-    // this.moduleSelectPanel = new ModuleSelectPanel(moduleManager);
-    // this.moduleSelectFrame = new JFrame("Module Select Panel");
-    // this.moduleSelectFrame.add(moduleSelectPanel);
-    // this.moduleSelectFrame.pack();
-    // this.moduleSelectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    // this.moduleSelectFrame.setVisible(true);
+    // our proposed interface
     Interface inf = new Interface(moduleManager);
     inf.setVisible(true);
 
@@ -84,14 +74,14 @@ public class MainFrame extends JFrame {
   /**
    * change module select panel
    */
-  public void changeModuleSelectPanel(Object data) {
-    this.moduleSelectFrame.remove(this.moduleSelectPanel);
-    this.moduleSelectPanel = (ModuleSelectPanel)data;
-    this.moduleSelectFrame.add(this.moduleSelectPanel);
-    this.moduleSelectFrame.pack();
-    this.moduleSelectFrame.repaint();
-    // this.moduleSelectPanel.repaint();
-  }
+  // public void changeModuleSelectPanel(Object data) {
+  //   this.moduleSelectFrame.remove(this.moduleSelectPanel);
+  //   this.moduleSelectPanel = (ModuleSelectPanel)data;
+  //   this.moduleSelectFrame.add(this.moduleSelectPanel);
+  //   this.moduleSelectFrame.pack();
+  //   this.moduleSelectFrame.repaint();
+  //   // this.moduleSelectPanel.repaint();
+  // }
 
   /**
    * Set mining module and visualization module to a panel.
