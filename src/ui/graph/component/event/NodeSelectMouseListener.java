@@ -17,17 +17,16 @@ public class NodeSelectMouseListener implements MouseListener {
 
   private final Interface parent;
   private final Node node;
-  
+
   private List<Node> connectableNodes;
 
-  
+
   public NodeSelectMouseListener(Interface parent, Node node) {
     this.parent = parent;
     this.node = node;
-  }  
+  }
 
-  @Override
-  public void mouseClicked(MouseEvent e) {
+  @Override public void mouseClicked(MouseEvent e) {
     node.selected(!node.isSelected());
 
     node.repaint();
