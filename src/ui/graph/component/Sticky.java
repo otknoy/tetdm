@@ -29,15 +29,6 @@ public class Sticky extends JPanel implements Cloneable {
     this.bgColor = bgColor;
 
     this.setSize(new Dimension(this.WIDTH, this.HEIGHT));    
-
-    // drag & drop event
-    MouseDragAndDropListener mddl = new MouseDragAndDropListener(this);
-    this.addMouseListener(mddl);
-    this.addMouseMotionListener(mddl);
-
-    // mouse event
-    StickyEventListener sel = new StickyEventListener(this);
-    this.addMouseListener(sel);
   }
 
   public Sticky(String text) {

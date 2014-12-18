@@ -1,6 +1,6 @@
 package ui.graph.component;
 
-import ui.graph.GraphPanel;
+import ui.graph.StickyManager;
 
 import java.awt.Component;
 import java.awt.Color;
@@ -18,6 +18,7 @@ import java.awt.event.MouseEvent;
 
 public class StickyEditor extends JFrame implements MouseListener {
 
+  private final StickyManager stickyManager;
   private final Sticky sticky;
   private final JTextArea textArea;
   private final JButton saveButton;
@@ -25,7 +26,8 @@ public class StickyEditor extends JFrame implements MouseListener {
   private final JButton removeButton;
 
 
-  public StickyEditor(Sticky sticky) {
+  public StickyEditor(StickyManager stickyManager, Sticky sticky) {
+    this.stickyManager = stickyManager;
     this.sticky = sticky;
 
     this.setSize(480, 360);
@@ -65,9 +67,7 @@ public class StickyEditor extends JFrame implements MouseListener {
     if (src == this.saveButton) {
       this.sticky.setText(this.textArea.getText());
     } else if (src == this.removeButton) {
-      GraphPanel p = (GraphPanel)this.sticky.getParent();
-      p.removeSticky(this.sticky);
-      p.repaint();
+      this.stickyManager.remove(this.sticky);
     } else if (src == this.selectColorButton) {
       Color c = JColorChooser.showDialog(this, "Select color", sticky.getBgColor());
       if (c == null) return;

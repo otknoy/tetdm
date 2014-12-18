@@ -1,5 +1,6 @@
 package ui.graph.component.event;
 
+import ui.graph.StickyManager;
 import ui.graph.component.Sticky;
 import ui.graph.component.StickyEditor;
 
@@ -10,17 +11,22 @@ import java.awt.event.MouseEvent;
 
 public class StickyEventListener implements MouseListener{
 
-  private Sticky sticky;
+  private StickyManager stickyManager;
 
 
-  public StickyEventListener(Sticky sticky) {
-    this.sticky = sticky;
+  public StickyEventListener(StickyManager stickyManager) {
+    this.stickyManager = stickyManager;
   }
 
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    StickyEditor se = new StickyEditor(this.sticky);
+    Object o = e.getSource();
+    if (!(o instanceof Sticky)) return;
+
+    Sticky s = (Sticky)o;
+
+    StickyEditor se = new StickyEditor(this.stickyManager, s);
 
     Point mp = e.getLocationOnScreen();
     int x = (int)mp.getX() - se.getWidth() /2;
