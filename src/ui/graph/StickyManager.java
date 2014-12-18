@@ -29,9 +29,7 @@ public class StickyManager {
   }
 
 
-  public Sticky createSticky() {
-    Sticky s = new Sticky();
-
+  public void add(Sticky s) {
     // drag & drop event
     MouseDragAndDropListener mddl = new MouseDragAndDropListener(s);
     s.addMouseListener(mddl);
@@ -40,11 +38,6 @@ public class StickyManager {
     // mouse event
     s.addMouseListener(this.stickyEventListener);
 
-    this.add(s);
-    return s;
-  }
-
-  public void add(Sticky s) {
     this.parent.add(s);
     this.stickies.add(s);
     this.parent.repaint();
