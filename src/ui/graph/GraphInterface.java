@@ -41,8 +41,6 @@ public class GraphInterface extends JPanel {
     this.addNode(new ToolPanelNode(0, new Point(700, GraphInterface.HEIGHT/2 - 100)));
     this.addNode(new ToolPanelNode(1, new Point(700, GraphInterface.HEIGHT/2)));
     this.addNode(new ToolPanelNode(2, new Point(700, GraphInterface.HEIGHT/2 + 100)));
-
-    System.out.println(this.nodes.size());
   }
 
   @Override
