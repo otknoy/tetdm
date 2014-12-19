@@ -30,6 +30,14 @@ public class StickyManager {
 
   public List<Sticky> getStickies() { return this.stickies; }
 
+
+  public void add() {
+	Sticky s = new Sticky();
+	s.setLocation((this.parent.getWidth()  - s.getWidth())  / 2,
+		      (this.parent.getHeight() - s.getHeight()) / 2);
+	this.add(s);
+  }
+
   public void add(Sticky s) {
     // drag & drop event
     MouseDragAndDropListener mddl = new MouseDragAndDropListener(s);

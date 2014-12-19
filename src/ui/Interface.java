@@ -7,10 +7,12 @@ import ui.history.HistoryTree;
 import ui.graph.module.ModuleManager;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 
-public class Interface extends JFrame {
+public class Interface extends JFrame implements MouseListener {
 
   public static final String NAME = "Tool Selector";
 
@@ -45,8 +47,12 @@ public class Interface extends JFrame {
     this.add(p, BorderLayout.CENTER);
 
 
-    // manipulation bar
-    // this.add(hoge, BorderLayout.SOUTH);
+    // manipulation panel
+    JPanel mp = new JPanel();
+    JButton addStickyButton = new JButton("Add sticky");
+    addStickyButton.addMouseListener(this);
+    mp.add(addStickyButton);
+    this.add(mp, BorderLayout.SOUTH);
 
 
     this.pack();
@@ -56,4 +62,23 @@ public class Interface extends JFrame {
   public ModuleManager getModuleManager() { return this.moduleManager; }
   public Toolbox getToolbox() { return this.toolbox; }
   public GraphInterface getGraphInterface() { return this.graphInterface; }
+
+
+  @Override
+  public void mouseClicked(MouseEvent e) {
+    Object src = e.getSource();
+    if (src instanceof JButton) {
+      JButton b = (JButton)src;
+      String text = b.getText();
+      if (text == "Add sticky") {
+	this.graphInterface.getStickyManager().add();
+	this.graphInterface.repaint();
+      }
+    }
+  }
+
+  @Override public void mousePressed(MouseEvent e) {}
+  @Override public void mouseReleased(MouseEvent e) {}
+  @Override public void mouseEntered(MouseEvent e) {}
+  @Override public void mouseExited(MouseEvent e) {}
 }

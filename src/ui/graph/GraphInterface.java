@@ -24,6 +24,8 @@ public class GraphInterface extends JPanel implements Cloneable {
   private final Interface parent;
   private List<Node> nodes;
 
+  private final StickyManager stickyManager;
+
 
   public GraphInterface(Interface parent) {
     this.parent = parent;
@@ -32,6 +34,7 @@ public class GraphInterface extends JPanel implements Cloneable {
     this.setPreferredSize(new Dimension(GraphInterface.WIDTH, GraphInterface.HEIGHT));
     this.setLayout(null);
 
+    this.stickyManager = new StickyManager(this);
     
 
     // Init preprocess node
@@ -99,4 +102,6 @@ public class GraphInterface extends JPanel implements Cloneable {
 
     this.repaint();
   }
+
+  public StickyManager getStickyManager() { return this.stickyManager; }
 }
