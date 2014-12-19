@@ -1,5 +1,6 @@
 package ui.toolbox.event;
 
+import ui.Interface;
 import ui.toolbox.Toolbox;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
@@ -12,22 +13,19 @@ import java.util.ArrayList;
 
 public class NodeMouseListener implements MouseListener {
 
-  private final Toolbox toolbox;
-  private final GraphInterface graphInterface;
-
+  private final Interface parent;
   private List<Node> connectableNodes;
 
 
-  public NodeMouseListener(Toolbox toolbox, GraphInterface graphInterface) {
-    this.toolbox = toolbox;
-    this.graphInterface = graphInterface;
+  public NodeMouseListener(Interface parent) {
+    this.parent = parent;
   }
 
 
   @Override
   public void mouseClicked(MouseEvent e) {
     ModuleNode n = (ModuleNode)e.getSource();
-    this.graphInterface.addNode(n.clone());
+    this.parent.getGraphInterface().addNode(n.clone());
   }
   
   @Override public void mousePressed(MouseEvent e) { }
@@ -39,8 +37,8 @@ public class NodeMouseListener implements MouseListener {
     node.highlighted(true);
 
     List<Node> nodes = new ArrayList<Node>();
-    nodes.addAll(this.toolbox.getNodes());
-    nodes.addAll(this.graphInterface.getNodes());
+    nodes.addAll(this.parent.getToolbox().getNodes());
+    nodes.addAll(this.parent.getGraphInterface().getNodes());
 
     this.connectableNodes = new ArrayList<Node>();
     for (Node n : nodes) {
@@ -50,8 +48,7 @@ public class NodeMouseListener implements MouseListener {
       }
     }
 
-    this.toolbox.repaint();
-    this.graphInterface.repaint();
+    this.parent.repaint();
   }
 
   @Override public void mouseExited(MouseEvent e) {
@@ -63,7 +60,6 @@ public class NodeMouseListener implements MouseListener {
     }
     this.connectableNodes = null;
 
-    this.toolbox.repaint();
-    this.graphInterface.repaint();
+    this.parent.repaint();
   }
 }

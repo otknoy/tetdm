@@ -1,5 +1,7 @@
 package ui.toolbox;
 
+import ui.Interface;
+import ui.toolbox.event.NodeMouseListener;
 import ui.graph.component.*;
 import ui.graph.component.util.*;
 import ui.graph.module.*;
@@ -18,24 +20,28 @@ public class Toolbox extends JPanel {
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 250;
 
-  private final ModuleManager moduleManager;
+  private final Interface parent;
   private final List<ModuleNode> nodes;
 
 
-  public Toolbox(ModuleManager moduleManager) {
-    this.moduleManager = moduleManager;
+  public Toolbox(Interface parent) {
+    this.parent = parent;
+    this.nodes = new ArrayList<ModuleNode>();
 
     this.setPreferredSize(new Dimension(Toolbox.WIDTH, Toolbox.HEIGHT));
     this.setLayout(null);
 
 
-    this.nodes = new ArrayList<ModuleNode>();
-    List<ModuleNode> mNodes = this.createNodes(this.moduleManager.getMiningModuleDataList());
-    this.nodes.addAll(mNodes);
-    List<ModuleNode> vNodes = this.createNodes(this.moduleManager.getVisualizationModuleDataList());
-    this.nodes.addAll(vNodes);
+    List<ModuleNode> nodes = new ArrayList<ModuleNode>();
+    List<ModuleNode> mNodes = this.createNodes(this.parent.getModuleManager().getMiningModuleDataList());
+    nodes.addAll(mNodes);
+    List<ModuleNode> vNodes = this.createNodes(this.parent.getModuleManager().getVisualizationModuleDataList());
+    nodes.addAll(vNodes);
 
-    for (ModuleNode n : this.nodes) {
+    NodeMouseListener tml = new NodeMouseListener(this.parent);
+    for (ModuleNode n : nodes) {
+      n.addMouseListener(tml);
+      this.nodes.add(n);
       this.add(n);
     }
 

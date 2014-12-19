@@ -1,7 +1,6 @@
 package ui;
 
 import ui.toolbox.Toolbox;
-import ui.toolbox.event.NodeMouseListener;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
 import ui.history.HistoryTree;
@@ -39,12 +38,7 @@ public class Interface extends JFrame {
     p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
 
     this.graphInterface = new GraphInterface(this);
-
-    this.toolbox = new Toolbox(this.moduleManager);
-    NodeMouseListener tml = new NodeMouseListener(this.toolbox, this.graphInterface);
-    for (Node n : this.toolbox.getNodes()) {
-      n.addMouseListener(tml);
-    }
+    this.toolbox = new Toolbox(this);
 
     p.add(this.toolbox);
     p.add(this.graphInterface);
@@ -58,7 +52,8 @@ public class Interface extends JFrame {
     this.pack();
   }
 
-  
+
+  public ModuleManager getModuleManager() { return this.moduleManager; }
   public Toolbox getToolbox() { return this.toolbox; }
   public GraphInterface getGraphInterface() { return this.graphInterface; }
 }
