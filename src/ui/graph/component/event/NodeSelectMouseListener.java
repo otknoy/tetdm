@@ -44,7 +44,7 @@ public class NodeSelectMouseListener implements MouseListener {
 
     List<Node> nodes = new ArrayList<Node>();
     nodes.addAll(toolbox.getNodes());
-    nodes.addAll(graphInterface.getNodes());
+    nodes.addAll(graphInterface.getNodeManager().getNodes());
 
     this.connectableNodes = new ArrayList<Node>();
     for (Node n : nodes) {

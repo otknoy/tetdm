@@ -1,7 +1,7 @@
 package ui.graph;
 
 import ui.Interface;
-import ui.graph.component.*;
+import ui.graph.component.Node;
 import ui.graph.component.event.MouseDragAndDropListener;
 import ui.graph.component.event.NodeSelectMouseListener;
 import ui.graph.event.NodeConnectMouseListener;
@@ -22,29 +22,20 @@ public class GraphInterface extends JPanel implements Cloneable {
   public static final int HEIGHT = 650;
 
   private final Interface parent;
-  private List<Node> nodes;
-
+  private final NodeManager nodeManager;
   private final StickyManager stickyManager;
 
 
   public GraphInterface(Interface parent) {
     this.parent = parent;
-    this.nodes = new ArrayList<Node>();
 
     this.setPreferredSize(new Dimension(GraphInterface.WIDTH, GraphInterface.HEIGHT));
     this.setLayout(null);
 
+    this.nodeManager = new NodeManager(this.parent);
     this.stickyManager = new StickyManager(this);
     
-
-    // Init preprocess node
-    PreprocessNode pNode = new PreprocessNode(new Point(100, GraphInterface.HEIGHT/2));
-    this.addNode(pNode);
-
-    // Init tool panel nodes
-    this.addNode(new ToolPanelNode(0, new Point(700, GraphInterface.HEIGHT/2 - 100)));
-    this.addNode(new ToolPanelNode(1, new Point(700, GraphInterface.HEIGHT/2)));
-    this.addNode(new ToolPanelNode(2, new Point(700, GraphInterface.HEIGHT/2 + 100)));
+    this.nodeManager.initialize();
   }
 
 
@@ -54,7 +45,7 @@ public class GraphInterface extends JPanel implements Cloneable {
     g.fillRect(0, 0, getWidth(), getHeight());
 
     // draw edges
-    for (Node n : this.nodes) {
+    for (Node n : this.nodeManager.getNodes()) {
       n.drawEdgesToNextNodes(g);
     }
   }
@@ -63,45 +54,14 @@ public class GraphInterface extends JPanel implements Cloneable {
     // clone this
     GraphInterface gi = new GraphInterface(this.parent);
 
-    // remove existing nodes,
-    // and then clone the nodes and add them to the cloned GraphInterface
-    for (Node n : this.nodes) {
-      gi.remove(n);
-
-      gi.add(n.clone());
-    }
+    // clone nodes
 
     // clone stickies
 
 
     return gi;
   }
-
-
-  public List<Node> getNodes() { return this.nodes; }
-
-  public void addNode(Node n) {
-    // Add the node to arraylist
-    this.nodes.add(n);
-
-    // Add the node to this panel
-    this.add(n);
-
-    // Add mouse listener to the node
-    // drag and drop
-    MouseDragAndDropListener mddl = new MouseDragAndDropListener(n);
-    n.addMouseListener(mddl);
-    n.addMouseMotionListener(mddl);
-    // select and highlight
-    NodeSelectMouseListener nsml = new NodeSelectMouseListener(parent, n);
-    n.addMouseListener(nsml);
-    // connect
-    NodeConnectMouseListener ncml = new NodeConnectMouseListener(parent, n);
-    n.addMouseListener(ncml);
-    n.addMouseMotionListener(ncml);
-
-    this.repaint();
-  }
-
+  
+  public NodeManager getNodeManager() { return this.nodeManager; }
   public StickyManager getStickyManager() { return this.stickyManager; }
 }

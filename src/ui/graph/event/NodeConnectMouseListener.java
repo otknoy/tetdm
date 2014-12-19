@@ -31,7 +31,7 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
   @Override public void mouseReleased(MouseEvent e) {}
 
   @Override public void mouseEntered(MouseEvent e) {
-    List<Node> nodes = this.parent.getGraphInterface().getNodes();
+    List<Node> nodes = this.parent.getGraphInterface().getNodeManager().getNodes();
 
     this.connectableNodes = new ArrayList<Node>();
     for (Node n : nodes) {
