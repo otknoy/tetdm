@@ -73,11 +73,4 @@ public class ModuleManager {
 
   public List<ModuleData> getMiningModuleDataList() { return this.minings; }
   public List<ModuleData> getVisualizationModuleDataList() { return this.visualizations; }
-
-  // public List<ModuleData> getAllModuleData() {
-  //   List<ModuleData> all = new ArrayList<ModuleData>();
-  //   all.addAll(this.minings);
-  //   all.addAll(this.visualizations);
-  //   return all;
-  // }
 }
