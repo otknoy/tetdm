@@ -55,4 +55,29 @@ public class NodeManager {
     this.graphInterface.repaint();
     return n;
   }
+
+  public List<Node[]> getNodeCombinations() {
+    List<Node[]> combinations = new ArrayList<Node[]>();
+
+    Node pNode = null;
+    for (Node n : this.nodes) {
+      if (n instanceof PreprocessNode) {
+	pNode = n;
+      }
+    }
+    if (pNode == null) {
+      return combinations;
+    }
+
+    for (Node mmNode : pNode.getNextNodes()) {
+      for (Node vmNode : mmNode.getNextNodes()) {
+	for (Node tpNode : vmNode.getNextNodes()) {
+	  Node[] combination = {pNode, mmNode, vmNode, tpNode};
+	  combinations.add(combination);
+	}
+      }
+    }
+
+    return combinations;
+  }
 }
