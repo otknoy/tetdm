@@ -40,6 +40,8 @@ public class Interface extends JFrame implements MouseListener {
     p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
 
     this.graphInterface = new GraphInterface(this);
+    this.graphInterface.initialize();
+
     this.toolbox = new Toolbox(this);
 
     p.add(this.toolbox);

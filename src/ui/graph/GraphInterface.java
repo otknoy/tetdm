@@ -2,6 +2,8 @@ package ui.graph;
 
 import ui.Interface;
 import ui.graph.component.Node;
+import ui.graph.component.PreprocessNode;
+import ui.graph.component.ToolPanelNode;
 import ui.graph.component.event.MouseDragAndDropListener;
 import ui.graph.component.event.NodeSelectMouseListener;
 import ui.graph.event.NodeConnectMouseListener;
@@ -32,10 +34,25 @@ public class GraphInterface extends JPanel implements Cloneable {
     this.setPreferredSize(new Dimension(GraphInterface.WIDTH, GraphInterface.HEIGHT));
     this.setLayout(null);
 
-    this.nodeManager = new NodeManager(this.parent);
+    this.nodeManager = new NodeManager(this);
     this.stickyManager = new StickyManager(this);
-    
-    this.nodeManager.initialize();
+  }
+
+
+  public void initialize() {
+    // Init preprocess node
+    PreprocessNode pNode = new PreprocessNode(new Point(100, GraphInterface.HEIGHT/2));
+    this.nodeManager.add(pNode);
+
+    // Init tool panel nodes
+    int n = 3;
+    int w = 100;
+    for (int i = 0; i < n; i++) {
+      int x = 700;
+      int y = GraphInterface.HEIGHT - (n-i)*w;
+      ToolPanelNode tpNode = new ToolPanelNode(i, new Point(x, y));
+      this.nodeManager.add(tpNode);
+    }
   }
 
 
@@ -61,7 +78,7 @@ public class GraphInterface extends JPanel implements Cloneable {
 
     return gi;
   }
-  
+
   public NodeManager getNodeManager() { return this.nodeManager; }
   public StickyManager getStickyManager() { return this.stickyManager; }
 }
