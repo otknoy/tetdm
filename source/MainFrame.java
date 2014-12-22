@@ -72,18 +72,6 @@ public class MainFrame extends JFrame {
   }
 
   /**
-   * change module select panel
-   */
-  // public void changeModuleSelectPanel(Object data) {
-  //   this.moduleSelectFrame.remove(this.moduleSelectPanel);
-  //   this.moduleSelectPanel = (ModuleSelectPanel)data;
-  //   this.moduleSelectFrame.add(this.moduleSelectPanel);
-  //   this.moduleSelectFrame.pack();
-  //   this.moduleSelectFrame.repaint();
-  //   // this.moduleSelectPanel.repaint();
-  // }
-
-  /**
    * Set mining module and visualization module to a panel.
    * @param: panel index
    * @param: mining module id
