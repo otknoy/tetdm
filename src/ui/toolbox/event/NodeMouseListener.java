@@ -25,7 +25,7 @@ public class NodeMouseListener implements MouseListener {
   @Override
   public void mouseClicked(MouseEvent e) {
     ModuleNode n = (ModuleNode)e.getSource();
-    this.parent.getGraphInterface().getNodeManager().add(n.clone());
+    this.parent.addNodeToGraphInterface(n.clone());
   }
   
   @Override public void mousePressed(MouseEvent e) { }
@@ -38,7 +38,7 @@ public class NodeMouseListener implements MouseListener {
 
     List<Node> nodes = new ArrayList<Node>();
     nodes.addAll(this.parent.getToolbox().getNodes());
-    nodes.addAll(this.parent.getGraphInterface().getNodeManager().getNodes());
+    nodes.addAll(this.parent.getNodesFromGraphInterface());
 
     this.connectableNodes = new ArrayList<Node>();
     for (Node n : nodes) {

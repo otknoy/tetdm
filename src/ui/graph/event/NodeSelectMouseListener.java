@@ -1,29 +1,40 @@
 package ui.graph.event;
 
+import ui.toolbox.Toolbox;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.awt.Point;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import javax.swing.JComponent;
+import java.util.List;
+import java.util.ArrayList;
 
 
-public class NodeConnectMouseListener implements MouseListener, MouseMotionListener {
+public class NodeSelectMouseListener implements MouseListener {
 
-  private static final int threshold = 192;
-
+  private final Toolbox toolbox;
   private final GraphInterface graphInterface;
   private List<Node> connectableNodes;
 
 
-  public NodeConnectMouseListener(GraphInterface graphInterface) {
+  public NodeSelectMouseListener(Toolbox toolbox, GraphInterface graphInterface) {
+    this.toolbox = toolbox;
     this.graphInterface = graphInterface;
   }
 
-  
-  @Override public void mouseClicked(MouseEvent e) {}
+  @Override public void mouseClicked(MouseEvent e) {
+    Object o = e.getSource();
+    if (!(o instanceof Node)) {
+      return;
+    }
+
+    Node n = (Node)o;
+    n.selected(!n.isSelected());
+    n.repaint();
+  }
+
   @Override public void mousePressed(MouseEvent e) {}
   @Override public void mouseReleased(MouseEvent e) {}
 
@@ -36,41 +47,37 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
     Node n = (Node)o;
     n.highlighted(true);
 
-    
+
     Node n1 = n;
     List<Node> nodes = this.graphInterface.getNodes();
 
     this.connectableNodes = new ArrayList<Node>();
     for (Node n2 : nodes) {
       if (n1.isConnectableTo(n2)) {
-	this.connectableNodes.add(n2);
+    	n2.highlighted(true);
+    	this.connectableNodes.add(n2);
       }
     }
+
+    this.toolbox.repaint();
+    this.graphInterface.repaint();
   }
 
-  @Override public void mouseExited(MouseEvent e) {}
-
-  @Override public void mouseDragged(MouseEvent e) {
+  @Override public void mouseExited(MouseEvent e) {
     Object o = e.getSource();
     if (!(o instanceof Node)) {
       return;
     }
 
     Node n = (Node)o;
+    n.highlighted(false);
+
     for (Node cn : this.connectableNodes) {
-      if (n.distance(cn) <= this.threshold) {
-	if (n.isConnectedTo(cn)) continue;
-
-	n.connectsTo(cn);
-      } else {
-	if (!n.isConnectedTo(cn)) continue;
-
-	n.disconnectsTo(cn);
-      }
+      cn.highlighted(false);
     }
+    this.connectableNodes = null;
 
+    this.toolbox.repaint();
     this.graphInterface.repaint();
   }
-
-  @Override public void mouseMoved(MouseEvent e) {}
 }
