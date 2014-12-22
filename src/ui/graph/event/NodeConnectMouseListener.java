@@ -1,7 +1,9 @@
 package ui.graph.event;
 
+import ui.Interface;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
+import ui.graph.component.ToolPanelNode;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -14,11 +16,13 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
 
   private static final int threshold = 192;
 
+  private final Interface parent;
   private final GraphInterface graphInterface;
   private List<Node> connectableNodes;
 
 
-  public NodeConnectMouseListener(GraphInterface graphInterface) {
+  public NodeConnectMouseListener(Interface parent, GraphInterface graphInterface) {
+    this.parent = parent;
     this.graphInterface = graphInterface;
   }
 
@@ -70,7 +74,52 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
     }
 
     this.graphInterface.repaint();
+
+    this.changeTools();
   }
 
   @Override public void mouseMoved(MouseEvent e) {}
+
+
+  private boolean changeTools() {
+    List<Node[]> combinations = this.graphInterface.getNodeCombinations();
+    combinations = this.extractSelectedCombinations(combinations);
+    if (combinations.size() <= 0) {
+      return false;
+    }
+
+    if (combinations.size() <= 1) {
+      Node[] c = combinations.get(0);
+
+      int mId  = c[1].getId();
+      int vId  = c[2].getId();
+      int pNum = ((ToolPanelNode)c[3]).getPanelNumber();
+
+      this.parent.setToolsToPanel(pNum, mId, vId);
+    } else {
+      //
+      System.out.println(this.parent);
+    }
+
+    return true;
+  }
+
+  private List<Node[]> extractSelectedCombinations(List<Node[]> combinations) {
+    List<Node[]> selected = new ArrayList<Node[]>();
+    for (Node[] c : combinations) {
+      if (this.checkAllSelected(c)) {
+	selected.add(c);
+      }
+    }
+    return selected;
+  }
+
+  private boolean checkAllSelected(Node[] nodes) {
+    for (Node n : nodes) {
+      if (!n.isSelected()) {
+	return false;
+      }
+    }
+    return true;
+  }
 }

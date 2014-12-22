@@ -52,7 +52,7 @@ public class Interface extends JFrame implements MouseListener {
     this.toolbox = new Toolbox(this);
 
     this.nsmLisneter = new NodeSelectMouseListener(this.toolbox, this.graphInterface);
-    this.ncmListener = new NodeConnectMouseListener(this.graphInterface);
+    this.ncmListener = new NodeConnectMouseListener(this, this.graphInterface);
     this.graphInterface.initialize();
 
     p.add(this.toolbox);

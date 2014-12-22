@@ -76,9 +76,14 @@ public class GraphInterface extends JPanel implements Cloneable {
     return gi;
   }
 
+
   public List<Node> getNodes() { return this.nodeManager.getNodes(); }
   public void addNode(Node n) { this.nodeManager.add(n); }
   public Node removeNode(Node n) { return this.nodeManager.remove(n); }
+
+  public List<Node[]> getNodeCombinations() {
+    return this.nodeManager.getNodeCombinations();
+  }
 
   public StickyManager getStickyManager() { return this.stickyManager; }
 }
