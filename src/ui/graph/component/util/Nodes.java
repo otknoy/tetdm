@@ -63,6 +63,7 @@ public class Nodes {
    * Search same type nodes from node list.
    * @param target node list for searching
    * @param key node
+   * @return same type nodes
    */
   public static List<Node> searchSameTypeNodes(List<Node> nodes, Node key) {
     List<Node> sameTypeNodes = new ArrayList<Node>();
@@ -82,5 +83,17 @@ public class Nodes {
    */
   public static void selectedAll(List<Node> nodes, boolean selected) {
     for (Node n : nodes) { n.selected(selected); }
+  }
+
+  /**
+   * If all nodes are selected, return true
+   * @param target node list
+   * @return All nodes are selected or unselected.
+   */
+  public static boolean checkAllSelected(List<Node> nodes) {
+    for (Node n : nodes) {
+      if (!n.isSelected()) { return false; }
+    }
+    return true;
   }
 }

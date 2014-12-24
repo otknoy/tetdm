@@ -4,9 +4,11 @@ import ui.Interface;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
 import ui.graph.component.ToolPanelNode;
+import ui.graph.component.util.Nodes;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -107,19 +109,10 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
   private List<Node[]> extractSelectedCombinations(List<Node[]> combinations) {
     List<Node[]> selected = new ArrayList<Node[]>();
     for (Node[] c : combinations) {
-      if (this.checkAllSelected(c)) {
+      if (Nodes.checkAllSelected(Arrays.asList(c))) {
 	selected.add(c);
       }
     }
     return selected;
-  }
-
-  private boolean checkAllSelected(Node[] nodes) {
-    for (Node n : nodes) {
-      if (!n.isSelected()) {
-	return false;
-      }
-    }
-    return true;
   }
 }
