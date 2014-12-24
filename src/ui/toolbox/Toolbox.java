@@ -1,7 +1,6 @@
 package ui.toolbox;
 
 import ui.Interface;
-import ui.toolbox.event.NodeMouseListener;
 import ui.graph.component.*;
 import ui.graph.component.util.*;
 import ui.graph.module.*;
@@ -20,55 +19,23 @@ public class Toolbox extends JPanel {
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 250;
 
-  private final Interface parent;
-  private final List<ModuleNode> nodes;
-
 
   public Toolbox(Interface parent) {
-    this.parent = parent;
-    this.nodes = new ArrayList<ModuleNode>();
-
     this.setPreferredSize(new Dimension(Toolbox.WIDTH, Toolbox.HEIGHT));
-    this.setLayout(null);
+    this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
+    List<ModuleData> dataList = new ArrayList<ModuleData>();
+    dataList.addAll(parent.getModuleManager().getMiningModuleDataList());
+    dataList.addAll(parent.getModuleManager().getVisualizationModuleDataList());
+    ToolSelectPanel toolSelectPanel = new ToolSelectPanel(parent, dataList);
 
-    List<ModuleNode> nodes = new ArrayList<ModuleNode>();
-    List<ModuleNode> mNodes = this.createNodes(this.parent.getModuleManager().getMiningModuleDataList());
-    nodes.addAll(mNodes);
-    List<ModuleNode> vNodes = this.createNodes(this.parent.getModuleManager().getVisualizationModuleDataList());
-    nodes.addAll(vNodes);
-
-    NodeMouseListener tml = new NodeMouseListener(this.parent);
-    for (ModuleNode n : nodes) {
-      n.addMouseListener(tml);
-      this.nodes.add(n);
-      this.add(n);
-    }
-
-    Nodes.alignNodes(new Rectangle(      0, 0, WIDTH/2, HEIGHT/2), mNodes);
-    Nodes.alignNodes(new Rectangle(WIDTH/2, 0, WIDTH/2, HEIGHT/2), vNodes);
+    this.add(toolSelectPanel);
   }
-
+  
 
   @Override
   public void paintComponent(Graphics g) {
     g.setColor(new Color(223, 223, 223));
     g.fillRect(0, 0, getWidth(), getHeight());
   }
-
-  private List<ModuleNode> createNodes(List<ModuleData> mdl) {
-    List<ModuleNode> nodes = new ArrayList<ModuleNode>();
-
-    for (ModuleData md : mdl) {
-      if (md.isMiningModule()) {
-	nodes.add(new MiningModuleNode(md));
-      } else if (md.isVisualizationModule()) {
-	nodes.add(new VisualizationModuleNode(md));
-      }
-    }
-
-    return nodes;
-  }
-
-  public List<ModuleNode> getNodes() { return this.nodes; }
 }

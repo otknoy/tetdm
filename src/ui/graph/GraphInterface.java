@@ -39,7 +39,7 @@ public class GraphInterface extends JPanel implements Cloneable {
     this.nodeManager = new NodeManager(this);
     this.stickyManager = new StickyManager(this);
 
-    this.nsmLisneter = new NodeSelectMouseListener(this.parent, this);
+    this.nsmLisneter = new NodeSelectMouseListener(this);
     this.ncmListener = new NodeConnectMouseListener(this.parent, this);
   }
 

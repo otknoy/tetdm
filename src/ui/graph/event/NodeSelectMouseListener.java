@@ -15,13 +15,11 @@ import java.util.ArrayList;
 
 public class NodeSelectMouseListener implements MouseListener {
 
-  private final Interface parent;
   private final GraphInterface graphInterface;
   private List<Node> connectableNodes;
 
 
-  public NodeSelectMouseListener(Interface parent, GraphInterface graphInterface) {
-    this.parent = parent;
+  public NodeSelectMouseListener(GraphInterface graphInterface) {
     this.graphInterface = graphInterface;
   }
 
@@ -65,7 +63,7 @@ public class NodeSelectMouseListener implements MouseListener {
       }
     }
 
-    this.parent.repaint();
+    this.graphInterface.repaint();
   }
 
   @Override public void mouseExited(MouseEvent e) {
@@ -82,6 +80,6 @@ public class NodeSelectMouseListener implements MouseListener {
     }
     this.connectableNodes = null;
 
-    this.parent.repaint();
+    this.graphInterface.repaint();
   }
 }
