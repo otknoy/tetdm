@@ -32,35 +32,34 @@ public class ToolSelectMouseListener implements MouseListener {
   @Override public void mousePressed(MouseEvent e) { }
   @Override public void mouseReleased(MouseEvent e) { }
 
-
   @Override public void mouseEntered(MouseEvent e) {
-   //  Node node = (Node)e.getSource();
-   //  node.highlighted(true);
+    Node node = (Node)e.getSource();
+    node.highlighted(true);
 
-   //  List<Node> nodes = new ArrayList<Node>();
-   //  nodes.addAll(this.parent.getToolbox().getNodes());
-   //  nodes.addAll(this.parent.getNodesFromGraphInterface());
+    List<Node> nodes = new ArrayList<Node>();
+    nodes.addAll(this.toolSelectPanel.getNodes());
+    nodes.addAll(this.parent.getNodesFromGraphInterface());
 
-   //  this.connectableNodes = new ArrayList<Node>();
-   //  for (Node n : nodes) {
-   //    if (node.isConnectableTo(n)) {
-   // 	n.highlighted(true);
-   // 	this.connectableNodes.add(n);
-   //    }
-   // }
+    this.connectableNodes = new ArrayList<Node>();
+    for (Node n : nodes) {
+      if (node.isConnectableTo(n)) {
+	n.highlighted(true);
+	this.connectableNodes.add(n);
+      }
+   }
 
-   //  this.parent.repaint();
+    this.parent.repaint();
   }
 
   @Override public void mouseExited(MouseEvent e) {
-    // Node node = (Node)e.getSource();
-    // node.highlighted(false);
+    Node node = (Node)e.getSource();
+    node.highlighted(false);
 
-    // for (Node n : this.connectableNodes) {
-    //   n.highlighted(false);
-    // }
-    // this.connectableNodes = null;
+    for (Node n : this.connectableNodes) {
+      n.highlighted(false);
+    }
+    this.connectableNodes = null;
 
-    // this.parent.repaint();
+    this.parent.repaint();
   }
 }
