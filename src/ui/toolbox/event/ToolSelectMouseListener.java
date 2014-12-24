@@ -26,7 +26,8 @@ public class ToolSelectMouseListener implements MouseListener {
   @Override
   public void mouseClicked(MouseEvent e) {
     ModuleNode n = (ModuleNode)e.getSource();
-    this.parent.addNodeToGraphInterface(n.clone());
+    ModuleNode cn = n.clone();
+    this.parent.addNodeToGraphInterface(cn);
   }
   
   @Override public void mousePressed(MouseEvent e) { }
