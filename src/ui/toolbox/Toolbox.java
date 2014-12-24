@@ -19,6 +19,8 @@ public class Toolbox extends JPanel {
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 250;
 
+  private final ToolSelectPanel toolSelectPanel;
+
 
   public Toolbox(Interface parent) {
     this.setPreferredSize(new Dimension(Toolbox.WIDTH, Toolbox.HEIGHT));
@@ -27,9 +29,9 @@ public class Toolbox extends JPanel {
     List<ModuleData> dataList = new ArrayList<ModuleData>();
     dataList.addAll(parent.getModuleManager().getMiningModuleDataList());
     dataList.addAll(parent.getModuleManager().getVisualizationModuleDataList());
-    ToolSelectPanel toolSelectPanel = new ToolSelectPanel(parent, dataList);
+    this.toolSelectPanel = new ToolSelectPanel(parent, dataList);
 
-    this.add(toolSelectPanel);
+    this.add(this.toolSelectPanel);
   }
   
 
@@ -38,4 +40,6 @@ public class Toolbox extends JPanel {
     g.setColor(new Color(223, 223, 223));
     g.fillRect(0, 0, getWidth(), getHeight());
   }
+
+  public List<? extends Node> getNodesFromToolSelectPanel() { return this.toolSelectPanel.getNodes(); }
 }
