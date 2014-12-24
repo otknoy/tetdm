@@ -5,6 +5,7 @@ import ui.graph.component.Node;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.List;
+import java.util.ArrayList;
 
 
 public class Nodes {
@@ -56,5 +57,30 @@ public class Nodes {
       nodes.get(i).setLocation((int)x - node.getWidth()/2,
 			       (int)y - node.getHeight()/2);
     }
+  }
+
+  /**
+   * Search same type nodes from node list.
+   * @param target node list for searching
+   * @param key node
+   */
+  public static List<Node> searchSameTypeNodes(List<Node> nodes, Node key) {
+    List<Node> sameTypeNodes = new ArrayList<Node>();
+    for (Node n : nodes) {
+      if (n.getClass() == key.getClass()) {
+	sameTypeNodes.add(n);
+      }
+    }
+    return sameTypeNodes;
+  }
+
+
+  /**
+   * Select all nodes.
+   * @param target node list
+   * @param selected or unselected
+   */
+  public static void selectedAll(List<Node> nodes, boolean selected) {
+    for (Node n : nodes) { n.selected(selected); }
   }
 }

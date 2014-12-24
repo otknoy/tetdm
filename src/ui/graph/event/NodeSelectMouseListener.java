@@ -3,6 +3,7 @@ package ui.graph.event;
 import ui.Interface;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
+import ui.graph.component.util.Nodes;
 
 import java.awt.Point;
 import java.awt.event.MouseListener;
@@ -31,8 +32,13 @@ public class NodeSelectMouseListener implements MouseListener {
     }
 
     Node n = (Node)o;
+    if (!n.isSelected()) {
+      List<Node> nodes = Nodes.searchSameTypeNodes(this.graphInterface.getNodes(), n);
+      Nodes.selectedAll(nodes, false);
+    }
+
     n.selected(!n.isSelected());
-    n.repaint();
+    this.graphInterface.repaint();
   }
 
   @Override public void mousePressed(MouseEvent e) {}
