@@ -5,7 +5,9 @@ import ui.graph.event.NodeSelectMouseListener;
 import ui.graph.event.NodeConnectMouseListener;
 import ui.graph.component.Node;
 import ui.graph.component.PreprocessNode;
+import ui.graph.component.ModuleNode;
 import ui.graph.component.ToolPanelNode;
+import ui.graph.component.event.NodeRemoveListener;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -92,6 +94,10 @@ public class GraphInterface extends JPanel implements Cloneable {
 
     n.addMouseListener(this.ncmListener);
     n.addMouseMotionListener(this.ncmListener);
+
+    if (n instanceof ModuleNode) {
+      ((ModuleNode)n).addRemoveListener(new NodeRemoveListener(this, n));
+    }
 
     this.nodeManager.add(n);
   }
