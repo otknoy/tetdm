@@ -29,7 +29,10 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
   }
 
   
-  @Override public void mouseClicked(MouseEvent e) {}
+  @Override public void mouseClicked(MouseEvent e) {
+    this.changeTools();
+  }
+
   @Override public void mousePressed(MouseEvent e) {}
   @Override public void mouseReleased(MouseEvent e) {}
 
