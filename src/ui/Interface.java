@@ -1,7 +1,5 @@
 package ui;
 
-import ui.graph.event.NodeSelectMouseListener;
-import ui.graph.event.NodeConnectMouseListener;
 import ui.toolbox.Toolbox;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
@@ -27,8 +25,6 @@ public class Interface extends JFrame implements MouseListener {
 
   private final Toolbox toolbox;
   private final GraphInterface graphInterface;
-  private final NodeSelectMouseListener nsmLisneter;
-  private final NodeConnectMouseListener ncmListener;
   
   
   public Interface(ModuleManager moduleManager) {
@@ -51,8 +47,6 @@ public class Interface extends JFrame implements MouseListener {
     this.graphInterface = new GraphInterface(this);
     this.toolbox = new Toolbox(this);
 
-    this.nsmLisneter = new NodeSelectMouseListener(this.toolbox, this.graphInterface);
-    this.ncmListener = new NodeConnectMouseListener(this, this.graphInterface);
     this.graphInterface.initialize();
 
     p.add(this.toolbox);
@@ -76,14 +70,7 @@ public class Interface extends JFrame implements MouseListener {
   public Toolbox getToolbox() { return this.toolbox; }
 
   public List<Node> getNodesFromGraphInterface() { return this.graphInterface.getNodes(); }
-  public void addNodeToGraphInterface(Node n) {
-    n.addMouseListener(this.nsmLisneter);
-
-    n.addMouseListener(this.ncmListener);
-    n.addMouseMotionListener(this.ncmListener);
-
-    this.graphInterface.addNode(n);
-  }
+  public void addNodeToGraphInterface(Node n) { this.graphInterface.addNode(n); }
   public Node removeNodeFromGraphInterface(Node n) { return this.graphInterface.removeNode(n); }
 
 

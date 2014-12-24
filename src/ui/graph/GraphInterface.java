@@ -1,6 +1,8 @@
 package ui.graph;
 
 import ui.Interface;
+import ui.graph.event.NodeSelectMouseListener;
+import ui.graph.event.NodeConnectMouseListener;
 import ui.graph.component.Node;
 import ui.graph.component.PreprocessNode;
 import ui.graph.component.ToolPanelNode;
@@ -24,6 +26,9 @@ public class GraphInterface extends JPanel implements Cloneable {
   private final NodeManager nodeManager;
   private final StickyManager stickyManager;
 
+  private final NodeSelectMouseListener nsmLisneter;
+  private final NodeConnectMouseListener ncmListener;
+
 
   public GraphInterface(Interface parent) {
     this.parent = parent;
@@ -33,6 +38,9 @@ public class GraphInterface extends JPanel implements Cloneable {
 
     this.nodeManager = new NodeManager(this);
     this.stickyManager = new StickyManager(this);
+
+    this.nsmLisneter = new NodeSelectMouseListener(this.parent, this);
+    this.ncmListener = new NodeConnectMouseListener(this.parent, this);
   }
 
 
@@ -78,7 +86,16 @@ public class GraphInterface extends JPanel implements Cloneable {
 
 
   public List<Node> getNodes() { return this.nodeManager.getNodes(); }
-  public void addNode(Node n) { this.nodeManager.add(n); }
+  
+  public void addNode(Node n) {
+    n.addMouseListener(this.nsmLisneter);
+
+    n.addMouseListener(this.ncmListener);
+    n.addMouseMotionListener(this.ncmListener);
+
+    this.nodeManager.add(n);
+  }
+  
   public Node removeNode(Node n) { return this.nodeManager.remove(n); }
 
   public List<Node[]> getNodeCombinations() {
