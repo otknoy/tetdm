@@ -30,6 +30,26 @@ public class Nodes {
   }
   
   /**
+   * Align nodes
+   * @param region where nodes aligned
+   * @param aligned nodes
+   */
+  public static void alignNodes(Point base, int columnNum, List<? extends Node> nodes) {
+    final int mergin = 2;
+
+    for (int i = 0; i < nodes.size(); i++) {
+      Node n = nodes.get(i);
+
+      int wi = i % columnNum;
+      int hi = i / columnNum;
+
+      int x = base.x + mergin + wi * (n.getWidth()  + mergin);
+      int y = base.y + mergin + hi * (n.getHeight() + mergin);
+      n.setLocation(x, y);
+    }
+  }
+
+  /**
    * Align nodes to arch-shaped
    * @param base node
    * @param aligned nodes
