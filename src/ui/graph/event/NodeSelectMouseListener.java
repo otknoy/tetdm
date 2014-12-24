@@ -24,12 +24,7 @@ public class NodeSelectMouseListener implements MouseListener {
   }
 
   @Override public void mouseClicked(MouseEvent e) {
-    Object o = e.getSource();
-    if (!(o instanceof Node)) {
-      return;
-    }
-
-    Node n = (Node)o;
+    Node n = (Node)e.getSource();
     if (!n.isSelected()) {
       List<Node> nodes = Nodes.searchSameTypeNodes(this.graphInterface.getNodes(), n);
       Nodes.selectedAll(nodes, false);
@@ -43,14 +38,8 @@ public class NodeSelectMouseListener implements MouseListener {
   @Override public void mouseReleased(MouseEvent e) {}
 
   @Override public void mouseEntered(MouseEvent e) {
-    Object o = e.getSource();
-    if (!(o instanceof Node)) {
-      return;
-    }
-
-    Node n = (Node)o;
+    Node n = (Node)e.getSource();
     n.highlighted(true);
-
 
     Node n1 = n;
     List<Node> nodes = this.graphInterface.getNodes();
@@ -67,12 +56,7 @@ public class NodeSelectMouseListener implements MouseListener {
   }
 
   @Override public void mouseExited(MouseEvent e) {
-    Object o = e.getSource();
-    if (!(o instanceof Node)) {
-      return;
-    }
-
-    Node n = (Node)o;
+    Node n = (Node)e.getSource();
     n.highlighted(false);
 
     for (Node cn : this.connectableNodes) {
