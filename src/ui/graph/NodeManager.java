@@ -35,16 +35,6 @@ public class NodeManager {
     n.addMouseListener(mddl);
     n.addMouseMotionListener(mddl);
 
-    // // select and highlight event
-    // System.out.println(this.graphInterface.getParent());
-    // NodeSelectMouseListener nsml = new NodeSelectMouseListener((Interface)this.graphInterface.getParent(), n);
-    // n.addMouseListener(nsml);
-
-    // // connect event
-    // NodeConnectMouseListener ncml = new NodeConnectMouseListener((Interface)this.graphInterface.getParent(), n);
-    // n.addMouseListener(ncml);
-    // n.addMouseMotionListener(ncml);
-
     this.graphInterface.repaint();
   }
 
