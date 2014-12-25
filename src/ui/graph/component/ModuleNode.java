@@ -19,7 +19,7 @@ public abstract class ModuleNode extends Node {
     super(moduleData.getName(), moduleData.getId(), bgColor, location);
     this.moduleData = moduleData;
 
-    this.removeButton = new JButton("test");
+    this.removeButton = new JButton("x");
     this.add(this.removeButton);
   }
 
