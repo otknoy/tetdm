@@ -8,11 +8,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.BasicStroke;
-import javax.swing.JComponent;
+import javax.swing.JPanel;
 import java.lang.Cloneable;
 
 
-public abstract class Node extends JComponent implements Cloneable {
+public abstract class Node extends JPanel implements Cloneable {
 
   private String name;
   private int id;
