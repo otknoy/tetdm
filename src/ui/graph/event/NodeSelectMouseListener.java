@@ -56,7 +56,6 @@ public class NodeSelectMouseListener implements MouseListener {
     // highlight connectable nodes on toolbox
     for (Node n2 : this.parent.getToolbox().getNodesFromToolSelectPanel()) {
       if (n1.isConnectableTo(n2)) {
-	System.out.println(n2);
 	n2.highlighted(true);
       }
     }
