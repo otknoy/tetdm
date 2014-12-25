@@ -18,15 +18,13 @@ import javax.swing.JPanel;
 public class ToolSelectPanel extends JPanel {
 
   private final Interface parent;
-  private final List<ModuleData> moduleDataList;
   private final List<ModuleNode> nodes;
   private final ToolSelectMouseListener tsmListener;
   
 
   public ToolSelectPanel(Interface parent, List<ModuleData> moduleDataList) {
     this.parent = parent;
-    this.moduleDataList = moduleDataList;
-    this.nodes = this.createNodes(this.moduleDataList);
+    this.nodes = this.createNodes(moduleDataList);
 
     this.setLayout(null);
 
