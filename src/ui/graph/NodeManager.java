@@ -39,6 +39,13 @@ public class NodeManager {
   }
 
   public Node remove(Node n) {
+    for (Node pn : n.getPrevNodes()) {
+      pn.removeNextNode(n);
+    }
+    for (Node nn : n.getNextNodes()) {
+      nn.removePrevNode(n);
+    }
+
     this.graphInterface.remove(n);
     this.nodes.remove(n);
 
