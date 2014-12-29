@@ -92,7 +92,7 @@ public class Interface extends JFrame implements MouseListener {
       JButton b = (JButton)src;
       String text = b.getText();
       if (text == "Add sticky") {
-	this.graphInterface.getStickyManager().add();
+	this.graphInterface.addSticky();
 	this.graphInterface.repaint();
       } else if (text == "Save history") {
 	JFrame p = new JFrame();

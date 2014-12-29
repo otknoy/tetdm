@@ -7,6 +7,7 @@ import ui.graph.component.Node;
 import ui.graph.component.PreprocessNode;
 import ui.graph.component.ModuleNode;
 import ui.graph.component.ToolPanelNode;
+import ui.graph.component.Sticky;
 import ui.graph.component.event.NodeRemoveListener;
 
 import java.util.List;
@@ -79,9 +80,14 @@ public class GraphInterface extends JPanel implements Cloneable {
     GraphInterface gi = new GraphInterface(this.parent);
 
     // clone nodes
+    for (Node n: this.getNodes()) {
+      gi.addNode(n.clone());
+    }
 
     // clone stickies
-
+    for (Sticky s : this.getStickies()) {
+      gi.addSticky(s.clone());
+    }
 
     return gi;
   }
@@ -108,5 +114,8 @@ public class GraphInterface extends JPanel implements Cloneable {
     return this.nodeManager.getNodeCombinations();
   }
 
-  public StickyManager getStickyManager() { return this.stickyManager; }
+  public List<Sticky> getStickies() { return this.stickyManager.getStickies(); }
+  public void addSticky() { this.stickyManager.add(); }
+  public void addSticky(Sticky s) { this.stickyManager.add(s); }
+  public Sticky removeSticky(Sticky s) { return this.stickyManager.remove(s); }
 }
