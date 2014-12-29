@@ -56,9 +56,15 @@ public class Interface extends JFrame implements MouseListener {
 
     // manipulation panel
     JPanel mp = new JPanel();
+    // add sticky
     JButton addStickyButton = new JButton("Add sticky");
     addStickyButton.addMouseListener(this);
     mp.add(addStickyButton);
+    // save history (test)
+    JButton saveHistoryButton = new JButton("Save history");
+    saveHistoryButton.addMouseListener(this);
+    mp.add(saveHistoryButton);
+
     this.add(mp, BorderLayout.SOUTH);
 
 
@@ -88,6 +94,10 @@ public class Interface extends JFrame implements MouseListener {
       if (text == "Add sticky") {
 	this.graphInterface.getStickyManager().add();
 	this.graphInterface.repaint();
+      } else if (text == "Save history") {
+	JFrame p = new JFrame();
+	p.add(this.graphInterface.clone());
+	p.setVisible(true);
       }
     }
   }
