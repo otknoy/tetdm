@@ -96,7 +96,9 @@ public class Interface extends JFrame implements MouseListener {
 	this.graphInterface.repaint();
       } else if (text == "Save history") {
 	JFrame p = new JFrame();
+	p.setPreferredSize(new Dimension(800, 800));
 	p.add(this.graphInterface.clone());
+	p.pack();
 	p.setVisible(true);
       }
     }
