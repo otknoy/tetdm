@@ -28,7 +28,7 @@ public class NodeSelectMouseListener implements MouseListener {
   @Override public void mouseClicked(MouseEvent e) {
     Node n = (Node)e.getSource();
     if (!n.isSelected()) {
-      List<Node> nodes = Nodes.searchSameTypeNodes(this.graphInterface.getNodes(), n);
+      List<Node> nodes = Nodes.selectSameTypeNodes(this.graphInterface.getNodes(), n);
       Nodes.selectedAll(nodes, false);
     }
 

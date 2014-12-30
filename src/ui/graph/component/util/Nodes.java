@@ -81,12 +81,12 @@ public class Nodes {
 
 
   /**
-   * Search same type nodes from node list.
+   * Select same type nodes from node list.
    * @param target node list for searching
    * @param key node
    * @return same type nodes
    */
-  public static List<Node> searchSameTypeNodes(List<Node> nodes, Node key) {
+  public static List<Node> selectSameTypeNodes(List<Node> nodes, Node key) {
     List<Node> sameTypeNodes = new ArrayList<Node>();
     for (Node n : nodes) {
       if (n.getClass() == key.getClass()) {
