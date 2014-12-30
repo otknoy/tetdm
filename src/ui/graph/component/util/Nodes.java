@@ -79,6 +79,7 @@ public class Nodes {
     }
   }
 
+
   /**
    * Search same type nodes from node list.
    * @param target node list for searching
@@ -115,5 +116,22 @@ public class Nodes {
       if (!n.isSelected()) { return false; }
     }
     return true;
+  }
+
+
+  /**
+   * Select connectable nodes from specified node
+   * @param target node
+   * @param target node list
+   * @return nodes which are connectable to n1
+   */
+  public static List<Node> selectConnectableNodes(Node n1, List<Node> nodes) {
+    List<Node> connectableNodes = new ArrayList<Node>();
+    for (Node n2 : nodes) {
+      if (n1.isConnectableTo(n2)) {
+	connectableNodes.add(n2);
+      }
+    }
+    return connectableNodes;
   }
 }

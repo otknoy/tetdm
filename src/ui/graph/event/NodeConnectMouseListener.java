@@ -45,16 +45,7 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
     Node n = (Node)o;
     n.highlighted(true);
 
-    
-    Node n1 = n;
-    List<Node> nodes = this.graphInterface.getNodes();
-
-    this.connectableNodes = new ArrayList<Node>();
-    for (Node n2 : nodes) {
-      if (n1.isConnectableTo(n2)) {
-	this.connectableNodes.add(n2);
-      }
-    }
+    this.connectableNodes = Nodes.selectConnectableNodes(n, this.graphInterface.getNodes());
   }
 
   @Override public void mouseExited(MouseEvent e) {}
