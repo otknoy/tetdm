@@ -134,4 +134,36 @@ public class Nodes {
     }
     return connectableNodes;
   }
+
+  /**
+   * Connect or disconnect nodes by distance
+   * @param target node list
+   * @param close distance threshold
+   */
+  public static void connect(List<Node> nodes, final int threshold) {
+    final int n = nodes.size();
+    for (int i = 0; i < n-1; i++) {
+      Nodes.connect(nodes.get(i), nodes.subList(i+1, n), threshold);
+    }
+  }
+
+  /**
+   * Connect or disconnect nodes to specified node by distance
+   * @param specified node
+   * @param target node list
+   * @param close distance threshold
+   */
+  public static void connect(Node n1, List<Node> nodes, final int threshold) {
+    for (Node n2 : nodes) {
+      if (n1.distance(n2) <= threshold) {
+	if (n1.isConnectedTo(n2)) continue;
+
+	n1.connectsTo(n2);
+      } else {
+	if (!n1.isConnectedTo(n2)) continue;
+
+	n1.disconnectsTo(n2);
+      }
+    }
+  }
 }

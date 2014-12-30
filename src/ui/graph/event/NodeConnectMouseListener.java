@@ -57,17 +57,7 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
     }
 
     Node n = (Node)o;
-    for (Node cn : this.connectableNodes) {
-      if (n.distance(cn) <= this.threshold) {
-	if (n.isConnectedTo(cn)) continue;
-
-	n.connectsTo(cn);
-      } else {
-	if (!n.isConnectedTo(cn)) continue;
-
-	n.disconnectsTo(cn);
-      }
-    }
+    Nodes.connect(n, this.connectableNodes, this.threshold);
 
     this.graphInterface.repaint();
 
