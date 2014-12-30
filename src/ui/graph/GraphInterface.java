@@ -9,6 +9,7 @@ import ui.graph.component.ModuleNode;
 import ui.graph.component.ToolPanelNode;
 import ui.graph.component.Sticky;
 import ui.graph.component.event.NodeRemoveListener;
+import ui.graph.component.util.Nodes;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -83,6 +84,9 @@ public class GraphInterface extends JPanel implements Cloneable {
     for (Node n: this.getNodes()) {
       gi.addNode(n.clone());
     }
+    // reconnect nodes
+    final int threshold = 192;
+    Nodes.connect(gi.getNodes(), threshold);
 
     // clone stickies
     for (Sticky s : this.getStickies()) {

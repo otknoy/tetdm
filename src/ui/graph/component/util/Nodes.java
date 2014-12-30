@@ -141,9 +141,9 @@ public class Nodes {
    * @param close distance threshold
    */
   public static void connect(List<Node> nodes, final int threshold) {
-    final int n = nodes.size();
-    for (int i = 0; i < n-1; i++) {
-      Nodes.connect(nodes.get(i), nodes.subList(i+1, n), threshold);
+    for (Node n : nodes) {
+      List<Node> connectableNodes = Nodes.selectConnectableNodes(n, nodes);
+      Nodes.connect(n, connectableNodes, threshold);
     }
   }
 
