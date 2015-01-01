@@ -12,7 +12,7 @@ public class History extends Node {
     super(prev);
     this.state = state;
   }
-  
+
 
   public State getState() { return this.state; }
 }

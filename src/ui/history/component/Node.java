@@ -1,7 +1,5 @@
 package ui.history.component;
 
-import ui.history.data.State;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.Color;
@@ -12,7 +10,7 @@ import java.awt.BasicStroke;
 import javax.swing.JPanel;
 
 
-public abstract class Node extends JPanel {
+public class Node extends JPanel {
 
   public static final int WIDTH  = 64;
   public static final int HEIGHT = 48;
@@ -48,7 +46,7 @@ public abstract class Node extends JPanel {
 
   public boolean isSelected() { return this.isSelected; }
   public void selected(boolean selected) { this.isSelected = selected; }
-  public void addToNextList(Node n) { this.nextList.add(n); }
+  public void addToNext(Node n) { this.nextList.add(n); }
   
 
   /**
