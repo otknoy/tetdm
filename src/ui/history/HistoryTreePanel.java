@@ -35,7 +35,7 @@ public class HistoryTreePanel extends JPanel implements MouseListener {
     g.fillRect(0, 0, getWidth(), getHeight());
 
     // draw edges
-    // this.root.drawEdge(g);
+    this.root.drawEdgesToNextNodes(g);
   }
   
   
