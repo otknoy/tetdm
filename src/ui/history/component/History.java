@@ -13,6 +13,11 @@ public class History extends Node {
     this.state = state;
   }
 
+  public History(History prev) {
+    this(null, prev);
+  }
+
 
   public State getState() { return this.state; }
+  public State setState(State s) { this.state = s; }
 }
