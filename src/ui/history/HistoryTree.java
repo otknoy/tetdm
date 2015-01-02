@@ -13,11 +13,10 @@ public class HistoryTree {
   public HistoryTree(HistoryTreePanel parent, History root) {
     this.parent = parent;
     this.root = root;
-    this.current = this.root;
-  }
 
-  public HistoryTree(HistoryTreePanel parent) {
-    this(parent, null);
+    this.current = this.root;
+    this.parent.add(this.current);
+    this.parent.repaint();
   }
 
 

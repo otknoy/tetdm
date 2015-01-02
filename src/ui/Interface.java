@@ -87,6 +87,7 @@ public class Interface extends JFrame implements MouseListener {
   public void addNodeToGraphInterface(Node n) { this.graphInterface.addNode(n); }
   public Node removeNodeFromGraphInterface(Node n) { return this.graphInterface.removeNode(n); }
 
+  public GraphInterface cloneGraphInterface() { return this.graphInterface.clone(); }
 
   public void setToolsToPanel(int panelIndex, int miningModuleID, int visualizationModuleID) {
     this.moduleManager.setModulesToPanel(panelIndex, miningModuleID, visualizationModuleID);

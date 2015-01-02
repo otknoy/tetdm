@@ -3,6 +3,7 @@ package ui.history;
 import ui.Interface;
 import ui.graph.GraphInterface;
 import ui.history.component.History;
+import ui.history.data.State;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -21,7 +22,10 @@ public class HistoryTreePanel extends JPanel {
 
   public HistoryTreePanel(Interface parent) {
     this.parent = parent;
-    this.historyTree = new HistoryTree(this, );
+
+    State s = new State(this.parent.cloneGraphInterface(), State.RATE_NORMAL);
+    History root = new History(s, null);
+    this.historyTree = new HistoryTree(this, root);
     
     this.setLayout(null);
   }
@@ -34,4 +38,6 @@ public class HistoryTreePanel extends JPanel {
     // draw edges
     // this.root.drawEdgesToNextNodes(g);
   }
+
+  public void addHistory(History h) { this.historyTree.addHistory(h); }
 }
