@@ -21,6 +21,7 @@ public class HistoryTree {
   }
 
 
+  public History getRoot() { return this.root; }
   public History getCurrent() { return this.current; }
 
   public void changeCurrent(History h) {
