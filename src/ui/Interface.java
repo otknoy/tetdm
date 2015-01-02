@@ -3,7 +3,7 @@ package ui;
 import ui.toolbox.Toolbox;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
-import ui.history.HistoryTree;
+import ui.history.HistoryTreePanel;
 import ui.graph.module.ModuleManager;
 
 import java.awt.*;
@@ -66,9 +66,17 @@ public class Interface extends JFrame implements MouseListener {
     mp.add(saveHistoryButton);
 
     this.add(mp, BorderLayout.SOUTH);
-
-
     this.pack();
+
+
+    // history tree frame
+    JFrame f = new JFrame("History tree");
+    f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    HistoryTreePanel htPanel = new HistoryTreePanel(this);
+    htPanel.setPreferredSize(new Dimension(800, 250));
+    f.add(htPanel);
+    f.pack();
+    f.setVisible(true);
   }
 
 
