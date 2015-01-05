@@ -4,6 +4,7 @@ import ui.toolbox.Toolbox;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
 import ui.history.HistoryTreePanel;
+import ui.history.component.History;
 import ui.graph.module.ModuleManager;
 
 import java.awt.*;
@@ -25,6 +26,7 @@ public class Interface extends JFrame implements MouseListener {
 
   private final Toolbox toolbox;
   private final GraphInterface graphInterface;
+  private final HistoryTreePanel historyTreePanel;
   
   
   public Interface(ModuleManager moduleManager) {
@@ -72,9 +74,9 @@ public class Interface extends JFrame implements MouseListener {
     // history tree frame
     JFrame f = new JFrame("History tree");
     f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-    HistoryTreePanel htPanel = new HistoryTreePanel(this);
-    htPanel.setPreferredSize(new Dimension(800, 250));
-    f.add(htPanel);
+    this.historyTreePanel = new HistoryTreePanel(this);
+    this.historyTreePanel.setPreferredSize(new Dimension(800, 250));
+    f.add(this.historyTreePanel);
     f.pack();
     f.setVisible(true);
   }
@@ -104,11 +106,14 @@ public class Interface extends JFrame implements MouseListener {
 	this.graphInterface.addSticky();
 	this.graphInterface.repaint();
       } else if (text == "Save history") {
-	JFrame p = new JFrame();
-	p.setPreferredSize(new Dimension(800, 800));
-	p.add(this.graphInterface.clone());
-	p.pack();
-	p.setVisible(true);
+	History h = new History(this.graphInterface.clone(), History.RATE_NORMAL);
+	this.historyTreePanel.addHistory(h);
+
+	// JFrame p = new JFrame();
+	// p.setPreferredSize(new Dimension(800, 800));
+	// p.add(this.graphInterface.clone());
+	// p.pack();
+	// p.setVisible(true);
       }
     }
   }

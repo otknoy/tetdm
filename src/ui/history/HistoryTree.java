@@ -25,14 +25,10 @@ public class HistoryTree {
 
   public void changeCurrent(History h) {
     this.current = h;
-    this.parent.repaint();
   }
 
   public void addHistory(History h) {
     current.addToNext(h);
     current = h;
-
-    this.parent.add(h);
-    this.parent.repaint();
   }
 }
