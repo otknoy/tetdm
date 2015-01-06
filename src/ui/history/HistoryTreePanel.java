@@ -8,11 +8,13 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.ArrayList;
 
 
-public class HistoryTreePanel extends JPanel {
+public class HistoryTreePanel extends JPanel implements MouseListener {
 
   static final String NAME = "History Tree";
 
@@ -25,6 +27,7 @@ public class HistoryTreePanel extends JPanel {
     this.parent = parent;
 
     History root = new History(this.parent.cloneGraphInterface(), History.RATE_NORMAL);
+    root.addMouseListener(this);
     this.historyTree = new HistoryTree(this, root);
     
     this.setLayout(null);
@@ -40,7 +43,22 @@ public class HistoryTreePanel extends JPanel {
     this.historyTree.getRoot().drawEdgesToNext(g);
   }
 
+
+  @Override public void mouseClicked(MouseEvent e) {
+    History h = (History)e.getSource();
+    this.historyTree.changeCurrent(h);
+
+    this.repaint();
+  }
+
+  @Override public void mousePressed(MouseEvent e) { }
+  @Override public void mouseReleased(MouseEvent e) { }
+  @Override public void mouseEntered(MouseEvent e) { }
+  @Override public void mouseExited(MouseEvent e) { }
+
+
   public void addHistory(History h) {
+    h.addMouseListener(this);
     this.historyTree.addHistory(h);
     this.add(h);
 

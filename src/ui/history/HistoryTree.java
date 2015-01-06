@@ -24,11 +24,13 @@ public class HistoryTree {
   public History getCurrent() { return this.current; }
 
   public void changeCurrent(History h) {
+    this.current.selected(false);
     this.current = h;
+    this.current.selected(true);
   }
 
   public void addHistory(History h) {
-    current.addToNext(h);
-    current = h;
+    this.current.addToNext(h);
+    this.changeCurrent(h);
   }
 }
