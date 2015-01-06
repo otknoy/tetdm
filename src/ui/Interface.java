@@ -56,21 +56,6 @@ public class Interface extends JFrame implements MouseListener {
     this.add(p, BorderLayout.CENTER);
 
 
-    // manipulation panel
-    JPanel mp = new JPanel();
-    // add sticky
-    JButton addStickyButton = new JButton("Add sticky");
-    addStickyButton.addMouseListener(this);
-    mp.add(addStickyButton);
-    // save history (test)
-    JButton saveHistoryButton = new JButton("Save history");
-    saveHistoryButton.addMouseListener(this);
-    mp.add(saveHistoryButton);
-
-    this.add(mp, BorderLayout.SOUTH);
-    this.pack();
-
-
     // history tree frame
     JFrame f = new JFrame("History tree");
     f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -79,6 +64,20 @@ public class Interface extends JFrame implements MouseListener {
     f.add(this.historyTreePanel);
     f.pack();
     f.setVisible(true);
+
+
+    // manipulation panel
+    JPanel mp = new JPanel();
+    // add sticky
+    JButton addStickyButton = new JButton("Add sticky");
+    addStickyButton.addMouseListener(this);
+    mp.add(addStickyButton);
+    // Rating buttons for saving history
+    RatingButtonPanel ratingButtonPanel = new RatingButtonPanel(this, this.historyTreePanel);
+    mp.add(ratingButtonPanel);
+
+    this.add(mp, BorderLayout.SOUTH);
+    this.pack();
   }
 
 
@@ -105,15 +104,6 @@ public class Interface extends JFrame implements MouseListener {
       if (text == "Add sticky") {
 	this.graphInterface.addSticky();
 	this.graphInterface.repaint();
-      } else if (text == "Save history") {
-	History h = new History(this.graphInterface.clone(), History.RATE_NORMAL);
-	this.historyTreePanel.addHistory(h);
-
-	// JFrame p = new JFrame();
-	// p.setPreferredSize(new Dimension(800, 800));
-	// p.add(this.graphInterface.clone());
-	// p.pack();
-	// p.setVisible(true);
       }
     }
   }
