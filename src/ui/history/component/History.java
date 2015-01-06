@@ -58,8 +58,8 @@ public class History extends JPanel {
   public List<History> getNext() { return this.next; }
   public void addToNext(History n) { this.next.add(n); }
 
-  // public GraphInterface getGraphInterface() { return this.gi; }
-  // public int getRate() { return this.rate; }
+  public GraphInterface getGraphInterface() { return this.gi; }
+  public int getRate() { return this.rate; }
  
 
   /**
