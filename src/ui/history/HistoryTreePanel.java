@@ -48,6 +48,8 @@ public class HistoryTreePanel extends JPanel implements MouseListener {
     History h = (History)e.getSource();
     this.historyTree.changeCurrent(h);
 
+    // replace graph interface based on selected history
+
     this.repaint();
   }
 
