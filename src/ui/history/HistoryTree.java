@@ -15,6 +15,7 @@ public class HistoryTree {
     this.root = root;
 
     this.current = this.root;
+    this.current.selected(true);
     this.parent.add(this.current);
     this.parent.repaint();
   }
