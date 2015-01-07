@@ -10,6 +10,10 @@ import java.awt.image.BufferedImage;
 
 public class ScreenCapture {
 
+  /**
+   * Get full screen capture image
+   * @return full screen capture image
+   */
   public static BufferedImage getImage() throws AWTException {
     GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
     DisplayMode displayMode = env.getDefaultScreenDevice().getDisplayMode();
@@ -22,6 +26,13 @@ public class ScreenCapture {
     return screenCapture;
   }
 
+  /**
+   * Resize Bufferd Image
+   * @param resize target image
+   * @param target width
+   * @param target height
+   * @return resized image
+   */
   public static BufferedImage resize(BufferedImage img, int width, int height) {
     BufferedImage resized = new BufferedImage(width, height, img.getType());
     Graphics2D g2 = resized.createGraphics();
