@@ -1,5 +1,6 @@
 package ui.history.component;
 
+import ui.util.ScreenCapture;
 import ui.graph.GraphInterface;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.BasicStroke;
 import javax.swing.JPanel;
+import java.awt.AWTException;
+import java.awt.image.BufferedImage;
 
 
 public class History extends JPanel {
@@ -22,6 +25,7 @@ public class History extends JPanel {
 
   private GraphInterface gi;
   private int rate;
+  private BufferedImage screenCapture;
 
   public static final int RATE_BAD    = 0;
   public static final int RATE_NORMAL = 1;
@@ -34,11 +38,22 @@ public class History extends JPanel {
 
     this.next = new ArrayList<History>();
     this.setSize(History.WIDTH, History.HEIGHT);
+
+    // save screen capture
+    try {
+      this.screenCapture = ScreenCapture.getImage();
+      this.screenCapture = ScreenCapture.resize(this.screenCapture, History.WIDTH, History.HEIGHT);
+    } catch (AWTException e) {
+      e.printStackTrace();
+    }
   }
 
 
   @Override public void paintComponent(Graphics g) {
     Graphics2D g2 = (Graphics2D)g;
+
+    // draw screen capture
+    g.drawImage(this.screenCapture, 0, 0, this);
 
     // border
     g2.setColor(Color.black);
