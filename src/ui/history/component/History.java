@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.BasicStroke;
 import javax.swing.JPanel;
+import javax.swing.JToolTip;
 import java.awt.AWTException;
 import java.awt.image.BufferedImage;
 
@@ -38,14 +40,19 @@ public class History extends JPanel {
 
     this.next = new ArrayList<History>();
     this.setSize(History.WIDTH, History.HEIGHT);
+    this.setToolTipText("");
 
     // save screen capture
     try {
       this.screenCapture = ScreenCapture.getImage();
-      this.screenCapture = ScreenCapture.resize(this.screenCapture, History.WIDTH, History.HEIGHT);
     } catch (AWTException e) {
       e.printStackTrace();
     }
+  }
+
+
+  @Override public JToolTip createToolTip() {
+    return new ToolTip(this.screenCapture);
   }
 
 
@@ -53,7 +60,8 @@ public class History extends JPanel {
     Graphics2D g2 = (Graphics2D)g;
 
     // draw screen capture
-    g.drawImage(this.screenCapture, 0, 0, this);
+    BufferedImage resized = ScreenCapture.resize(this.screenCapture, History.WIDTH, History.HEIGHT);
+    g.drawImage(resized, 0, 0, this);
 
     // border
     g2.setColor(Color.black);
