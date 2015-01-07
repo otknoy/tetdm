@@ -4,6 +4,7 @@ import ui.Interface;
 import ui.graph.GraphInterface;
 import ui.history.HistoryTreePanel;
 import ui.history.component.History;
+import ui.history.data.State;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -47,15 +48,16 @@ public class RatingButtonPanel extends JPanel implements MouseListener {
   public void mouseClicked(MouseEvent e) {
     JButton b = (JButton)e.getSource();
 
+    State s = null;
     GraphInterface gi = this.parent.cloneGraphInterface();
-    History h = null;
     if (b == this.goodButton) {
-      h = new History(gi, History.RATE_GOOD);
+      s = new State(gi, State.RATE_GOOD);
     } else if (b == this.badButton) {
-      h = new History(gi, History.RATE_BAD);
+      s = new State(gi, State.RATE_BAD);
     } else {
-      h = new History(gi, History.RATE_NORMAL);
+      s = new State(gi, State.RATE_NORMAL);
     }
+    History h = new History(s);
 
     this.historyTreePanel.addHistory(h);
   }

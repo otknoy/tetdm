@@ -1,6 +1,6 @@
 package ui.history.component;
 
-import ui.util.ScreenCapture;
+import ui.history.data.State;
 import ui.graph.GraphInterface;
 
 import java.util.List;
@@ -25,34 +25,24 @@ public class History extends JPanel {
   private List<History> next;
   private boolean isSelected;
 
-  private GraphInterface gi;
-  private int rate;
-  private BufferedImage screenCapture;
-
-  public static final int RATE_BAD    = 0;
-  public static final int RATE_NORMAL = 1;
-  public static final int RATE_GOOD   = 2;
+  private State state;
 
 
-  public History(GraphInterface gi, int rate) {
-    this.gi = gi;
-    this.rate = rate;
+  public History(State state) {
+    this.state = state;
 
     this.next = new ArrayList<History>();
     this.setSize(History.WIDTH, History.HEIGHT);
     this.setToolTipText("");
-
-    // save screen capture
-    try {
-      this.screenCapture = ScreenCapture.getImage();
-    } catch (AWTException e) {
-      e.printStackTrace();
-    }
   }
 
+  public History(GraphInterface gi, int rate, BufferedImage img) {
+    this(new State(gi, rate, img));
+  }
 
+  
   @Override public JToolTip createToolTip() {
-    return new ToolTip(this.screenCapture);
+    return new ToolTip(this.state.getImage());
   }
 
 
@@ -60,8 +50,7 @@ public class History extends JPanel {
     Graphics2D g2 = (Graphics2D)g;
 
     // draw screen capture
-    BufferedImage resized = ScreenCapture.resize(this.screenCapture, History.WIDTH, History.HEIGHT);
-    g.drawImage(resized, 0, 0, this);
+    g.drawImage(this.state.getThumbnail(), 0, 0, this);
 
     // border
     g2.setColor(Color.black);
@@ -81,8 +70,8 @@ public class History extends JPanel {
   public List<History> getNext() { return this.next; }
   public void addToNext(History n) { this.next.add(n); }
 
-  public GraphInterface getGraphInterface() { return this.gi; }
-  public int getRate() { return this.rate; }
+  public GraphInterface getGraphInterface() { return this.state.getGraphInterface(); }
+  public int getRate() { return this.state.getRate(); }
  
 
   /**

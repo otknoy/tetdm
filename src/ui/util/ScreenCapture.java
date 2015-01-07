@@ -14,15 +14,20 @@ public class ScreenCapture {
    * Get full screen capture image
    * @return full screen capture image
    */
-  public static BufferedImage getImage() throws AWTException {
+  public static BufferedImage getImage(){
     GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
     DisplayMode displayMode = env.getDefaultScreenDevice().getDisplayMode();
     int width  = displayMode.getWidth();
     int height = displayMode.getHeight();
 
-    Robot r = new Robot();
-    BufferedImage screenCapture = r.createScreenCapture(new Rectangle(width, height));
+    Robot r = null;
+    try {
+      r = new Robot();
+    } catch (AWTException e) {
+      e.printStackTrace();
+    }
 
+    BufferedImage screenCapture = r.createScreenCapture(new Rectangle(width, height));
     return screenCapture;
   }
 

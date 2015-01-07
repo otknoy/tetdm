@@ -3,6 +3,7 @@ package ui.history;
 import ui.Interface;
 import ui.graph.GraphInterface;
 import ui.history.component.History;
+import ui.history.data.State;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -26,7 +27,8 @@ public class HistoryTreePanel extends JPanel implements MouseListener {
   public HistoryTreePanel(Interface parent) {
     this.parent = parent;
 
-    History root = new History(this.parent.cloneGraphInterface(), History.RATE_NORMAL);
+    State s = new State(this.parent.cloneGraphInterface(), State.RATE_NORMAL);
+    History root = new History(s);
     root.addMouseListener(this);
     this.historyTree = new HistoryTree(this, root);
     
