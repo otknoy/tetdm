@@ -24,11 +24,12 @@ public class Interface extends JFrame implements MouseListener {
 
   private final ModuleManager moduleManager;
 
+  private final JPanel mainPanel;
   private final Toolbox toolbox;
-  private final GraphInterface graphInterface;
+  private GraphInterface graphInterface;
   private final HistoryTreePanel historyTreePanel;
-  
-  
+
+
   public Interface(ModuleManager moduleManager) {
     this.moduleManager = moduleManager;
 
@@ -43,17 +44,17 @@ public class Interface extends JFrame implements MouseListener {
 
 
     // toolbox and graph interface
-    JPanel p = new JPanel();
-    p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
+    this.mainPanel = new JPanel();
+    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
     this.graphInterface = new GraphInterface(this);
     this.toolbox = new Toolbox(this);
 
     this.graphInterface.initialize();
 
-    p.add(this.toolbox);
-    p.add(this.graphInterface);
-    this.add(p, BorderLayout.CENTER);
+    mainPanel.add(this.toolbox);
+    mainPanel.add(this.graphInterface);
+    this.add(mainPanel, BorderLayout.CENTER);
 
 
     // history tree frame
@@ -89,6 +90,18 @@ public class Interface extends JFrame implements MouseListener {
   public Node removeNodeFromGraphInterface(Node n) { return this.graphInterface.removeNode(n); }
 
   public GraphInterface cloneGraphInterface() { return this.graphInterface.clone(); }
+
+  public void changeGraphInterface(GraphInterface gi) {
+    this.mainPanel.remove(this.graphInterface);
+    this.mainPanel.revalidate();
+
+    this.mainPanel.add(gi);
+    this.mainPanel.revalidate();
+
+    this.graphInterface = gi;
+
+    this.repaint();
+  }
 
   public void setToolsToPanel(int panelIndex, int miningModuleID, int visualizationModuleID) {
     this.moduleManager.setModulesToPanel(panelIndex, miningModuleID, visualizationModuleID);
