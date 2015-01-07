@@ -92,6 +92,8 @@ public class History extends JPanel {
 
       g.setColor(Color.black);
       g.drawLine(startX, startY, endX, endY);
+
+      n.drawEdgesToNext(g);
     }
   }
 
