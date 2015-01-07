@@ -51,6 +51,7 @@ public class GraphInterface extends JPanel implements Cloneable {
   public void initialize() {
     // Init preprocess node
     PreprocessNode pNode = new PreprocessNode(new Point(100, GraphInterface.HEIGHT/2));
+    pNode.selected(true);
     this.parent.addNodeToGraphInterface(pNode);
 
     // Init tool panel nodes
