@@ -4,6 +4,7 @@ import ui.Interface;
 import ui.toolbox.ToolSelectPanel;
 import ui.graph.component.Node;
 import ui.graph.component.ModuleNode;
+import ui.graph.component.util.Nodes;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
@@ -27,6 +28,13 @@ public class ToolSelectMouseListener implements MouseListener {
   @Override public void mouseClicked(MouseEvent e) {
     ModuleNode n = (ModuleNode)e.getSource();
     ModuleNode cn = n.clone();
+
+    // selected exclusively
+    List<Node> nodes = Nodes.selectSameTypeNodes(this.parent.getNodesFromGraphInterface(), cn);
+    Nodes.selectedAll(nodes, false);
+    cn.selected(true);
+
+    cn.highlighted(false);
 
     this.parent.addNodeToGraphInterface(cn);
   }
