@@ -53,11 +53,12 @@ public class History extends JPanel {
     g.drawImage(this.state.getThumbnail(), 0, 0, this);
 
     // border
-    g2.setColor(Color.black);
     if (this.isSelected) {
+      g2.setColor(Color.red);
       BasicStroke wideStroke = new BasicStroke(3.0f);
       g2.setStroke(wideStroke);
     } else {
+      g2.setColor(Color.black);
       BasicStroke wideStroke = new BasicStroke(1.0f);
       g2.setStroke(wideStroke);
     }
