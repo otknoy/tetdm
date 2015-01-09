@@ -7,7 +7,7 @@ public class PanelState {
   private final int visualizationModuleId;
 
 
-  private PanelState(int panelId, int miningModuleId, int visualizationModuleId) {
+  public PanelState(int panelId, int miningModuleId, int visualizationModuleId) {
     this.panelId = panelId;
     this.miningModuleId = miningModuleId;
     this.visualizationModuleId = visualizationModuleId;
