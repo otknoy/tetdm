@@ -22,6 +22,7 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.List;
+import java.util.ArrayList;
 
 
 //MAIN FRAME
@@ -69,7 +70,53 @@ public class MainFrame extends JFrame {
     // setPanel(1, 0, 23);
     // setPanel(2, 14, 14);
     // Control.addNewPanel(Text text);
+
+
+    for (Select s : this.getPanels()) {
+      int pid = s.getPanelID();
+
+      JPanel modulePanel = s.modulep;
+      MiningModule mm = (MiningModule)this.getVisiblePanel(modulePanel);
+      int mid = mm.getModuleID();
+
+      JPanel visualPanel = mm.visualPanel;
+      VisualizationModule vm = (VisualizationModule)this.getVisiblePanel(visualPanel);
+      int vid = vm.getModuleID();
+
+      System.out.println("****************");
+      System.out.println(pid);
+      System.out.println(mid);
+      System.out.println(vid);
+    }
   }
+
+
+  private List<Select> getPanels() {
+    List<Select> panels = new ArrayList<Select>();
+    for (Select s : this.controlPanel.panel) {
+      if (s == null) continue;
+      panels.add(s);
+    }
+    return panels;
+  }
+
+  private JPanel getVisiblePanel(JPanel parent) {
+    JPanel p = null;
+    for (Component c : parent.getComponents()) {
+      if (!(c instanceof JPanel)) continue;
+
+      if (c.isVisible()) {
+	p = (JPanel)c;
+      }
+    }
+
+    return p;
+  }
+
+  public int getPanelState() {
+    return 0;
+  }
+
 
   /**
    * Set mining module and visualization module to a panel.
