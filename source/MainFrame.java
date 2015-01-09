@@ -105,10 +105,10 @@ public class MainFrame extends JFrame {
   }
 
   /**
-   * Get each panel state
+   * Get each panel states
    * @return list of panel state
    */
-  public List<PanelState> getPanelState() {
+  public List<PanelState> getPanelStates() {
     List<PanelState> panelStates = new ArrayList<PanelState>();
     for (Select s : this.getPanels()) {
       int pid = s.getPanelID();
