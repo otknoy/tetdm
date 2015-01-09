@@ -11,6 +11,7 @@ package source;
 import source.*;
 import source.TextData.*;
 
+import tetdm.PanelState;
 import ui.Interface;
 import ui.graph.component.Node;
 import ui.graph.module.ModuleManager;
@@ -70,27 +71,12 @@ public class MainFrame extends JFrame {
     // setPanel(1, 0, 23);
     // setPanel(2, 14, 14);
     // Control.addNewPanel(Text text);
-
-
-    for (Select s : this.getPanels()) {
-      int pid = s.getPanelID();
-
-      JPanel modulePanel = s.modulep;
-      MiningModule mm = (MiningModule)this.getVisiblePanel(modulePanel);
-      int mid = mm.getModuleID();
-
-      JPanel visualPanel = mm.visualPanel;
-      VisualizationModule vm = (VisualizationModule)this.getVisiblePanel(visualPanel);
-      int vid = vm.getModuleID();
-
-      System.out.println("****************");
-      System.out.println(pid);
-      System.out.println(mid);
-      System.out.println(vid);
-    }
   }
 
 
+  /**
+   * Get module panels
+   */
   private List<Select> getPanels() {
     List<Select> panels = new ArrayList<Select>();
     for (Select s : this.controlPanel.panel) {
@@ -100,6 +86,11 @@ public class MainFrame extends JFrame {
     return panels;
   }
 
+  /**
+   * Get visible panel in parent panel
+   * @param parent panel
+   * @return visible panel
+   */
   private JPanel getVisiblePanel(JPanel parent) {
     JPanel p = null;
     for (Component c : parent.getComponents()) {
@@ -113,8 +104,28 @@ public class MainFrame extends JFrame {
     return p;
   }
 
-  public int getPanelState() {
-    return 0;
+  /**
+   * Get each panel state
+   * @return list of panel state
+   */
+  public List<PanelState> getPanelState() {
+    List<PanelState> panelStates = new ArrayList<PanelState>();
+    for (Select s : this.getPanels()) {
+      int pid = s.getPanelID();
+
+      JPanel modulePanel = s.modulep;
+      MiningModule mm = (MiningModule)this.getVisiblePanel(modulePanel);
+      int mid = mm.getModuleID();
+
+      JPanel visualPanel = mm.visualPanel;
+      VisualizationModule vm = (VisualizationModule)this.getVisiblePanel(visualPanel);
+      int vid = vm.getModuleID();
+
+      PanelState ps = new PanelState(pid, mid, vid);
+      panelStates.add(ps);
+    }
+
+    return panelStates;
   }
 
 
