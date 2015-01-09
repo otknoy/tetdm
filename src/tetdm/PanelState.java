@@ -12,4 +12,8 @@ public class PanelState {
     this.miningModuleId = miningModuleId;
     this.visualizationModuleId = visualizationModuleId;
   }
+
+  @Override String toString() {
+    return String.format("{\"pid\": %d, \"mid\": %d, \"vid\": %d}", this.panelId, this.miningModulesId, this.visualizationModuleId);
+ }
 }
