@@ -1,4 +1,4 @@
-package ui;
+package tetdm;
 
 public class PanelState {
 
