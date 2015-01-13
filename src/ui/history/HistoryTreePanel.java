@@ -24,11 +24,9 @@ public class HistoryTreePanel extends JPanel implements MouseListener {
   private HistoryTree historyTree;
 
 
-  public HistoryTreePanel(Interface parent) {
+  public HistoryTreePanel(Interface parent, History root) {
     this.parent = parent;
 
-    State s = new State(this.parent.cloneGraphInterface(), State.RATE_NORMAL);
-    History root = new History(s);
     root.addMouseListener(this);
     this.historyTree = new HistoryTree(this, root);
     
@@ -50,8 +48,7 @@ public class HistoryTreePanel extends JPanel implements MouseListener {
     History h = (History)e.getSource();
     this.historyTree.changeCurrent(h);
 
-    // replace graph interface based on selected history
-    this.parent.changeGraphInterface(h.getGraphInterface().clone());
+    this.parent.restoreHistory(h);
 
     this.repaint();
   }

@@ -1,10 +1,12 @@
 package ui;
 
+import tetdm.PanelState;
 import ui.toolbox.Toolbox;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
 import ui.history.HistoryTreePanel;
 import ui.history.component.History;
+import ui.history.data.State;
 import ui.graph.module.ModuleManager;
 
 import java.awt.*;
@@ -58,9 +60,12 @@ public class Interface extends JFrame implements MouseListener {
 
 
     // history tree frame
+    State s = new State(this.graphInterface.clone(), State.RATE_NORMAL, this.moduleManager.getPanelStates());
+    History h = new History(s);
+
     JFrame f = new JFrame("History tree");
     f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-    this.historyTreePanel = new HistoryTreePanel(this);
+    this.historyTreePanel = new HistoryTreePanel(this, h);
     this.historyTreePanel.setPreferredSize(new Dimension(800, 250));
     f.add(this.historyTreePanel);
     f.pack();
@@ -89,9 +94,16 @@ public class Interface extends JFrame implements MouseListener {
   public void addNodeToGraphInterface(Node n) { this.graphInterface.addNode(n); }
   public Node removeNodeFromGraphInterface(Node n) { return this.graphInterface.removeNode(n); }
 
-  public GraphInterface cloneGraphInterface() { return this.graphInterface.clone(); }
 
-  public void changeGraphInterface(GraphInterface gi) {
+  public void restoreHistory(History h) {
+    this.changeGraphInterface(h.getGraphInterface().clone());
+
+    for (PanelState ps : h.getPanelStates()) {
+      this.setToolsToPanel(ps.panelId, ps.miningModuleId, ps.visualizationModuleId);
+    }
+  }
+
+  private void changeGraphInterface(GraphInterface gi) {
     this.mainPanel.remove(this.graphInterface);
     this.mainPanel.revalidate();
 
@@ -105,6 +117,20 @@ public class Interface extends JFrame implements MouseListener {
 
   public void setToolsToPanel(int panelIndex, int miningModuleID, int visualizationModuleID) {
     this.moduleManager.setModulesToPanel(panelIndex, miningModuleID, visualizationModuleID);
+  }
+
+
+  /**
+   * Save history of GraphInterface to history tree
+   * @param rate
+   */
+  public void saveHistory(int rate) {
+    GraphInterface gic = this.graphInterface.clone();
+    List<PanelState> ps = this.moduleManager.getPanelStates();
+    State s = new State(gic, rate, ps);
+    History h = new History(s);
+
+    this.historyTreePanel.addHistory(h);
   }
 
 

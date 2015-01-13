@@ -1,5 +1,6 @@
 package ui.history.component;
 
+import tetdm.PanelState;
 import ui.history.data.State;
 import ui.graph.GraphInterface;
 
@@ -36,10 +37,6 @@ public class History extends JPanel {
     this.setToolTipText("");
   }
 
-  public History(GraphInterface gi, int rate, BufferedImage img) {
-    this(new State(gi, rate, img));
-  }
-
   
   @Override public JToolTip createToolTip() {
     return new ToolTip(this.state.getImage());
@@ -73,6 +70,7 @@ public class History extends JPanel {
 
   public GraphInterface getGraphInterface() { return this.state.getGraphInterface(); }
   public int getRate() { return this.state.getRate(); }
+  public List<PanelState> getPanelStates() { return this.state.getPanelStates(); }
  
 
   /**
