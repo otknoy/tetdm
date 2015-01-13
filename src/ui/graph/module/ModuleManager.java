@@ -4,6 +4,7 @@ import source.MainFrame;
 import source.MiningModule;
 import source.VisualizationModule;
 
+import tetdm.PanelState;
 import ui.graph.component.Node;
 
 import java.util.List;
@@ -73,4 +74,6 @@ public class ModuleManager {
 
   public List<ModuleData> getMiningModuleDataList() { return this.minings; }
   public List<ModuleData> getVisualizationModuleDataList() { return this.visualizations; }
+
+  public List<PanelState> getPanelStates() { return this.mainFrame.getPanelStates(); }
 }
