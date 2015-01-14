@@ -1,4 +1,4 @@
-package ui.graph.module;
+package tetdm.module;
 
 import source.MainFrame;
 import source.MiningModule;

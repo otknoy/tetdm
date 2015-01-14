@@ -1,6 +1,6 @@
 package ui.graph.component;
 
-import ui.graph.module.ModuleData;
+import tetdm.module.ModuleData;
 
 import java.awt.Color;
 import java.awt.Point;

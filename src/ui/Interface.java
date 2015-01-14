@@ -1,5 +1,6 @@
 package ui;
 
+import tetdm.module.ModuleManager;
 import tetdm.PanelState;
 import ui.toolbox.Toolbox;
 import ui.graph.GraphInterface;
@@ -7,7 +8,6 @@ import ui.graph.component.Node;
 import ui.history.HistoryTreePanel;
 import ui.history.component.History;
 import ui.history.data.State;
-import ui.graph.module.ModuleManager;
 
 import java.awt.*;
 import java.awt.event.MouseListener;

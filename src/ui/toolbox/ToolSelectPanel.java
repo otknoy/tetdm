@@ -1,7 +1,7 @@
 package ui.toolbox;
 
+import tetdm.module.ModuleData;
 import ui.Interface;
-import ui.graph.module.ModuleData;
 import ui.graph.component.ModuleNode;
 import ui.graph.component.MiningModuleNode;
 import ui.graph.component.VisualizationModuleNode;

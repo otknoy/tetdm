@@ -1,9 +1,9 @@
 package ui.toolbox;
 
+import tetdm.module.*;
 import ui.Interface;
 import ui.graph.component.*;
 import ui.graph.component.util.*;
-import ui.graph.module.*;
 
 import java.util.ArrayList;
 import java.util.List;

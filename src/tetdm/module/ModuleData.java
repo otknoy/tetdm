@@ -1,4 +1,4 @@
-package ui.graph.module;
+package tetdm.module;
 
 import java.util.List;
 import java.util.ArrayList;

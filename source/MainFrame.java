@@ -12,9 +12,9 @@ import source.*;
 import source.TextData.*;
 
 import tetdm.PanelState;
+import tetdm.module.ModuleManager;
 import ui.Interface;
 import ui.graph.component.Node;
-import ui.graph.module.ModuleManager;
 
 import java.awt.*;
 import java.awt.BorderLayout;
