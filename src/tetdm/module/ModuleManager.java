@@ -68,8 +68,10 @@ public class ModuleManager {
     }
   }
 
-  public void setModulesToPanel(int panelIndex, int miningModuleID, int visualizationModuleID) {
-    this.mainFrame.setPanel(panelIndex, miningModuleID, visualizationModuleID);
+  public void setModulesToPanel(PanelState panelState) {
+    this.mainFrame.setPanel(panelState.panelId,
+			    panelState.miningModuleId,
+			    panelState.visualizationModuleId);
   }
 
   public List<ModuleData> getMiningModuleDataList() { return this.minings; }

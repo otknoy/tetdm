@@ -99,7 +99,7 @@ public class Interface extends JFrame implements MouseListener {
     this.changeGraphInterface(h.getGraphInterface().clone());
 
     for (PanelState ps : h.getPanelStates()) {
-      this.setToolsToPanel(ps.panelId, ps.miningModuleId, ps.visualizationModuleId);
+      this.setToolsToPanel(ps);
     }
   }
 
@@ -115,8 +115,8 @@ public class Interface extends JFrame implements MouseListener {
     this.repaint();
   }
 
-  public void setToolsToPanel(int panelIndex, int miningModuleID, int visualizationModuleID) {
-    this.moduleManager.setModulesToPanel(panelIndex, miningModuleID, visualizationModuleID);
+  public void setToolsToPanel(PanelState panelState) {
+    this.moduleManager.setModulesToPanel(panelState);
   }
 
 

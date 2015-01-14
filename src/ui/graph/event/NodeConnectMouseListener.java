@@ -1,5 +1,6 @@
 package ui.graph.event;
 
+import tetdm.PanelState;
 import ui.Interface;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
@@ -80,8 +81,9 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
       int mId  = c[1].getId();
       int vId  = c[2].getId();
       int pNum = ((ToolPanelNode)c[3]).getPanelNumber();
+      PanelState ps = new PanelState(pNum, mId, vId);
 
-      this.parent.setToolsToPanel(pNum, mId, vId);
+      this.parent.setToolsToPanel(ps);
     } else {
       //
       System.out.println(this.parent);
