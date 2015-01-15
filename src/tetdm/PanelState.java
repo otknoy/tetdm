@@ -1,9 +1,24 @@
 package tetdm;
 
+/**
+ * State of result panel in TETDM.
+ * The result panel shows processing result by combination of mining module and visualization module.
+ */
 public class PanelState {
 
+  /**
+   * Result panel ID
+   */
   public final int panelId;
+
+  /**
+   * ID of selected mining module
+   */
   public final int miningModuleId;
+
+  /**
+   * ID of selected visualization module
+   */
   public final int visualizationModuleId;
 
 

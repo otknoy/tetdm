@@ -3,7 +3,9 @@ package tetdm.module;
 import java.util.List;
 import java.util.ArrayList;
 
-
+/**
+ * Module data in TETDM.
+ */
 public class ModuleData {
 
   private final String name;
@@ -28,6 +30,7 @@ public class ModuleData {
   public ModuleData(String name, int type, int id) {
     this(name, type, id, new ArrayList<ModuleData>(), new ArrayList<ModuleData>());
   }
+
 
   public String toString() {
     return "ModuleData: [" + this.name + ", " + this.id + "]";

@@ -11,12 +11,15 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+/**
+ * Module manager and interface to existing TETDM
+ */
 public class ModuleManager {
 
   private MainFrame mainFrame;
   private List<ModuleData> minings;
   private List<ModuleData> visualizations;
+
 
   public ModuleManager(MainFrame mainFrame,
 		       MiningModule[] miningModules, String[] miningModuleNames,
@@ -67,6 +70,7 @@ public class ModuleManager {
       }
     }
   }
+
 
   public void setModulesToPanel(PanelState panelState) {
     this.mainFrame.setPanel(panelState.panelId,
