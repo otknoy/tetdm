@@ -29,8 +29,8 @@ public abstract class ModuleNode extends Node {
   abstract public ModuleNode clone();
 
   public void addRemoveListener(NodeRemoveListener nodeRemoveListener) {
-    JButton rmButton = new JButton("x");
-    rmButton.setSize(12, 12);
+    JButton rmButton = new JButton(new CloseIcon());
+    rmButton.setSize(16, 16);
     rmButton.setLocation(new Point(this.getWidth()  - rmButton.getWidth(), 0));
     rmButton.addMouseListener(nodeRemoveListener);
     this.add(rmButton);
