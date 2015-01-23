@@ -27,11 +27,21 @@ public class TETDM {
     return this.moduleManager.getModuleDataList();
   }
 
+
   public void setToolsToPanel(PanelState ps) {
     this.mainFrame.setPanel(ps.panelId, ps.miningModuleId, ps.visualizationModuleId);
   }
 
   public List<PanelState> getPanelStates() {
     return this.mainFrame.getPanelStates();
+  }
+
+
+  public String getReadFilename() {
+    return "";
+  }
+
+  public void loadFile(String filename) {
+
   }
 }
