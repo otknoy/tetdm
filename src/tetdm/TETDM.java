@@ -42,9 +42,6 @@ public class TETDM {
   }
 
   public void loadFile(String filename) {
-    if (this.getInputFilename() == filename) {
-      return;
-    }
     this.mainFrame.loadFile(filename);
   }
 }
