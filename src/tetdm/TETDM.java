@@ -37,11 +37,14 @@ public class TETDM {
   }
 
 
-  public String getReadFilename() {
-    return "";
+  public String getInputFilename() {
+    return this.mainFrame.getInputFilename();
   }
 
   public void loadFile(String filename) {
-
+    if (this.getInputFilename() == filename) {
+      return;
+    }
+    this.mainFrame.loadFile(filename);
   }
 }

@@ -77,6 +77,16 @@ public class MainFrame extends JFrame {
   }
 
 
+  public String getInputFilename() {
+    return this.controlPanel.original_file;
+  }
+
+  public void loadFile(String filename) {
+    this.controlPanel.textDataLoading(filename);
+    this.controlPanel.resetSelectpanelData();
+  }
+
+
   /**
    * Get module panels
    */
