@@ -60,7 +60,8 @@ public class Interface extends JFrame implements MouseListener {
 
 
     // history tree frame
-    State s = new State(this.graphInterface.clone(), State.RATE_NORMAL, this.tetdm.getPanelStates());
+    State s = new State(this.graphInterface.clone(), State.RATE_NORMAL,
+			this.tetdm.getInputFilename(), this.tetdm.getPanelStates());
     History h = new History(s);
 
     JFrame f = new JFrame("History tree");
@@ -124,8 +125,9 @@ public class Interface extends JFrame implements MouseListener {
    */
   public void saveHistory(int rate) {
     GraphInterface gic = this.graphInterface.clone();
+    String inputFilename = this.tetdm.getInputFilename();
     List<PanelState> ps = this.tetdm.getPanelStates();
-    State s = new State(gic, rate, ps);
+    State s = new State(gic, rate, inputFilename, ps);
     History h = new History(s);
 
     this.historyTreePanel.addHistory(h);
