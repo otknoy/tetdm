@@ -47,5 +47,7 @@ public class State {
   public int getRate() { return this.rate; }
   public BufferedImage getImage() { return this.img; }
   public BufferedImage getThumbnail() { return this.thumbnail; }
+
+  public String getInputFilename() { return this.inputFilename; }
   public List<PanelState> getPanelStates() { return this.panelStates; }
 }
