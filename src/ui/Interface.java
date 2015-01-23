@@ -97,6 +97,11 @@ public class Interface extends JFrame implements MouseListener {
   public void restoreHistory(History h) {
     this.changeGraphInterface(h.getGraphInterface().clone());
 
+    String filename = h.getInputFilename();
+    if (filename != this.tetdm.getInputFilename()) {
+      this.tetdm.loadFile(filename);
+    }
+
     for (PanelState ps : h.getPanelStates()) {
       this.setToolsToPanel(ps);
     }
