@@ -4,9 +4,6 @@ import source.MainFrame;
 import source.MiningModule;
 import source.VisualizationModule;
 
-import tetdm.PanelState;
-import ui.graph.component.Node;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,8 +18,7 @@ public class ModuleManager {
   private List<ModuleData> visualizations;
 
 
-  public ModuleManager(MainFrame mainFrame,
-		       MiningModule[] miningModules, String[] miningModuleNames,
+  public ModuleManager(MiningModule[] miningModules, String[] miningModuleNames,
 		       VisualizationModule[] visualizationModules, String[] visualizationModuleNames) {
     this.mainFrame = mainFrame;
     
@@ -71,15 +67,13 @@ public class ModuleManager {
     }
   }
 
-
-  public void setModulesToPanel(PanelState panelState) {
-    this.mainFrame.setPanel(panelState.panelId,
-			    panelState.miningModuleId,
-			    panelState.visualizationModuleId);
-  }
-
   public List<ModuleData> getMiningModuleDataList() { return this.minings; }
   public List<ModuleData> getVisualizationModuleDataList() { return this.visualizations; }
 
-  public List<PanelState> getPanelStates() { return this.mainFrame.getPanelStates(); }
+  public List<ModuleData> getModuleDataList() {
+    List<ModuleData> modules = new ArrayList<ModuleData>();
+    modules.addAll(this.getMiningModuleDataList());
+    modules.addAll(this.getVisualizationModuleDataList());
+    return modules;
+ }
 }

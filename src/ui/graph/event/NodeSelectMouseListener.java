@@ -54,7 +54,7 @@ public class NodeSelectMouseListener implements MouseListener {
     }
 
     // highlight connectable nodes on toolbox
-    for (Node n2 : this.parent.getToolbox().getNodesFromToolSelectPanel()) {
+    for (Node n2 : this.parent.getNodesFromToolbox()) {
       if (n1.isConnectableTo(n2)) {
 	n2.highlighted(true);
       }
@@ -73,7 +73,7 @@ public class NodeSelectMouseListener implements MouseListener {
     this.connectableNodes = null;
 
     // unhighlight all nodes on toolbox
-    for (Node cn : this.parent.getToolbox().getNodesFromToolSelectPanel()) {
+    for (Node cn : this.parent.getNodesFromToolbox()) {
       cn.highlighted(false);
     }
 

@@ -1,6 +1,6 @@
 package ui;
 
-import tetdm.module.ModuleManager;
+import tetdm.TETDM;
 import tetdm.PanelState;
 import ui.toolbox.Toolbox;
 import ui.graph.GraphInterface;
@@ -24,7 +24,7 @@ public class Interface extends JFrame implements MouseListener {
 
   public static final String NAME = "Tool Selector";
 
-  private final ModuleManager moduleManager;
+  private final TETDM tetdm;
 
   private final JPanel mainPanel;
   private final Toolbox toolbox;
@@ -32,8 +32,8 @@ public class Interface extends JFrame implements MouseListener {
   private final HistoryTreePanel historyTreePanel;
 
 
-  public Interface(ModuleManager moduleManager) {
-    this.moduleManager = moduleManager;
+  public Interface(TETDM tetdm) {
+    this.tetdm = tetdm;
 
     this.setTitle(Interface.NAME);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,7 +50,7 @@ public class Interface extends JFrame implements MouseListener {
     mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
     this.graphInterface = new GraphInterface(this);
-    this.toolbox = new Toolbox(this);
+    this.toolbox = new Toolbox(this, tetdm.getModuleDataList());
 
     this.graphInterface.initialize();
 
@@ -60,7 +60,7 @@ public class Interface extends JFrame implements MouseListener {
 
 
     // history tree frame
-    State s = new State(this.graphInterface.clone(), State.RATE_NORMAL, this.moduleManager.getPanelStates());
+    State s = new State(this.graphInterface.clone(), State.RATE_NORMAL, this.tetdm.getPanelStates());
     History h = new History(s);
 
     JFrame f = new JFrame("History tree");
@@ -87,9 +87,7 @@ public class Interface extends JFrame implements MouseListener {
   }
 
 
-  public ModuleManager getModuleManager() { return this.moduleManager; }
-  public Toolbox getToolbox() { return this.toolbox; }
-
+  public List<? extends Node> getNodesFromToolbox() { return this.toolbox.getNodes(); }
   public List<Node> getNodesFromGraphInterface() { return this.graphInterface.getNodes(); }
   public void addNodeToGraphInterface(Node n) { this.graphInterface.addNode(n); }
   public Node removeNodeFromGraphInterface(Node n) { return this.graphInterface.removeNode(n); }
@@ -116,7 +114,7 @@ public class Interface extends JFrame implements MouseListener {
   }
 
   public void setToolsToPanel(PanelState panelState) {
-    this.moduleManager.setModulesToPanel(panelState);
+    this.tetdm.setToolsToPanel(panelState);
   }
 
 
@@ -126,7 +124,7 @@ public class Interface extends JFrame implements MouseListener {
    */
   public void saveHistory(int rate) {
     GraphInterface gic = this.graphInterface.clone();
-    List<PanelState> ps = this.moduleManager.getPanelStates();
+    List<PanelState> ps = this.tetdm.getPanelStates();
     State s = new State(gic, rate, ps);
     History h = new History(s);
 

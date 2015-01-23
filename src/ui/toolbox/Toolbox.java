@@ -1,6 +1,6 @@
 package ui.toolbox;
 
-import tetdm.module.*;
+import tetdm.module.ModuleData;
 import ui.Interface;
 import ui.graph.component.*;
 import ui.graph.component.util.*;
@@ -22,14 +22,11 @@ public class Toolbox extends JPanel {
   private final ToolSelectPanel toolSelectPanel;
 
 
-  public Toolbox(Interface parent) {
+  public Toolbox(Interface parent, List<ModuleData> moduleDataList) {
     this.setPreferredSize(new Dimension(Toolbox.WIDTH, Toolbox.HEIGHT));
     this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-    List<ModuleData> dataList = new ArrayList<ModuleData>();
-    dataList.addAll(parent.getModuleManager().getMiningModuleDataList());
-    dataList.addAll(parent.getModuleManager().getVisualizationModuleDataList());
-    this.toolSelectPanel = new ToolSelectPanel(parent, dataList);
+    this.toolSelectPanel = new ToolSelectPanel(parent, moduleDataList);
 
     this.add(this.toolSelectPanel);
   }
@@ -41,5 +38,5 @@ public class Toolbox extends JPanel {
     g.fillRect(0, 0, getWidth(), getHeight());
   }
 
-  public List<? extends Node> getNodesFromToolSelectPanel() { return this.toolSelectPanel.getNodes(); }
+  public List<? extends Node> getNodes() { return this.toolSelectPanel.getNodes(); }
 }

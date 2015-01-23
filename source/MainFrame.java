@@ -11,6 +11,7 @@ package source;
 import source.*;
 import source.TextData.*;
 
+import tetdm.TETDM;
 import tetdm.PanelState;
 import tetdm.module.ModuleManager;
 import ui.Interface;
@@ -59,12 +60,14 @@ public class MainFrame extends JFrame {
     String[] miningNames = moduleData.miningModuleNamesInJapanese; // moduleData.module_names;
     VisualizationModule[] visualizationModules = moduleData.visual;
     String[] visualNames = moduleData.visualizationModuleNamesInJapanese; // moduleData.visu_module_names;
-    ModuleManager moduleManager = new ModuleManager(this,
-						    miningModules, miningNames,
+    ModuleManager moduleManager = new ModuleManager(miningModules, miningNames,
 						    visualizationModules, visualNames);
 
+    // Wrapper class of original TETDM system
+    TETDM tetdm = new TETDM(this, moduleManager);
+
     // our proposed interface
-    Interface inf = new Interface(moduleManager);
+    Interface inf = new Interface(tetdm);
     inf.setVisible(true);
 
     // setPanel(0, 14, 14);
