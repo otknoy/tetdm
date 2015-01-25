@@ -11,6 +11,7 @@ import ui.graph.component.ToolPanelNode;
 import ui.graph.component.Sticky;
 import ui.graph.component.event.NodeRemoveListener;
 import ui.graph.component.util.Nodes;
+import ui.history.data.State;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ public class GraphInterface extends JPanel implements Cloneable {
 
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 650;
-
 
   private final MainPanel mainPanel;
   private final TETDM tetdm;
@@ -99,6 +99,17 @@ public class GraphInterface extends JPanel implements Cloneable {
     }
 
     return gi;
+  }
+
+
+  public State getCurrentState(int rate) {
+    return new State(this.clone(), rate, 
+		     this.tetdm.getInputFilename(),
+		     this.tetdm.getPanelStates());
+  }
+
+  public State getCurrentState() {
+    return this.getCurrentState(State.RATE_NORMAL);
   }
 
 

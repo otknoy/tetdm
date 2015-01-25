@@ -1,6 +1,6 @@
 package ui.history;
 
-import ui.Interface;
+import ui.MainPanel;
 import ui.graph.GraphInterface;
 import ui.history.component.History;
 import ui.history.data.State;
@@ -19,13 +19,13 @@ public class HistoryTreePanel extends JPanel implements MouseListener {
 
   static final String NAME = "History Tree";
 
-  private Interface parent;
+  private MainPanel mainPanel;
 
   private HistoryTree historyTree;
 
 
-  public HistoryTreePanel(Interface parent, History root) {
-    this.parent = parent;
+  public HistoryTreePanel(MainPanel mainPanel, History root) {
+    this.mainPanel = mainPanel;
 
     root.addMouseListener(this);
     this.historyTree = new HistoryTree(this, root);
@@ -48,7 +48,7 @@ public class HistoryTreePanel extends JPanel implements MouseListener {
     History h = (History)e.getSource();
     this.historyTree.changeCurrent(h);
 
-    this.parent.restoreHistory(h);
+    this.mainPanel.restoreHistory(h);
 
     this.repaint();
   }

@@ -56,7 +56,7 @@ public class RatingButtonPanel extends JPanel implements MouseListener {
       rate = State.RATE_NORMAL;
     }
 
-    this.parent.saveHistory(rate);
+    // this.parent.saveHistory(rate);
   }
 
   @Override public void mousePressed(MouseEvent e) {}

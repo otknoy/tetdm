@@ -1,6 +1,8 @@
 package ui;
 
-import ui.Interface;
+import ui.MainPanel;
+import ui.history.HistoryTreePanel;
+import ui.history.component.History;
 import ui.history.data.State;
 
 import java.awt.event.MouseListener;
@@ -12,7 +14,8 @@ import javax.swing.JPanel;
 
 class ManipulationPanel extends JPanel implements MouseListener {
 
-  private final Interface parent;
+  private final MainPanel mainPanel;
+  private final HistoryTreePanel historyTreePanel;
 
   private final JButton addStickyButton;
 
@@ -21,8 +24,9 @@ class ManipulationPanel extends JPanel implements MouseListener {
   private final JButton badButton;
 
 
-  ManipulationPanel(Interface parent) {
-    this.parent = parent;
+  ManipulationPanel(MainPanel mainPanel, HistoryTreePanel historyTreePanel) {
+    this.mainPanel = mainPanel;
+    this.historyTreePanel = historyTreePanel;
 
     this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
@@ -47,8 +51,6 @@ class ManipulationPanel extends JPanel implements MouseListener {
   }
 
 
-
-
   @Override
   public void mouseClicked(MouseEvent e) {
     Object src = e.getSource();
@@ -57,17 +59,28 @@ class ManipulationPanel extends JPanel implements MouseListener {
     }
 
     JButton b = (JButton)src;
+
+    // Add sticky
     if (b == this.addStickyButton) {
       String text = b.getText();
-      this.parent.mainPanel.getGraphInterface().addSticky();
-      this.parent.mainPanel.getGraphInterface().repaint();
-    } else if (b == this.goodButton) {
-      this.parent.saveHistory(State.RATE_GOOD);
-    } else if (b == this.badButton) {
-      this.parent.saveHistory(State.RATE_BAD);
-    } else {
-      this.parent.saveHistory(State.RATE_NORMAL);
+      this.mainPanel.getGraphInterface().addSticky();
+      this.mainPanel.getGraphInterface().repaint();
+
+      return;
     }
+
+    // Save history
+    // HistoryTreePanel.addHistory(h)
+    int rate = -1;
+    if (b == this.goodButton) {
+      rate = State.RATE_GOOD;
+    } else if (b == this.badButton) {
+      rate = State.RATE_BAD;
+    } else {
+      rate = State.RATE_NORMAL;
+    }
+    State s = this.mainPanel.getGraphInterface().getCurrentState(rate);
+    this.historyTreePanel.addHistory(new History(s));
   }
 
   @Override public void mousePressed(MouseEvent e) {}
