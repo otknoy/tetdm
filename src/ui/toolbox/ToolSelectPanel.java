@@ -1,7 +1,7 @@
 package ui.toolbox;
 
 import tetdm.module.ModuleData;
-import ui.Interface;
+import ui.MainPanel;
 import ui.graph.component.ModuleNode;
 import ui.graph.component.MiningModuleNode;
 import ui.graph.component.VisualizationModuleNode;
@@ -17,19 +17,17 @@ import javax.swing.JPanel;
 
 public class ToolSelectPanel extends JPanel {
 
-  private final Interface parent;
   private final List<ModuleNode> nodes;
   private final ToolSelectMouseListener tsmListener;
   
 
-  public ToolSelectPanel(Interface parent, List<ModuleData> moduleDataList) {
-    this.parent = parent;
+  public ToolSelectPanel(MainPanel mainPanel, List<ModuleData> moduleDataList) {
     this.nodes = this.createNodes(moduleDataList);
 
     this.setLayout(null);
 
     // event
-    this.tsmListener = new ToolSelectMouseListener(this.parent, this);
+    this.tsmListener = new ToolSelectMouseListener(mainPanel, this);
     for (ModuleNode n : this.nodes) {
       n.addMouseListener(this.tsmListener);
     }

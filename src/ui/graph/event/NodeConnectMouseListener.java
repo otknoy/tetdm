@@ -1,7 +1,7 @@
 package ui.graph.event;
 
+import tetdm.TETDM;
 import tetdm.PanelState;
-import ui.Interface;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
 import ui.graph.component.ToolPanelNode;
@@ -19,13 +19,13 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
 
   private static final int threshold = 192;
 
-  private final Interface parent;
+  private final TETDM tetdm;
   private final GraphInterface graphInterface;
   private List<Node> connectableNodes;
 
 
-  public NodeConnectMouseListener(Interface parent, GraphInterface graphInterface) {
-    this.parent = parent;
+  public NodeConnectMouseListener(TETDM tetdm, GraphInterface graphInterface) {
+    this.tetdm = tetdm;
     this.graphInterface = graphInterface;
   }
 
@@ -83,10 +83,10 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
       int pNum = ((ToolPanelNode)c[3]).getPanelNumber();
       PanelState ps = new PanelState(pNum, mId, vId);
 
-      this.parent.setToolsToPanel(ps);
+      this.tetdm.setToolsToPanel(ps);
     } else {
       //
-      System.out.println(this.parent);
+      System.out.println(this.tetdm);
     }
 
     return true;

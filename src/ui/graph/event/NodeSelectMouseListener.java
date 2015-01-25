@@ -1,6 +1,6 @@
 package ui.graph.event;
 
-import ui.Interface;
+import ui.MainPanel;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
 import ui.graph.component.util.Nodes;
@@ -15,13 +15,13 @@ import java.util.ArrayList;
 
 public class NodeSelectMouseListener implements MouseListener {
 
-  private final Interface parent;
+  private final MainPanel mainPanel;
   private final GraphInterface graphInterface;
   private List<Node> connectableNodes;
 
 
-  public NodeSelectMouseListener(Interface parent, GraphInterface graphInterface) {
-    this.parent = parent;
+  public NodeSelectMouseListener(MainPanel mainPanel, GraphInterface graphInterface) {
+    this.mainPanel = mainPanel;
     this.graphInterface = graphInterface;
   }
 
@@ -54,13 +54,13 @@ public class NodeSelectMouseListener implements MouseListener {
     }
 
     // highlight connectable nodes on toolbox
-    for (Node n2 : this.parent.getNodesFromToolbox()) {
+    for (Node n2 : this.mainPanel.getToolbox().getNodes()) {
       if (n1.isConnectableTo(n2)) {
 	n2.highlighted(true);
       }
     }
 
-    this.parent.repaint();
+    this.mainPanel.repaint();
   }
 
   @Override public void mouseExited(MouseEvent e) {
@@ -73,10 +73,10 @@ public class NodeSelectMouseListener implements MouseListener {
     this.connectableNodes = null;
 
     // unhighlight all nodes on toolbox
-    for (Node cn : this.parent.getNodesFromToolbox()) {
+    for (Node cn : this.mainPanel.getToolbox().getNodes()) {
       cn.highlighted(false);
     }
 
-    this.parent.repaint();
+    this.mainPanel.repaint();
   }
 }

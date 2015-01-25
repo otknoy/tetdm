@@ -1,6 +1,7 @@
 package ui.graph;
 
-import ui.Interface;
+import tetdm.TETDM;
+import ui.MainPanel;
 import ui.graph.event.NodeSelectMouseListener;
 import ui.graph.event.NodeConnectMouseListener;
 import ui.graph.component.Node;
@@ -26,7 +27,9 @@ public class GraphInterface extends JPanel implements Cloneable {
   public static final int WIDTH  = 800;
   public static final int HEIGHT = 650;
 
-  private final Interface parent;
+
+  private final MainPanel mainPanel;
+  private final TETDM tetdm;
   private final NodeManager nodeManager;
   private final StickyManager stickyManager;
 
@@ -34,8 +37,9 @@ public class GraphInterface extends JPanel implements Cloneable {
   private final NodeConnectMouseListener ncmListener;
 
 
-  public GraphInterface(Interface parent) {
-    this.parent = parent;
+  public GraphInterface(MainPanel mainPanel, TETDM tetdm) {
+    this.mainPanel = mainPanel;
+    this.tetdm = tetdm;
 
     this.setPreferredSize(new Dimension(GraphInterface.WIDTH, GraphInterface.HEIGHT));
     this.setLayout(null);
@@ -43,8 +47,8 @@ public class GraphInterface extends JPanel implements Cloneable {
     this.nodeManager = new NodeManager(this);
     this.stickyManager = new StickyManager(this);
 
-    this.nsmLisneter = new NodeSelectMouseListener(this.parent, this);
-    this.ncmListener = new NodeConnectMouseListener(this.parent, this);
+    this.nsmLisneter = new NodeSelectMouseListener(this.mainPanel, this);
+    this.ncmListener = new NodeConnectMouseListener(this.tetdm, this);
   }
 
 
@@ -52,7 +56,7 @@ public class GraphInterface extends JPanel implements Cloneable {
     // Init preprocess node
     PreprocessNode pNode = new PreprocessNode(new Point(100, GraphInterface.HEIGHT/2));
     pNode.selected(true);
-    this.parent.addNodeToGraphInterface(pNode);
+    this.addNode(pNode);
 
     // Init tool panel nodes
     int n = 3;
@@ -61,7 +65,7 @@ public class GraphInterface extends JPanel implements Cloneable {
       int x = 700;
       int y = GraphInterface.HEIGHT - (n-i)*w;
       ToolPanelNode tpNode = new ToolPanelNode(i, new Point(x, y));
-      this.parent.addNodeToGraphInterface(tpNode);
+      this.addNode(tpNode);
     }
   }
 
@@ -79,7 +83,7 @@ public class GraphInterface extends JPanel implements Cloneable {
 
   @Override public GraphInterface clone() {
     // clone this
-    GraphInterface gi = new GraphInterface(this.parent);
+    GraphInterface gi = new GraphInterface(this.mainPanel, this.tetdm);
 
     // clone nodes
     for (Node n: this.getNodes()) {

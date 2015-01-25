@@ -1,7 +1,7 @@
 package ui.toolbox;
 
 import tetdm.module.ModuleData;
-import ui.Interface;
+import ui.MainPanel;
 import ui.graph.component.*;
 import ui.graph.component.util.*;
 
@@ -22,11 +22,11 @@ public class Toolbox extends JPanel {
   private final ToolSelectPanel toolSelectPanel;
 
 
-  public Toolbox(Interface parent, List<ModuleData> moduleDataList) {
+  public Toolbox(MainPanel mainPanel, List<ModuleData> moduleDataList) {
     this.setPreferredSize(new Dimension(Toolbox.WIDTH, Toolbox.HEIGHT));
     this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-    this.toolSelectPanel = new ToolSelectPanel(parent, moduleDataList);
+    this.toolSelectPanel = new ToolSelectPanel(mainPanel, moduleDataList);
 
     this.add(this.toolSelectPanel);
   }

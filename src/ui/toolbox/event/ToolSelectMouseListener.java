@@ -1,6 +1,6 @@
 package ui.toolbox.event;
 
-import ui.Interface;
+import ui.MainPanel;
 import ui.toolbox.ToolSelectPanel;
 import ui.graph.component.Node;
 import ui.graph.component.ModuleNode;
@@ -14,13 +14,13 @@ import java.util.ArrayList;
 
 public class ToolSelectMouseListener implements MouseListener {
 
-  private final Interface parent;
+  private final MainPanel mainPanel;
   private final ToolSelectPanel toolSelectPanel;
   private List<Node> connectableNodes;
 
 
-  public ToolSelectMouseListener(Interface parent, ToolSelectPanel toolSelectPanel) {
-    this.parent = parent;
+  public ToolSelectMouseListener(MainPanel mainPanel, ToolSelectPanel toolSelectPanel) {
+    this.mainPanel = mainPanel;
     this.toolSelectPanel = toolSelectPanel;
   }
 
@@ -30,13 +30,13 @@ public class ToolSelectMouseListener implements MouseListener {
     ModuleNode cn = n.clone();
 
     // selected exclusively
-    List<Node> nodes = Nodes.selectSameTypeNodes(this.parent.getNodesFromGraphInterface(), cn);
+    List<Node> nodes = Nodes.selectSameTypeNodes(this.mainPanel.getGraphInterface().getNodes(), cn);
     Nodes.selectedAll(nodes, false);
     cn.selected(true);
 
     cn.highlighted(false);
 
-    this.parent.addNodeToGraphInterface(cn);
+    this.mainPanel.getGraphInterface().addNode(cn);
   }
   
   @Override public void mousePressed(MouseEvent e) { }
@@ -48,7 +48,7 @@ public class ToolSelectMouseListener implements MouseListener {
 
     List<Node> nodes = new ArrayList<Node>();
     nodes.addAll(this.toolSelectPanel.getNodes());
-    nodes.addAll(this.parent.getNodesFromGraphInterface());
+    nodes.addAll(this.mainPanel.getGraphInterface().getNodes());
 
     this.connectableNodes = new ArrayList<Node>();
     for (Node n : nodes) {
@@ -58,7 +58,7 @@ public class ToolSelectMouseListener implements MouseListener {
       }
    }
 
-    this.parent.repaint();
+    this.mainPanel.repaint();
   }
 
   @Override public void mouseExited(MouseEvent e) {
@@ -70,6 +70,6 @@ public class ToolSelectMouseListener implements MouseListener {
     }
     this.connectableNodes = null;
 
-    this.parent.repaint();
+    this.mainPanel.repaint();
   }
 }

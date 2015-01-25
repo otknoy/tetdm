@@ -26,9 +26,7 @@ public class Interface extends JFrame implements MouseListener {
 
   private final TETDM tetdm;
 
-  private final JPanel mainPanel;
-  private final Toolbox toolbox;
-  private GraphInterface graphInterface;
+  private final MainPanel mainPanel;
   private final HistoryTreePanel historyTreePanel;
 
 
@@ -45,23 +43,15 @@ public class Interface extends JFrame implements MouseListener {
     // this.add(hoge, BorderLayout.NORTH);
 
 
-    // toolbox and graph interface
-    this.mainPanel = new JPanel();
-    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
-
-    this.graphInterface = new GraphInterface(this);
-    this.toolbox = new Toolbox(this, tetdm.getModuleDataList());
-
-    this.graphInterface.initialize();
-
-    mainPanel.add(this.toolbox);
-    mainPanel.add(this.graphInterface);
+    // Main panel: toolbox and graph interface
+    this.mainPanel = new MainPanel(tetdm);
     this.add(mainPanel, BorderLayout.CENTER);
 
-
     // history tree frame
-    State s = new State(this.graphInterface.clone(), State.RATE_NORMAL,
-			this.tetdm.getInputFilename(), this.tetdm.getPanelStates());
+    State s = new State(this.mainPanel.getGraphInterface().clone(),
+			State.RATE_NORMAL,
+			this.tetdm.getInputFilename(),
+			this.tetdm.getPanelStates());
     History h = new History(s);
 
     JFrame f = new JFrame("History tree");
@@ -88,14 +78,8 @@ public class Interface extends JFrame implements MouseListener {
   }
 
 
-  public List<? extends Node> getNodesFromToolbox() { return this.toolbox.getNodes(); }
-  public List<Node> getNodesFromGraphInterface() { return this.graphInterface.getNodes(); }
-  public void addNodeToGraphInterface(Node n) { this.graphInterface.addNode(n); }
-  public Node removeNodeFromGraphInterface(Node n) { return this.graphInterface.removeNode(n); }
-
-
   public void restoreHistory(History h) {
-    this.changeGraphInterface(h.getGraphInterface().clone());
+    this.mainPanel.changeGraphInterface(h.getGraphInterface().clone());
 
     String filename = h.getInputFilename();
     if (filename != this.tetdm.getInputFilename()) {
@@ -103,25 +87,14 @@ public class Interface extends JFrame implements MouseListener {
     }
 
     for (PanelState ps : h.getPanelStates()) {
-      this.setToolsToPanel(ps);
+      this.tetdm.setToolsToPanel(ps);
     }
   }
 
-  private void changeGraphInterface(GraphInterface gi) {
-    this.mainPanel.remove(this.graphInterface);
-    this.mainPanel.revalidate();
 
-    this.mainPanel.add(gi);
-    this.mainPanel.revalidate();
-
-    this.graphInterface = gi;
-
-    this.repaint();
-  }
-
-  public void setToolsToPanel(PanelState panelState) {
-    this.tetdm.setToolsToPanel(panelState);
-  }
+  // public void setToolsToPanel(PanelState panelState) {
+  //   this.tetdm.setToolsToPanel(panelState);
+  // }
 
 
   /**
@@ -129,7 +102,7 @@ public class Interface extends JFrame implements MouseListener {
    * @param rate
    */
   public void saveHistory(int rate) {
-    GraphInterface gic = this.graphInterface.clone();
+    GraphInterface gic = this.mainPanel.getGraphInterface().clone();
     String inputFilename = this.tetdm.getInputFilename();
     List<PanelState> ps = this.tetdm.getPanelStates();
     State s = new State(gic, rate, inputFilename, ps);
@@ -146,8 +119,8 @@ public class Interface extends JFrame implements MouseListener {
       JButton b = (JButton)src;
       String text = b.getText();
       if (text == "Add sticky") {
-	this.graphInterface.addSticky();
-	this.graphInterface.repaint();
+	this.mainPanel.getGraphInterface().addSticky();
+		this.mainPanel.getGraphInterface().repaint();
       }
     }
   }
