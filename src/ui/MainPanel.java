@@ -29,11 +29,6 @@ public class MainPanel extends JPanel {
   public Toolbox getToolbox() { return this.toolbox; }
   public GraphInterface getGraphInterface() { return this.graphInterface; }
 
-  // public List<? extends Node> getNodesFromToolbox() { return this.toolbox.getNodes(); }
-  // public List<Node> getNodesFromGraphInterface() { return this.graphInterface.getNodes(); }
-  // public void addNodeToGraphInterface(Node n) { this.graphInterface.addNode(n); }
-  // public Node removeNodeFromGraphInterface(Node n) { return this.graphInterface.removeNode(n); }
-  
 
   public void changeGraphInterface(GraphInterface gi) {
     this.remove(this.graphInterface);
