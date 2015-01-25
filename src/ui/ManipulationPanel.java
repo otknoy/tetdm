@@ -1,34 +1,38 @@
 package ui;
 
 import ui.Interface;
-import ui.graph.GraphInterface;
-import ui.history.HistoryTreePanel;
 import ui.history.data.State;
 
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JFrame;
 
 
-public class RatingButtonPanel extends JPanel implements MouseListener {
+class ManipulationPanel extends JPanel implements MouseListener {
 
   private final Interface parent;
-  private final HistoryTreePanel historyTreePanel;
 
-  private static JButton goodButton;
-  private static JButton normalButton;
-  private static JButton badButton;
+  private final JButton addStickyButton;
+
+  private final JButton goodButton;
+  private final JButton normalButton;
+  private final JButton badButton;
 
 
-  public RatingButtonPanel(Interface parent, HistoryTreePanel historyTreePanel) {
+  ManipulationPanel(Interface parent) {
     this.parent = parent;
-    this.historyTreePanel = historyTreePanel;
 
     this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
+    // Sticky
+    this.addStickyButton = new JButton("Add sticky");
+    this.addStickyButton.addMouseListener(this);
+    this.add(addStickyButton);
+
+
+    // Rating buttons for savin history
     this.goodButton = new JButton("Good");
     this.goodButton.addMouseListener(this);
     this.add(this.goodButton);
@@ -43,20 +47,27 @@ public class RatingButtonPanel extends JPanel implements MouseListener {
   }
 
 
+
+
   @Override
   public void mouseClicked(MouseEvent e) {
-    JButton b = (JButton)e.getSource();
-
-    int rate;
-    if (b == this.goodButton) {
-      rate = State.RATE_GOOD;
-    } else if (b == this.badButton) {
-      rate = State.RATE_BAD;
-    } else {
-      rate = State.RATE_NORMAL;
+    Object src = e.getSource();
+    if (!(src instanceof JButton)) {
+      return;
     }
 
-    this.parent.saveHistory(rate);
+    JButton b = (JButton)src;
+    if (b == this.addStickyButton) {
+      String text = b.getText();
+      this.parent.mainPanel.getGraphInterface().addSticky();
+      this.parent.mainPanel.getGraphInterface().repaint();
+    } else if (b == this.goodButton) {
+      this.parent.saveHistory(State.RATE_GOOD);
+    } else if (b == this.badButton) {
+      this.parent.saveHistory(State.RATE_BAD);
+    } else {
+      this.parent.saveHistory(State.RATE_NORMAL);
+    }
   }
 
   @Override public void mousePressed(MouseEvent e) {}
