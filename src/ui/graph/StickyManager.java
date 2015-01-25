@@ -1,15 +1,11 @@
 package ui.graph;
 
 import ui.graph.component.Sticky;
-import ui.graph.component.StickyEditor;
 import ui.graph.component.event.MouseDragAndDropListener;
 import ui.graph.component.event.StickyEventListener;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.awt.Point;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 

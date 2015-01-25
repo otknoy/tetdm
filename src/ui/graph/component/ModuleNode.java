@@ -5,8 +5,6 @@ import ui.graph.component.event.NodeRemoveListener;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.awt.Insets;
-import java.awt.Dimension;
 import javax.swing.JButton;
 
 

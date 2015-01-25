@@ -1,7 +1,6 @@
 package ui;
 
 import ui.Interface;
-import ui.graph.GraphInterface;
 import ui.history.HistoryTreePanel;
 import ui.history.data.State;
 
@@ -10,7 +9,6 @@ import java.awt.event.MouseListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JFrame;
 
 
 public class RatingButtonPanel extends JPanel implements MouseListener {

@@ -8,7 +8,6 @@ import ui.graph.component.VisualizationModuleNode;
 import ui.graph.component.util.Nodes;
 import ui.toolbox.event.ToolSelectMouseListener;
 
-import java.awt.Rectangle;
 import java.awt.Point;
 import java.util.List;
 import java.util.ArrayList;

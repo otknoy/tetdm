@@ -6,7 +6,6 @@ import ui.graph.GraphInterface;
 import ui.history.component.History;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 
 

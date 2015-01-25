@@ -4,7 +4,6 @@ import ui.graph.StickyManager;
 
 import java.awt.Component;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;

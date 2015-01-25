@@ -2,16 +2,14 @@ package ui.toolbox;
 
 import tetdm.module.ModuleData;
 import ui.MainPanel;
-import ui.graph.component.*;
-import ui.graph.component.util.*;
+import ui.graph.component.Node;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.Color;
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 
 
 public class Toolbox extends JPanel {

@@ -1,16 +1,12 @@
 package ui.graph.component;
 
-import ui.graph.component.event.MouseDragAndDropListener;
-import ui.graph.component.event.StickyEventListener;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import java.lang.Cloneable;
 

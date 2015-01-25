@@ -9,13 +9,10 @@ import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.BasicStroke;
 import javax.swing.JPanel;
 import javax.swing.JToolTip;
-import java.awt.AWTException;
-import java.awt.image.BufferedImage;
 
 
 public class History extends JPanel {

@@ -1,16 +1,12 @@
 package ui.graph;
 
-import ui.Interface;
 import ui.graph.GraphInterface;
 import ui.graph.component.Node;
 import ui.graph.component.PreprocessNode;
-import ui.graph.component.ToolPanelNode;
 import ui.graph.component.event.MouseDragAndDropListener;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.awt.Point;
-import javax.swing.JComponent;
 
 
 public class NodeManager {

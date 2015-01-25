@@ -1,16 +1,13 @@
 package ui;
 
 import tetdm.TETDM;
-import ui.graph.GraphInterface;
 import ui.history.HistoryTreePanel;
 import ui.history.component.History;
 import ui.history.data.State;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.util.List;
 
 
 public class Interface extends JFrame {

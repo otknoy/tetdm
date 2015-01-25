@@ -1,9 +1,7 @@
 package ui.history;
 
 import ui.MainPanel;
-import ui.graph.GraphInterface;
 import ui.history.component.History;
-import ui.history.data.State;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -11,8 +9,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
-import java.util.List;
-import java.util.ArrayList;
 
 
 public class HistoryTreePanel extends JPanel implements MouseListener {

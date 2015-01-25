@@ -5,11 +5,9 @@ import tetdm.PanelState;
 import ui.toolbox.Toolbox;
 import ui.graph.GraphInterface;
 import ui.history.component.History;
-import ui.history.data.State;
 
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
-import java.util.List;
 
 
 public class MainPanel extends JPanel {
@@ -70,25 +68,4 @@ public class MainPanel extends JPanel {
       this.tetdm.setToolsToPanel(ps);
     }
   }
-
-  // /**
-  //  * Save history of GraphInterface to history tree
-  //  */
-  // public void saveHistory(History h) {
-  //   this.parent.historyTreePanel.addHistory(h);
-  // }
-
-  // /**
-  //  * Save history of GraphInterface to history tree
-  //  * @param rate
-  //  */
-  // public void saveHistory(int rate) {
-  //   GraphInterface gic = this.graphInterface.clone();
-  //   String inputFilename = this.tetdm.getInputFilename();
-  //   List<PanelState> ps = this.tetdm.getPanelStates();
-  //   State s = new State(gic, rate, inputFilename, ps);
-  //   History h = new History(s);
-
-  //   this.saveHistory(h);
-  // }
 }

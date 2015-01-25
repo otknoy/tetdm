@@ -14,7 +14,6 @@ import ui.graph.component.util.Nodes;
 import ui.history.data.State;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Point;
