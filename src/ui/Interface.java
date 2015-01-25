@@ -92,11 +92,6 @@ public class Interface extends JFrame implements MouseListener {
   }
 
 
-  // public void setToolsToPanel(PanelState panelState) {
-  //   this.tetdm.setToolsToPanel(panelState);
-  // }
-
-
   /**
    * Save history of GraphInterface to history tree
    * @param rate
