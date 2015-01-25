@@ -32,15 +32,13 @@ public class Interface extends JFrame {
     MainPanel mainPanel = new MainPanel(tetdm);
     this.add(mainPanel, BorderLayout.CENTER);
 
-    // history tree frame
-    State s = new State(mainPanel.getGraphInterface().clone(),
-			State.RATE_NORMAL,
-			tetdm.getInputFilename(),
-			tetdm.getPanelStates());
-    History h = new History(s);
 
+    // history tree frame
     JFrame f = new JFrame("History tree");
     f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+    State s = mainPanel.getGraphInterface().getCurrentState();
+    History h = new History(s);
     HistoryTreePanel historyTreePanel = new HistoryTreePanel(mainPanel, h);
     historyTreePanel.setPreferredSize(new Dimension(800, 250));
     f.add(historyTreePanel);
