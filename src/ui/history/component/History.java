@@ -64,11 +64,6 @@ public class History extends JPanel {
   public void addToNext(History n) { this.next.add(n); }
 
   public State getState() { return this.state; }
-  
-  // public GraphInterface getGraphInterface() { return this.state.getGraphInterface(); }
-  // public int getRate() { return this.state.getRate(); }
-  // public String getInputFilename() { return this.state.getInputFilename(); }
-  // public List<PanelState> getPanelStates() { return this.state.getPanelStates(); }
  
 
   /**
