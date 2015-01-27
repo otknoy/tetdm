@@ -1,8 +1,6 @@
 package ui.history.component;
 
-import tetdm.PanelState;
 import ui.history.data.State;
-import ui.graph.GraphInterface;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -65,10 +63,12 @@ public class History extends JPanel {
   public List<History> getNext() { return this.next; }
   public void addToNext(History n) { this.next.add(n); }
 
-  public GraphInterface getGraphInterface() { return this.state.getGraphInterface(); }
-  public int getRate() { return this.state.getRate(); }
-  public String getInputFilename() { return this.state.getInputFilename(); }
-  public List<PanelState> getPanelStates() { return this.state.getPanelStates(); }
+  public State getState() { return this.state; }
+  
+  // public GraphInterface getGraphInterface() { return this.state.getGraphInterface(); }
+  // public int getRate() { return this.state.getRate(); }
+  // public String getInputFilename() { return this.state.getInputFilename(); }
+  // public List<PanelState> getPanelStates() { return this.state.getPanelStates(); }
  
 
   /**

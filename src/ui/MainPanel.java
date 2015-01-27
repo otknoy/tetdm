@@ -5,6 +5,7 @@ import tetdm.PanelState;
 import ui.toolbox.Toolbox;
 import ui.graph.GraphInterface;
 import ui.history.component.History;
+import ui.history.data.State;
 
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
@@ -57,14 +58,16 @@ public class MainPanel extends JPanel {
    * @param restored history
    */
   public void restoreHistory(History h) {
-    this.changeGraphInterface(h.getGraphInterface().clone());
+    State s = h.getState();
 
-    String filename = h.getInputFilename();
+    this.changeGraphInterface(s.getGraphInterface().clone());
+
+    String filename = s.getInputFilename();
     if (filename != this.tetdm.getInputFilename()) {
       this.tetdm.loadFile(filename);
     }
 
-    for (PanelState ps : h.getPanelStates()) {
+    for (PanelState ps : s.getPanelStates()) {
       this.tetdm.setToolsToPanel(ps);
     }
   }
