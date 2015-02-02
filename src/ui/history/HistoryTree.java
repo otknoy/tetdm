@@ -48,15 +48,14 @@ public class HistoryTree {
     List<Node> nodes = new ArrayList<Node>();
     nodes.add(this.root);
     for (int i = 0; i < nodes.size(); i++) {
-      nodes.addAll(nodes.get(i).getNextNodes());
-    }
+      Node n = nodes.get(i);
 
-    for (Node n : nodes) {
       int width  = n.getX() + n.getWidth();
       int height = n.getY() + n.getHeight();
-
       maxWidth  = Math.max(width,  maxWidth);
       maxHeight = Math.max(height, maxHeight);
+
+      nodes.addAll(n.getNextNodes());
     }
 
     return new Dimension(maxWidth, maxHeight);
