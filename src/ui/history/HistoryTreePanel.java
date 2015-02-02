@@ -62,6 +62,10 @@ public class HistoryTreePanel extends JPanel implements MouseListener {
 
     alignHistoryTree();
     this.repaint();
+
+    // resize
+    this.setPreferredSize(this.historyTree.getSize());
+    this.revalidate();
   }
 
 

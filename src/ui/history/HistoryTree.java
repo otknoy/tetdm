@@ -1,6 +1,12 @@
 package ui.history;
 
+import ui.history.component.Node;
 import ui.history.component.History;
+
+
+import java.awt.Dimension;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class HistoryTree {
@@ -33,5 +39,26 @@ public class HistoryTree {
   public void addHistory(History h) {
     this.current.addToNext(h);
     this.changeCurrent(h);
+  }
+
+  public Dimension getSize() {
+    int maxWidth  = Integer.MIN_VALUE;
+    int maxHeight = Integer.MIN_VALUE;
+
+    List<Node> nodes = new ArrayList<Node>();
+    nodes.add(this.root);
+    for (int i = 0; i < nodes.size(); i++) {
+      nodes.addAll(nodes.get(i).getNextNodes());
+    }
+
+    for (Node n : nodes) {
+      int width  = n.getX() + n.getWidth();
+      int height = n.getY() + n.getHeight();
+
+      maxWidth  = Math.max(width,  maxWidth);
+      maxHeight = Math.max(height, maxHeight);
+    }
+
+    return new Dimension(maxWidth, maxHeight);
   }
 }

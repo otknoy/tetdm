@@ -8,6 +8,7 @@ import ui.history.data.State;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 
 public class Interface extends JFrame {
@@ -37,8 +38,11 @@ public class Interface extends JFrame {
     State s = mainPanel.getGraphInterface().getCurrentState();
     History h = new History(s);
     HistoryTreePanel historyTreePanel = new HistoryTreePanel(mainPanel, h);
-    historyTreePanel.setPreferredSize(new Dimension(800, 250));
-    f.add(historyTreePanel);
+    // historyTreePanel.setPreferredSize(new Dimension(10000, 10000));
+
+    JScrollPane scrollPane = new JScrollPane(historyTreePanel);
+    scrollPane.setPreferredSize(new Dimension(800, 250));
+    f.add(scrollPane);
     f.pack();
     f.setVisible(true);
 
