@@ -73,7 +73,10 @@ public class MainFrame extends JFrame {
     // setPanel(0, 14, 14);
     // setPanel(1, 0, 23);
     // setPanel(2, 14, 14);
+
     // Control.addNewPanel(Text text);
+    // controlPanel.addNewPanel(controlPanel.text);
+    // controlPanel.delete(delete panel number);
   }
 
 
