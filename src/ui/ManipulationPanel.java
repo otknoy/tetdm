@@ -19,9 +19,7 @@ class ManipulationPanel extends JPanel implements MouseListener {
 
   private final JButton addStickyButton;
 
-  private final JButton goodButton;
-  private final JButton normalButton;
-  private final JButton badButton;
+  private final JButton saveHistoryButton;
 
 
   ManipulationPanel(MainPanel mainPanel, HistoryTreePanel historyTreePanel) {
@@ -37,17 +35,9 @@ class ManipulationPanel extends JPanel implements MouseListener {
 
 
     // Rating buttons for savin history
-    this.goodButton = new JButton("Good");
-    this.goodButton.addMouseListener(this);
-    this.add(this.goodButton);
-
-    this.normalButton = new JButton("Normal");
-    this.normalButton.addMouseListener(this);
-    this.add(this.normalButton);
-
-    this.badButton = new JButton("Bad");
-    this.badButton.addMouseListener(this);
-    this.add(this.badButton);
+    this.saveHistoryButton = new JButton("Save history");
+    this.saveHistoryButton.addMouseListener(this);
+    this.add(this.saveHistoryButton);
   }
 
 
@@ -70,16 +60,7 @@ class ManipulationPanel extends JPanel implements MouseListener {
     }
 
     // Save history
-    // HistoryTreePanel.addHistory(h)
-    int rate = -1;
-    if (b == this.goodButton) {
-      rate = State.RATE_GOOD;
-    } else if (b == this.badButton) {
-      rate = State.RATE_BAD;
-    } else {
-      rate = State.RATE_NORMAL;
-    }
-    State s = this.mainPanel.getGraphInterface().getCurrentState(rate);
+    State s = this.mainPanel.getGraphInterface().getCurrentState(State.RATE_NORMAL);
     this.historyTreePanel.addHistory(new History(s));
   }
 
