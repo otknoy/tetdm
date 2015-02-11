@@ -28,6 +28,7 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
   public NodeConnectMouseListener(TETDM tetdm, GraphInterface graphInterface) {
     this.tetdm = tetdm;
     this.graphInterface = graphInterface;
+    this.connectableNodes = new ArrayList<Node>();
   }
 
   
@@ -56,7 +57,9 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
     this.connectableNodes = Nodes.selectConnectableNodes(n, this.graphInterface.getNodes());
   }
 
-  @Override public void mouseExited(MouseEvent e) {}
+  @Override public void mouseExited(MouseEvent e) {
+    this.connectableNodes = new ArrayList<Node>();
+  }
 
   @Override public void mouseDragged(MouseEvent e) {
     Object o = e.getSource();
@@ -66,7 +69,6 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
 
     Node n = (Node)o;
     Nodes.connect(n, this.connectableNodes, this.threshold);
-
     this.graphInterface.repaint();
 
     this.changeTools(n);
