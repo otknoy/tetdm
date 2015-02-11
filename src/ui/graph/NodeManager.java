@@ -49,8 +49,8 @@ public class NodeManager {
     return n;
   }
 
-  public List<Node[]> getNodeCombinations() {
-    List<Node[]> combinations = new ArrayList<Node[]>();
+  public List<NodeCombination> getNodeCombinations() {
+    List<NodeCombination> combinations = new ArrayList<NodeCombination>();
 
     Node pNode = null;
     for (Node n : this.nodes) {
@@ -65,8 +65,8 @@ public class NodeManager {
     for (Node mmNode : pNode.getNextNodes()) {
       for (Node vmNode : mmNode.getNextNodes()) {
 	for (Node tpNode : vmNode.getNextNodes()) {
-	  Node[] combination = {pNode, mmNode, vmNode, tpNode};
-	  combinations.add(combination);
+	  NodeCombination c = new NodeCombination(pNode, mmNode, vmNode, tpNode);
+	  combinations.add(c);
 	}
       }
     }

@@ -1,11 +1,14 @@
 package ui.graph.component.util;
 
+import ui.graph.NodeCombination;
 import ui.graph.component.Node;
 
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.lang.Iterable;
 
 
 public class Nodes {
@@ -104,18 +107,6 @@ public class Nodes {
    */
   public static void selectedAll(List<Node> nodes, boolean selected) {
     for (Node n : nodes) { n.selected(selected); }
-  }
-
-  /**
-   * If all nodes are selected, return true
-   * @param target node list
-   * @return All nodes are selected or unselected.
-   */
-  public static boolean checkAllSelected(List<Node> nodes) {
-    for (Node n : nodes) {
-      if (!n.isSelected()) { return false; }
-    }
-    return true;
   }
 
 

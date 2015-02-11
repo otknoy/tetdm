@@ -3,6 +3,7 @@ package ui.graph.event;
 import tetdm.TETDM;
 import tetdm.PanelState;
 import ui.graph.GraphInterface;
+import ui.graph.NodeCombination;
 import ui.graph.component.Node;
 import ui.graph.component.ToolPanelNode;
 import ui.graph.component.util.Nodes;
@@ -69,36 +70,21 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
 
 
   private boolean changeTools() {
-    List<Node[]> combinations = this.graphInterface.getNodeCombinations();
-    combinations = this.extractSelectedCombinations(combinations);
+    List<NodeCombination> combinations = this.graphInterface.getNodeCombinations();
+
     if (combinations.size() <= 0) {
       return false;
     }
 
-    if (combinations.size() <= 1) {
-      Node[] c = combinations.get(0);
+    NodeCombination c = combinations.get(0);
 
-      int mId  = c[1].getId();
-      int vId  = c[2].getId();
-      int pNum = ((ToolPanelNode)c[3]).getPanelNumber();
-      PanelState ps = new PanelState(pNum, mId, vId);
+    int mId  = c.mining.getId();
+    int vId  = c.visualization.getId();
+    int pNum = c.toolPanel.getPanelNumber();
+    PanelState ps = new PanelState(pNum, mId, vId);
 
-      this.tetdm.setToolsToPanel(ps);
-    } else {
-      //
-      System.out.println(this.tetdm);
-    }
+    this.tetdm.setToolsToPanel(ps);
 
     return true;
-  }
-
-  private List<Node[]> extractSelectedCombinations(List<Node[]> combinations) {
-    List<Node[]> selected = new ArrayList<Node[]>();
-    for (Node[] c : combinations) {
-      if (Nodes.checkAllSelected(Arrays.asList(c))) {
-	selected.add(c);
-      }
-    }
-    return selected;
   }
 }
