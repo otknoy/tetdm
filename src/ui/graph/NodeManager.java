@@ -52,21 +52,20 @@ public class NodeManager {
   public List<NodeCombination> getNodeCombinations() {
     List<NodeCombination> combinations = new ArrayList<NodeCombination>();
 
-    Node pNode = null;
+    List<Node> pNodes = new ArrayList<Node>();
     for (Node n : this.nodes) {
       if (n instanceof PreprocessNode) {
-	pNode = n;
+	pNodes.add(n);
       }
     }
-    if (pNode == null) {
-      return combinations;
-    }
 
-    for (Node mmNode : pNode.getNextNodes()) {
-      for (Node vmNode : mmNode.getNextNodes()) {
-	for (Node tpNode : vmNode.getNextNodes()) {
-	  NodeCombination c = new NodeCombination(pNode, mmNode, vmNode, tpNode);
-	  combinations.add(c);
+    for (Node pNode : pNodes) {
+      for (Node mmNode : pNode.getNextNodes()) {
+	for (Node vmNode : mmNode.getNextNodes()) {
+	  for (Node tpNode : vmNode.getNextNodes()) {
+	    NodeCombination c = new NodeCombination(pNode, mmNode, vmNode, tpNode);
+	    combinations.add(c);
+	  }
 	}
       }
     }
