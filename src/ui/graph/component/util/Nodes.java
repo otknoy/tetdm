@@ -1,6 +1,5 @@
 package ui.graph.component.util;
 
-import ui.graph.NodeCombination;
 import ui.graph.component.Node;
 
 import java.awt.Point;
@@ -98,7 +97,6 @@ public class Nodes {
     }
     return sameTypeNodes;
   }
-
 
   /**
    * Select all nodes.

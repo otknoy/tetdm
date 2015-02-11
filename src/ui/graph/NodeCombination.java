@@ -39,7 +39,7 @@ public class NodeCombination {
   }
 
 
-  private List<Node> getAllNodes() {
+  public List<Node> getAllNodes() {
     List<Node> nodes = new ArrayList<Node>();
     nodes.add(this.preprocess);
     nodes.add(this.mining);

@@ -32,7 +32,13 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
 
   
   @Override public void mouseClicked(MouseEvent e) {
-    this.changeTools();
+    Object o = e.getSource();
+    if (!(o instanceof Node)) {
+      return;
+    }
+
+    Node n = (Node)o;
+    this.changeTools(n);
   }
 
   @Override public void mousePressed(MouseEvent e) {}
@@ -63,20 +69,19 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
 
     this.graphInterface.repaint();
 
-    this.changeTools();
+    this.changeTools(n);
   }
 
   @Override public void mouseMoved(MouseEvent e) {}
 
 
-  private boolean changeTools() {
+  private boolean changeTools(Node n) {
     List<NodeCombination> combinations = this.graphInterface.getNodeCombinations();
 
-    if (combinations.size() <= 0) {
+    NodeCombination c = predictUserIntendedNodeCombination(n, combinations);
+    if (c == null) {
       return false;
     }
-
-    NodeCombination c = combinations.get(0);
 
     int mId  = c.mining.getId();
     int vId  = c.visualization.getId();
@@ -87,4 +92,34 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
 
     return true;
   }
+
+  private NodeCombination predictUserIntendedNodeCombination(Node n, List<NodeCombination> combinations) {
+    combinations = this.extractNodeCombinationsContainsNode(n, combinations);
+
+    NodeCombination predicted = null;
+    int maxScore = Integer.MIN_VALUE;
+    for (NodeCombination c : combinations) {
+      int score = c.countSelectedNode();
+      if (maxScore < score) {
+	maxScore = score;
+	predicted = c;
+      }
+    }
+
+    return predicted;
+  }
+
+  private List<NodeCombination> extractNodeCombinationsContainsNode(Node n, List<NodeCombination> combinations) {
+    List<NodeCombination> extracted = new ArrayList<NodeCombination>();
+
+    for (NodeCombination c : combinations) {
+      if (c.contains(n)) {
+	extracted.add(c);
+      }
+    }
+
+    return extracted;
+  }
 }
+
+
