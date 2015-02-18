@@ -92,6 +92,15 @@ public class NodeConnectMouseListener implements MouseListener, MouseMotionListe
 
     this.tetdm.setToolsToPanel(ps);
 
+    // Unselect all nodes
+    for (Node node : this.graphInterface.getNodes()) {
+      node.selected(false);
+    }
+    // Select nodes that are contained in the selected combination
+    for (Node node : c.getAllNodes()) {
+      node.selected(true);
+    }
+
     return true;
   }
 
