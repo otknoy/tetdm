@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 
 public class Toolbox extends JPanel {
 
-  public static final int WIDTH  = 800;
-  public static final int HEIGHT = 250;
+  public static final int WIDTH  = 600;
+  public static final int HEIGHT = 200;
 
   private final ToolSelectPanel toolSelectPanel;
 

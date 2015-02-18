@@ -24,8 +24,8 @@ import java.lang.Cloneable;
 
 public class GraphInterface extends JPanel implements Cloneable {
 
-  public static final int WIDTH  = 800;
-  public static final int HEIGHT = 650;
+  public static final int WIDTH  = 600;
+  public static final int HEIGHT = 400;
 
   private final MainPanel mainPanel;
   private final TETDM tetdm;
@@ -53,7 +53,7 @@ public class GraphInterface extends JPanel implements Cloneable {
 
   public void initialize() {
     // Init preprocess node
-    PreprocessNode pNode = new PreprocessNode(new Point(100, GraphInterface.HEIGHT/2));
+    PreprocessNode pNode = new PreprocessNode(new Point(16, GraphInterface.HEIGHT/2));
     pNode.selected(true);
     this.addNode(pNode);
 
@@ -61,7 +61,7 @@ public class GraphInterface extends JPanel implements Cloneable {
     int n = 3;
     int w = 100;
     for (int i = 0; i < n; i++) {
-      int x = 700;
+      int x = GraphInterface.WIDTH - Node.WIDTH - 16;
       int y = GraphInterface.HEIGHT - (n-i)*w;
       ToolPanelNode tpNode = new ToolPanelNode(i, new Point(x, y));
       this.addNode(tpNode);

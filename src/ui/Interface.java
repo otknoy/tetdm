@@ -41,7 +41,7 @@ public class Interface extends JFrame {
     // historyTreePanel.setPreferredSize(new Dimension(10000, 10000));
 
     JScrollPane scrollPane = new JScrollPane(historyTreePanel);
-    scrollPane.setPreferredSize(new Dimension(800, 250));
+    scrollPane.setPreferredSize(new Dimension(600, 200));
     f.add(scrollPane);
     f.pack();
     f.setVisible(true);

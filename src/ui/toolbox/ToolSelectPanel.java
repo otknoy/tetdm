@@ -36,7 +36,7 @@ public class ToolSelectPanel extends JPanel {
       this.add(n);
     }
 
-    Nodes.alignNodes(new Point(0, 0), 12, this.nodes);
+    Nodes.alignNodes(new Point(0, 0), 9, this.nodes);
   }
 
   private List<ModuleNode> createNodes(List<ModuleData> mdl) {

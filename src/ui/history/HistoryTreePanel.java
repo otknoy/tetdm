@@ -70,7 +70,7 @@ public class HistoryTreePanel extends JPanel implements MouseListener {
 
 
   private void alignHistoryTree() {
-    this.historyTree.getRoot().align(new Point(32, 32), 0, 0);
+    this.historyTree.getRoot().align(new Point(16, 16), 0, 0);
     this.repaint();
   }
 }
